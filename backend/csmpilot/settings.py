@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',
     'corsheaders',
     'customers',
     'analytics',
@@ -128,6 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # REST Framework settings
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_RENDERER_CLASSES': [
@@ -139,6 +141,45 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ],
+}
+
+# Spectacular settings for API documentation
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'CSM Copilot API',
+    'DESCRIPTION': '''
+    A comprehensive Customer Success Management platform API.
+    
+    ## Features
+    - Customer lifecycle management
+    - Health score tracking and analytics
+    - Feedback and meeting management
+    - Risk identification and renewal tracking
+    - Industry benchmarking capabilities
+    
+    ## Authentication
+    Currently no authentication required for development.
+    
+    ## Rate Limiting
+    No rate limiting applied in development mode.
+    ''',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': '/api/',
+    'TAGS': [
+        {
+            'name': 'customers',
+            'description': 'Customer management operations including CRUD and analytics'
+        },
+        {
+            'name': 'feedback', 
+            'description': 'Customer feedback tracking and management'
+        },
+        {
+            'name': 'meetings',
+            'description': 'Customer meeting records and sentiment tracking'
+        }
+    ]
 }
 
 # CORS settings
