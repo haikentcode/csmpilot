@@ -10,7 +10,6 @@ import {
   LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -56,27 +55,29 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     >
       {/* Logo Section */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <Link
-          href="/dashboard"
-          className={cn(
-            "flex items-center",
-            collapsed ? "justify-center w-full" : "space-x-3"
-          )}
-        >
-          <div className="w-8 h-8 flex items-center justify-center">
-            <Image
-              src="/datapiper-logo.svg"
-              alt="DataPiper Logo"
-              width={32}
-              height={32}
-              className="object-contain"
-            />
+        <Link href="/dashboard">
+          <div
+            suppressHydrationWarning
+            className={cn(
+              "flex items-center",
+              collapsed ? "justify-center w-full" : "space-x-3"
+            )}
+          >
+            <div className="w-8 h-8 flex items-center justify-center">
+              <Image
+                src="/datapiper-logo.svg"
+                alt="DataPiper Logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+            </div>
+            {!collapsed && (
+              <span className="text-xl font-bold text-dark-forest">
+                DataPiper
+              </span>
+            )}
           </div>
-          {!collapsed && (
-            <span className="text-xl font-bold text-dark-forest">
-              DataPiper
-            </span>
-          )}
         </Link>
       </div>
 
@@ -91,28 +92,32 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <Link
               key={`${item.label}-${index}`}
               href={item.href}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group font-medium",
-                active
-                  ? "bg-primary-green text-white shadow-md"
-                  : "text-primary-green bg-white hover:shadow-sm",
-                collapsed && "justify-center"
-              )}
               title={collapsed ? item.label : undefined}
             >
-              <Icon
+              <div
+                suppressHydrationWarning
                 className={cn(
-                  "w-5 h-5 shrink-0",
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group font-medium",
                   active
-                    ? "text-white"
-                    : "text-primary-green"
+                    ? "bg-primary-green text-white shadow-md"
+                    : "text-primary-green bg-white hover:shadow-sm",
+                  collapsed && "justify-center"
                 )}
-              />
-              {!collapsed && (
-                <span className="text-sm font-semibold whitespace-nowrap">
-                  {item.label}
-                </span>
-              )}
+              >
+                <Icon
+                  className={cn(
+                    "w-5 h-5 shrink-0",
+                    active
+                      ? "text-white"
+                      : "text-primary-green"
+                  )}
+                />
+                {!collapsed && (
+                  <span className="text-sm font-semibold whitespace-nowrap">
+                    {item.label}
+                  </span>
+                )}
+              </div>
             </Link>
           );
         })}
@@ -120,42 +125,51 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
         {/* Logout Button */}
         <div className="px-4 pb-4">
-        <Button
+        <button
           onClick={handleLogout}
-          variant="outline"
-          className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group font-medium border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 hover:border-red-300",
-            collapsed && "justify-center px-2"
-          )}
-          title={collapsed ? "Logout" : undefined}
+          className="w-full"
+          title={collapsed ? "Logout" : "Logout"}
         >
-          <LogOut className="w-5 h-5 shrink-0" />
-          {!collapsed && (
-            <span className="text-sm font-semibold whitespace-nowrap">
-              Logout
-            </span>
-          )}
-        </Button>
+          <div
+            suppressHydrationWarning
+            className={cn(
+              "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group font-medium border border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 hover:border-red-300",
+              collapsed && "justify-center px-2"
+            )}
+          >
+            <LogOut className="w-5 h-5 shrink-0" />
+            {!collapsed && (
+              <span className="text-sm font-semibold whitespace-nowrap">
+                Logout
+              </span>
+            )}
+          </div>
+        </button>
       </div>
 
       {/* Toggle Button */}
       <div className="p-4 border-t border-gray-200">
         <button
           onClick={onToggle}
-          className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white text-primary-green hover:bg-primary-green transition-all duration-200 font-medium shadow-sm cursor-pointer",
-            collapsed && "justify-center"
-          )}
+          className="w-full"
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          {collapsed ? (
-            <ChevronRight className="w-5 h-5" />
-          ) : (
-            <>
-              <ChevronLeft className="w-5 h-5" />
-              <span className="text-sm font-semibold">Collapse</span>
-            </>
-          )}
+          <div
+            suppressHydrationWarning
+            className={cn(
+              "flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white text-primary-green hover:bg-primary-green transition-all duration-200 font-medium shadow-sm cursor-pointer",
+              collapsed && "justify-center"
+            )}
+          >
+            {collapsed ? (
+              <ChevronRight className="w-5 h-5" />
+            ) : (
+              <>
+                <ChevronLeft className="w-5 h-5" />
+                <span className="text-sm font-semibold">Collapse</span>
+              </>
+            )}
+          </div>
         </button>
       </div>
     </aside>

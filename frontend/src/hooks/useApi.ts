@@ -1,113 +1,76 @@
-import { useState, useEffect, useCallback, useRef, useReducer } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   apiService, 
-  handleApiError, 
-  isRetryableError,
-  SimilarCustomer, 
+  handleApiError,
   ProfileSummary, 
   PaginatedResponse,
   GongMeeting
 } from '../services/apiService';
 
-// Generic API hook with loading, error, and retry states
+// Simple generic API hook
 export function useApi<T>(
   apiCall: () => Promise<T>,
   dependencies: unknown[] = [],
   options: {
     immediate?: boolean;
-    retryOnMount?: boolean;
     fallbackData?: T;
   } = {}
 ) {
-  const { immediate = true, retryOnMount = false, fallbackData } = options;
+  const { immediate = true, fallbackData } = options;
   
   const [data, setData] = useState<T | undefined>(fallbackData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [retryCount, setRetryCount] = useState(0);
-  const abortControllerRef = useRef<AbortController | null>(null);
 
-  const execute = useCallback(async (showLoading = true) => {
-    // Cancel any ongoing request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    abortControllerRef.current = new AbortController();
-    
-    if (showLoading) {
-      setLoading(true);
-    }
+  const execute = useCallback(async () => {
+    setLoading(true);
     setError(null);
 
     try {
       const result = await apiCall();
-      
-      if (!abortControllerRef.current.signal.aborted) {
-        setData(result);
-        setRetryCount(0);
-      }
+      setData(result);
     } catch (err) {
-      if (!abortControllerRef.current.signal.aborted) {
-        const errorMessage = handleApiError(err);
-        setError(errorMessage);
-        
-        // Use fallback data if available and error is retryable
-        if (fallbackData && isRetryableError(err)) {
-          setData(fallbackData);
-        }
+      const errorMessage = handleApiError(err);
+      setError(errorMessage);
+      if (fallbackData) {
+        setData(fallbackData);
       }
     } finally {
-      if (!abortControllerRef.current.signal.aborted) {
-        setLoading(false);
-      }
+      setLoading(false);
     }
   }, [apiCall, fallbackData]);
 
-  const retry = useCallback(() => {
-    setRetryCount(prev => prev + 1);
-    execute();
-  }, [execute]);
-
-  const refresh = useCallback(() => {
-    execute(false); // Refresh without showing loading spinner
-  }, [execute]);
-
   useEffect(() => {
-    if (immediate || (retryOnMount && retryCount > 0)) {
+    if (immediate) {
       execute();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, dependencies);
 
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, [immediate, retryOnMount, retryCount, apiCall, fallbackData, ...dependencies]);
+  const retry = useCallback(() => {
+    execute();
+  }, [execute]);
 
   return {
     data,
     loading,
     error,
     retry,
-    refresh,
     execute,
-    retryCount,
   };
 }
 
 // Specific hooks for different API endpoints
-export function useCustomers(page: number = 1, perPage: number = 20) {
+export function useCustomers(page: number = 1) {
   return useApi(
-    () => apiService.getCustomers(page, perPage),
-    [page, perPage],
+    () => apiService.getCustomers(page),
+    [page],
     {
       fallbackData: {
-        customers: [],
-        total: 0,
-        page,
-        per_page: perPage,
-        total_pages: 0,
+        count: 0,
+        next: null,
+        previous: null,
+        results: [],
       } as PaginatedResponse<Customer>
     }
   );
@@ -131,13 +94,7 @@ export function useSimilarCustomers(customerId: number | null) {
       return apiService.getSimilarCustomers(customerId);
     },
     [customerId],
-    { 
-      immediate: !!customerId,
-      fallbackData: {
-        base_customer: '',
-        similar_customers: [] as SimilarCustomer[]
-      }
-    }
+    { immediate: !!customerId }
   );
 }
 
@@ -152,10 +109,10 @@ export function useProfileSummary(customerId: number | null) {
       immediate: !!customerId,
       fallbackData: {
         customer: '',
-        summary: 'Profile summary is currently unavailable. Please try again later.',
-        risks: ['Service temporarily unavailable'],
-        opportunities: ['Retry when service is restored'],
-        talk_tracks: ['Acknowledge service interruption']
+        summary: 'Profile summary is currently unavailable.',
+        risks: [],
+        opportunities: [],
+        talk_tracks: []
       } as ProfileSummary
     }
   );
