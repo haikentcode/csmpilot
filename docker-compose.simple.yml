@@ -1,0 +1,107 @@
+version: "3.8"
+
+# Simplified Docker Compose for CSM Copilot with SQLite
+# Use this if you prefer SQLite over PostgreSQL
+
+services:
+  # Redis service for Celery
+  redis:
+    image: redis:7-alpine
+    container_name: csmpilot-redis-simple
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  # Django backend with SQLite
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: csmpilot-backend-simple
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=your-secret-key-here-change-in-production
+      - DATABASE_URL=sqlite:///db.sqlite3 # Use SQLite
+      - REDIS_URL=redis://redis:6379/0
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
+      - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
+      - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      - PYTHONHTTPSVERIFY=1
+    volumes:
+      - ./backend:/app
+      - sqlite_data:/app # Persist SQLite database
+      - backend_media:/app/media
+      - backend_static:/app/static
+    depends_on:
+      - redis
+    restart: unless-stopped
+    command: >
+      sh -c "
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
+  # Celery worker
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: csmpilot-celery-simple
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=your-secret-key-here-change-in-production
+      - DATABASE_URL=sqlite:///db.sqlite3 # Use SQLite
+      - REDIS_URL=redis://redis:6379/0
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
+      - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
+      - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      - PYTHONHTTPSVERIFY=1
+    volumes:
+      - ./backend:/app
+      - sqlite_data:/app # Share SQLite database
+    depends_on:
+      - redis
+      - backend
+    restart: unless-stopped
+    command: celery -A csmpilot worker --loglevel=info --pool=threads --concurrency=2
+
+  # Next.js frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: csmpilot-frontend-simple
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+      - NEXT_PUBLIC_APP_NAME=CSM Copilot
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+  sqlite_data:
+    driver: local
+  backend_media:
+    driver: local
+  backend_static:
+    driver: local
+
+networks:
+  default:
+    name: csmpilot-simple-network
