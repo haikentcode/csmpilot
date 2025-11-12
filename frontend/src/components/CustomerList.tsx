@@ -29,12 +29,15 @@ export default function CustomerList({
 }: CustomerListProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  const { data, loading, error, retry } = useCustomers(currentPage);
+  const { data, loading, error, retry } = useCustomers(
+    currentPage,
+    itemsPerPage
+  );
 
-  const customers = data?.results || [];
-  const totalCustomers = data?.count || 0;
-  const itemsPerPage = customers.length || 10; // Use actual results length or default to 10
+  const customers = data?.customers || [];
+  const totalCustomers = data?.total || 0;
 
   // Handle page changes
   const handlePageChange = (page: number) => {
