@@ -8,16 +8,17 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, ArrowDownRight, Search } from "lucide-react";
 import { useCustomers } from "@/hooks/useApi";
 import { Customer } from "@/services/apiService";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function Dashboard() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const perPage = 20;
-  
+
   // Fetch customers from API
   const { data, loading, error } = useCustomers(page, perPage);
-  
+
   // Extract customers from paginated response
   const accounts: Customer[] = useMemo(() => {
     return data?.customers || data?.results || [];
@@ -84,8 +85,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-off-white font-poppins">
-      <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
+      <div className="max-w-7xl mx-auto">
         {/* Top Navigation Bar */}
         <div className="mb-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
@@ -93,13 +94,6 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold text-dark-forest">
               Good morning, User 👋
             </h1>
-
-            {/* AI Summary Widget */}
-            <div className="bg-gradient-to-r from-[#00B365] to-[#004F38] text-white px-6 py-3 rounded-full shadow-md">
-              <p className="text-sm font-medium">
-                3 accounts need attention today
-              </p>
-            </div>
           </div>
 
           {/* Search Bar */}
@@ -118,8 +112,13 @@ export default function Dashboard() {
         {/* Error State */}
         {error && (
           <div className="text-center py-12">
-            <p className="text-red-600 text-lg mb-4">Error loading accounts: {error}</p>
-            <p className="text-neutral-gray">Please check that the backend server is running on http://localhost:8000</p>
+            <p className="text-red-600 text-lg mb-4">
+              Error loading accounts: {error}
+            </p>
+            <p className="text-neutral-gray">
+              Please check that the backend server is running on
+              http://localhost:8000
+            </p>
           </div>
         )}
 
@@ -135,7 +134,9 @@ export default function Dashboard() {
         {!loading && !error && filteredAccounts.length === 0 && (
           <div className="text-center py-12">
             <p className="text-neutral-gray text-lg">
-              {searchQuery ? "No accounts found matching your search." : "No accounts found."}
+              {searchQuery
+                ? "No accounts found matching your search."
+                : "No accounts found."}
             </p>
           </div>
         )}
@@ -218,6 +219,6 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

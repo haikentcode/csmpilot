@@ -76,7 +76,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
       scale: 1,
     },
     active: {
-      backgroundColor: "#00B365",
+      backgroundColor: "#25834b",
       color: "#FFFFFF",
       scale: 1.02,
     },

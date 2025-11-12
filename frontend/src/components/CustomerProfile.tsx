@@ -45,34 +45,28 @@ export default function CustomerProfile({
     retry,
   } = useProfileSummary(customer.id);
 
-  const getSegmentVariant = (
-    segment: string
+  const getHealthScoreVariant = (
+    healthScore: string
   ): "default" | "secondary" | "destructive" | "outline" => {
-    switch (segment.toLowerCase()) {
-      case "enterprise":
+    switch (healthScore) {
+      case "Healthy":
         return "default";
-      case "mid-market":
+      case "At Risk":
         return "secondary";
-      case "smb":
-        return "outline";
+      case "Critical":
+        return "destructive";
       default:
         return "outline";
     }
   };
 
-  const getTierVariant = (
-    tier: string
-  ): "default" | "secondary" | "destructive" | "outline" => {
-    switch (tier.toLowerCase()) {
-      case "platinum":
-        return "default";
-      case "gold":
-        return "secondary";
-      case "silver":
-        return "outline";
-      default:
-        return "outline";
+  const formatARR = (arr: number): string => {
+    if (arr >= 1000000) {
+      return `$${(arr / 1000000).toFixed(1)}M`;
+    } else if (arr >= 1000) {
+      return `$${(arr / 1000).toFixed(1)}k`;
     }
+    return `$${arr.toFixed(0)}`;
   };
 
   if (loading) {
@@ -111,14 +105,14 @@ export default function CustomerProfile({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Badge
-                        variant={getSegmentVariant(customer.segment)}
+                        variant="outline"
                         className="hover:scale-105 transition-transform duration-200 text-responsive-sm"
                       >
-                        {customer.segment}
+                        {customer.industry}
                       </Badge>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Customer Segment: {customer.segment}</p>
+                      <p>Industry: {customer.industry}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -127,14 +121,14 @@ export default function CustomerProfile({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Badge
-                        variant={getTierVariant(customer.tier)}
+                        variant={getHealthScoreVariant(customer.health_score)}
                         className="hover:scale-105 transition-transform duration-200 text-responsive-sm"
                       >
-                        {customer.tier}
+                        {customer.health_score}
                       </Badge>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Service Tier: {customer.tier}</p>
+                      <p>Health Score: {customer.health_score}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -146,21 +140,21 @@ export default function CustomerProfile({
                         variant="outline"
                         className="hover:scale-105 transition-transform duration-200 text-responsive-sm"
                       >
-                        ARR: {customer.arr_band}
+                        ARR: {formatARR(customer.arr)}
                       </Badge>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Annual Recurring Revenue: {customer.arr_band}</p>
+                      <p>Annual Recurring Revenue: {formatARR(customer.arr)}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
 
-                {customer.churned && (
+                {customer.health_score === "Critical" && (
                   <Badge
                     variant="destructive"
                     className="animate-pulse-subtle text-responsive-sm"
                   >
-                    Churned
+                    Critical
                   </Badge>
                 )}
               </div>

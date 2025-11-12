@@ -1,47 +1,82 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Sparkles } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
 
-interface Connection {
+interface LoadingStep {
   id: string;
   name: string;
-  icon: string;
-  connected: boolean;
+  logo: string;
+  status: "pending" | "loading" | "completed";
 }
 
 export default function LoginPage() {
   const router = useRouter();
-  const [ssoConnected, setSsoConnected] = useState(false);
-  const [connections, setConnections] = useState<Connection[]>([
-    { id: "salesforce", name: "Salesforce", icon: "☁️", connected: false },
-    { id: "gainsight", name: "Gainsight", icon: "📊", connected: false },
-    { id: "gong", name: "Gong", icon: "🎯", connected: false },
-  ]);
+  const [loading, setLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const integrations = [
+    {
+      id: "salesforce",
+      name: "Salesforce",
+      logo: "/integration-logos/salesforce.svg",
+    },
+    {
+      id: "slack",
+      name: "Slack",
+      logo: "/integration-logos/slack.svg",
+    },
+    {
+      id: "gong",
+      name: "Gong",
+      logo: "/integration-logos/gong.svg",
+    },
+    {
+      id: "gainsight",
+      name: "Gainsight",
+      logo: "/integration-logos/gainsight.svg",
+    },
+  ];
+
+  // Compute step statuses based on currentStep
+  const steps: LoadingStep[] = integrations.map((integration, index) => ({
+    ...integration,
+    status:
+      index < currentStep
+        ? "completed"
+        : index === currentStep
+        ? "loading"
+        : "pending",
+  }));
+
+  useEffect(() => {
+    if (!loading) return;
+
+    if (currentStep < integrations.length) {
+      // After 1500ms, move to next step
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    } else {
+      // All steps completed, redirect after a brief pause
+      const finalTimer = setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
+
+      return () => clearTimeout(finalTimer);
+    }
+  }, [loading, currentStep, integrations.length, router]);
 
   const handleSSOLogin = () => {
-    setSsoConnected(true);
-  };
-
-  const handleConnect = (id: string) => {
-    setConnections(
-      connections.map((conn) =>
-        conn.id === id ? { ...conn, connected: true } : conn
-      )
-    );
-  };
-
-  const allConnected = connections.every((conn) => conn.connected);
-  const canProceed = ssoConnected && allConnected;
-
-  const handleGoToDashboard = () => {
-    if (canProceed) {
-      router.push("/dashboard");
-    }
+    setLoading(true);
+    setCurrentStep(0);
   };
 
   return (
@@ -49,10 +84,17 @@ export default function LoginPage() {
       {/* Logo in top-left */}
       <div className="absolute top-6 left-6">
         <Link href="/" className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-primary-green rounded-lg flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-white" />
+          <div className="w-8 h-8 flex items-center justify-center">
+            <Image
+              src="/datapiper-logo.svg"
+              alt="DataPiper Logo"
+              width={40}
+              height={40}
+            />
           </div>
-          <span className="text-2xl font-bold text-dark-forest">CSMPilot</span>
+          <span className="text-2xl font-bold text-dark-forest">
+            DataPiper
+          </span>
         </Link>
       </div>
 
@@ -60,127 +102,91 @@ export default function LoginPage() {
       <Card className="w-full max-w-2xl bg-white shadow-2xl border-0">
         <CardHeader className="text-center pb-6 pt-8">
           <CardTitle className="text-3xl font-bold text-dark-forest mb-2">
-            Connect Your Workspace
+            Welcome to DataPiper
           </CardTitle>
           <p className="text-neutral-gray text-lg">
-            Link your tools to unlock AI-powered customer insights
+            Sign in with SurveyMonkey to access your customer intelligence
           </p>
         </CardHeader>
 
         <CardContent className="px-8 pb-8">
           {/* SSO Login Section */}
           <div className="mb-8">
-            <h3 className="text-sm font-semibold text-neutral-gray mb-3 uppercase tracking-wide">
-              Step 1: Authenticate
-            </h3>
-            <Button
-              onClick={handleSSOLogin}
-              disabled={ssoConnected}
-              className={`w-full h-14 text-lg font-medium transition-all duration-300 ${
-                ssoConnected
-                  ? "bg-light-mint text-dark-forest border-2 border-primary-green hover:bg-light-mint"
-                  : "bg-primary-green hover:bg-dark-forest text-white"
-              }`}
-            >
-              {ssoConnected ? (
-                <span className="flex items-center justify-center">
-                  <Check className="w-5 h-5 mr-2" />
-                  Connected to SurveyMonkey
-                </span>
-              ) : (
-                "Continue with SurveyMonkey"
-              )}
-            </Button>
-          </div>
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-8 space-y-6">
+                <div className="text-center mb-4">
+                  <p className="text-lg font-semibold text-dark-forest mb-2">
+                    Setting up your workspace
+                  </p>
+                  <p className="text-sm text-neutral-gray">
+                    Connecting to your data sources...
+                  </p>
+                </div>
 
-          {/* Data Connections Section */}
-          {ssoConnected && (
-            <div className="animate-fade-in-up">
-              <h3 className="text-sm font-semibold text-neutral-gray mb-4 uppercase tracking-wide">
-                Step 2: Connect Data Sources
-              </h3>
-              <div className="space-y-3">
-                {connections.map((connection) => (
-                  <div
-                    key={connection.id}
-                    className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-300 ${
-                      connection.connected
-                        ? "bg-light-mint border-primary-green"
-                        : "bg-off-white border-gray-200 hover:border-primary-green/30 cursor-pointer"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-4">
-                      <div className="text-3xl">{connection.icon}</div>
-                      <div>
-                        <p className="font-semibold text-dark-forest">
-                          {connection.name}
+                {/* Integration Steps */}
+                <div className="w-full space-y-3">
+                  {steps.map((step) => (
+                    <div
+                      key={step.id}
+                      className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all duration-300 ${
+                        step.status === "loading"
+                          ? "border-primary-green bg-light-mint"
+                          : step.status === "completed"
+                          ? "border-primary-green bg-white"
+                          : "border-gray-200 bg-white opacity-50"
+                      }`}
+                    >
+                      <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg border-2 border-gray-200">
+                        <Image
+                          src={step.logo}
+                          alt={`${step.name} logo`}
+                          width={24}
+                          height={24}
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-dark-forest">
+                          {step.status === "loading"
+                            ? `Connecting to ${step.name}...`
+                            : step.status === "completed"
+                            ? `Connected to ${step.name}`
+                            : `${step.name}`}
                         </p>
-                        <p className="text-sm text-neutral-gray">
-                          {connection.connected
-                            ? "Connected"
-                            : "Not connected"}
-                        </p>
+                      </div>
+                      <div className="w-6 h-6 flex items-center justify-center">
+                        {step.status === "loading" && (
+                          <Loader2 className="w-5 h-5 text-primary-green animate-spin" />
+                        )}
+                        {step.status === "completed" && (
+                          <CheckCircle2 className="w-5 h-5 text-primary-green" />
+                        )}
                       </div>
                     </div>
+                  ))}
+                </div>
 
-                    {connection.connected ? (
-                      <div className="flex items-center justify-center w-10 h-10 bg-primary-green rounded-full">
-                        <Check className="w-6 h-6 text-white" />
-                      </div>
-                    ) : (
-                      <Button
-                        onClick={() => handleConnect(connection.id)}
-                        size="sm"
-                        className="bg-primary-green hover:bg-dark-forest text-white font-medium"
-                      >
-                        Connect
-                      </Button>
-                    )}
+                {currentStep >= steps.length && (
+                  <div className="text-center animate-fade-in-up">
+                    <CheckCircle2 className="w-12 h-12 text-primary-green mx-auto mb-2" />
+                    <p className="text-lg font-semibold text-dark-forest">
+                      All set! Redirecting...
+                    </p>
                   </div>
-                ))}
+                )}
               </div>
-            </div>
-          )}
-
-          {/* Go to Dashboard Button */}
-          {ssoConnected && (
-            <div className="mt-8 animate-fade-in-up">
+            ) : (
               <Button
-                onClick={handleGoToDashboard}
-                disabled={!canProceed}
-                className={`w-full h-14 text-lg font-semibold transition-all duration-300 ${
-                  canProceed
-                    ? "bg-primary-green hover:bg-dark-forest text-white shadow-lg hover:shadow-xl"
-                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                }`}
+                onClick={handleSSOLogin}
+                disabled={loading}
+                className="w-full h-14 text-lg font-medium transition-all duration-300 bg-primary-green hover:bg-dark-forest text-white"
               >
-                {canProceed
-                  ? "Go to Dashboard →"
-                  : `Connect ${connections.filter((c) => !c.connected).length} more source${connections.filter((c) => !c.connected).length !== 1 ? "s" : ""}`}
+                Continue with SurveyMonkey
               </Button>
-
-              {!canProceed && (
-                <p className="text-center text-sm text-neutral-gray mt-3">
-                  Connect all data sources to continue
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* Skip Option */}
-          {ssoConnected && (
-            <div className="text-center mt-6">
-              <Link
-                href="/dashboard"
-                className="text-sm text-neutral-gray hover:text-primary-green transition-colors duration-200"
-              >
-                Skip for now and explore demo
-              </Link>
-            </div>
-          )}
+            )}
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
-

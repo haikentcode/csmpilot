@@ -50,8 +50,8 @@ export default function CustomerList({
   const filteredCustomers = customers.filter(
     (customer) =>
       customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.segment.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.tier.toLowerCase().includes(searchTerm.toLowerCase())
+      customer.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.health_score.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -135,8 +135,10 @@ export default function CustomerList({
                     ${
                       selectedCustomerId === customer.id
                         ? "border-l-primary-green bg-light-mint shadow-md"
-                        : customer.churned
+                        : customer.health_score === "Critical"
                         ? "border-l-red-400 hover:border-l-red-500"
+                        : customer.health_score === "At Risk"
+                        ? "border-l-yellow-400 hover:border-l-yellow-500"
                         : "border-l-primary-green hover:border-l-dark-forest"
                     }
                   `}
@@ -153,12 +155,20 @@ export default function CustomerList({
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Badge className="text-responsive-xs hover:scale-105 transition-transform duration-200 text-white">
-                                  {customer.segment}
+                                <Badge 
+                                  className={`text-responsive-xs hover:scale-105 transition-transform duration-200 ${
+                                    customer.health_score === "Critical"
+                                      ? "bg-red-500 text-white"
+                                      : customer.health_score === "At Risk"
+                                      ? "bg-yellow-500 text-white"
+                                      : "bg-primary-green text-white"
+                                  }`}
+                                >
+                                  {customer.industry}
                                 </Badge>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Customer Segment: {customer.segment}</p>
+                                <p>Industry: {customer.industry}</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
@@ -166,12 +176,20 @@ export default function CustomerList({
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Badge className="text-responsive-xs hover:scale-105 transition-transform duration-200 text-white">
-                                  {customer.tier}
+                                <Badge 
+                                  className={`text-responsive-xs hover:scale-105 transition-transform duration-200 ${
+                                    customer.health_score === "Critical"
+                                      ? "bg-red-500 text-white"
+                                      : customer.health_score === "At Risk"
+                                      ? "bg-yellow-500 text-white"
+                                      : "bg-primary-green text-white"
+                                  }`}
+                                >
+                                  {customer.health_score}
                                 </Badge>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Service Tier: {customer.tier}</p>
+                                <p>Health Score: {customer.health_score}</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
@@ -179,14 +197,16 @@ export default function CustomerList({
                         <div className="text-responsive-sm text-neutral-gray space-y-1">
                           <div className="flex items-center">
                             <span className="font-medium">ARR:</span>
-                            <span className="ml-2">{customer.arr_band}</span>
+                            <span className="ml-2">
+                              ${customer.arr >= 1000 
+                                ? `${(customer.arr / 1000).toFixed(1)}k` 
+                                : customer.arr.toFixed(0)}
+                            </span>
                           </div>
                           <div className="flex items-center">
-                            <span className="font-medium">Since:</span>
+                            <span className="font-medium">Renewal:</span>
                             <span className="ml-2">
-                              {new Date(
-                                customer.signup_date
-                              ).toLocaleDateString()}
+                              {new Date(customer.renewal_date).toLocaleDateString()}
                             </span>
                           </div>
                         </div>
@@ -199,8 +219,10 @@ export default function CustomerList({
                                 className={`
                                 w-3 h-3 rounded-full transition-all duration-200 hover:scale-125
                                 ${
-                                  customer.churned
+                                  customer.health_score === "Critical"
                                     ? "bg-red-500"
+                                    : customer.health_score === "At Risk"
+                                    ? "bg-yellow-500"
                                     : "bg-primary-green"
                                 }
                               `}
@@ -208,9 +230,7 @@ export default function CustomerList({
                             </TooltipTrigger>
                             <TooltipContent>
                               <p>
-                                {customer.churned
-                                  ? "Churned Customer"
-                                  : "Active Customer"}
+                                Health Score: {customer.health_score}
                               </p>
                             </TooltipContent>
                           </Tooltip>

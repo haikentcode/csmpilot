@@ -60,30 +60,26 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
     });
   };
 
-  const getSegmentVariant = (segment: string) => {
-    switch (segment.toLowerCase()) {
-      case "enterprise":
+  const getHealthScoreVariant = (healthScore: string) => {
+    switch (healthScore) {
+      case "Healthy":
         return "default";
-      case "mid-market":
+      case "At Risk":
         return "secondary";
-      case "smb":
-        return "outline";
+      case "Critical":
+        return "destructive";
       default:
         return "outline";
     }
   };
 
-  const getTierVariant = (tier: string) => {
-    switch (tier.toLowerCase()) {
-      case "platinum":
-        return "default";
-      case "gold":
-        return "secondary";
-      case "silver":
-        return "outline";
-      default:
-        return "outline";
+  const formatARR = (arr: number): string => {
+    if (arr >= 1000000) {
+      return `$${(arr / 1000000).toFixed(1)}M`;
+    } else if (arr >= 1000) {
+      return `$${(arr / 1000).toFixed(1)}k`;
     }
+    return `$${arr.toFixed(0)}`;
   };
 
   const tabVariants = {
@@ -93,7 +89,7 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
       scale: 1,
     },
     active: {
-      backgroundColor: "#00B365",
+      backgroundColor: "#25834b",
       color: "#FFFFFF",
       scale: 1.02,
     },
@@ -122,17 +118,17 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
             {customer.name}
           </h3>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-            <Badge variant={getSegmentVariant(customer.segment)} className="text-xs sm:text-sm">
-              {customer.segment}
+            <Badge variant="outline" className="text-xs sm:text-sm">
+              {customer.industry}
             </Badge>
-            <Badge variant={getTierVariant(customer.tier)} className="text-xs sm:text-sm">
-              {customer.tier}
+            <Badge variant={getHealthScoreVariant(customer.health_score)} className="text-xs sm:text-sm">
+              {customer.health_score}
             </Badge>
           </div>
         </div>
         <div className="text-left sm:text-right shrink-0">
           <div className="text-responsive-2xl font-bold text-green-600 wrap-break-words">
-            {customer.arr_band || "Not Available"}
+            {formatARR(customer.arr)}
           </div>
           <div className="text-responsive-sm text-gray-500">
             Annual Recurring Revenue
@@ -150,10 +146,16 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
                   Health Score
                 </p>
                 <p className="text-responsive-2xl font-bold text-gray-500">
-                  N/A
+                  {customer.health_score}
                 </p>
               </div>
-              <div className="p-2 rounded-full bg-gray-50 text-gray-500 shrink-0">
+              <div className={`p-2 rounded-full shrink-0 ${
+                customer.health_score === "Critical" 
+                  ? "bg-red-50 text-red-600"
+                  : customer.health_score === "At Risk"
+                  ? "bg-yellow-50 text-yellow-600"
+                  : "bg-green-50 text-green-600"
+              }`}>
                 <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
             </div>
@@ -165,10 +167,10 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
                 <p className="text-responsive-sm font-medium text-gray-600">
-                  Churn Risk
+                  Sentiment
                 </p>
                 <p className="text-responsive-2xl font-bold text-gray-500">
-                  N/A
+                  {customer.sentiment === "up" ? "↑ Positive" : "↓ Negative"}
                 </p>
               </div>
               <div className="p-2 rounded-full bg-gray-50 text-gray-500 shrink-0">
@@ -183,10 +185,10 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
                 <p className="text-responsive-sm font-medium text-gray-600">
-                  Signup Date
+                  Renewal Date
                 </p>
                 <p className="text-responsive-sm font-semibold text-gray-900 wrap-break-words">
-                  {formatDate(customer.signup_date)}
+                  {formatDate(customer.renewal_date)}
                 </p>
               </div>
               <div className="p-2 rounded-full bg-green-50 text-green-600 shrink-0">
