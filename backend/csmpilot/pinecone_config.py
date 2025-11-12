@@ -6,6 +6,10 @@ import ssl
 import certifi
 from typing import Dict, Any
 
+# Now import Pinecone and other modules
+from pinecone import Pinecone
+from sentence_transformers import SentenceTransformer
+
 # Fix SSL certificate issues on macOS - Must be done before any imports
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -22,12 +26,18 @@ try:
     print(f"🔐 SSL Certificate path: {cert_path}")
 except Exception as e:
     print(f"⚠️ SSL setup warning: {e}")
-    # Fallback to system certificates
-    os.environ['SSL_CERT_FILE'] = '/etc/ssl/certs/ca-certificates.crt'
-
-# Now import Pinecone and other modules
-from pinecone import Pinecone
-from sentence_transformers import SentenceTransformer
+    # Fallback to system certificates for Linux/Docker
+    linux_cert_paths = [
+        '/etc/ssl/certs/ca-certificates.crt',
+        '/etc/ssl/certs/ca-bundle.crt',
+        '/etc/pki/tls/certs/ca-bundle.crt'
+    ]
+    for cert_path in linux_cert_paths:
+        if os.path.exists(cert_path):
+            os.environ['SSL_CERT_FILE'] = cert_path
+            os.environ['REQUESTS_CA_BUNDLE'] = cert_path
+            os.environ['CURL_CA_BUNDLE'] = cert_path
+            break
 
 # Pinecone Configuration
 PINECONE_CONFIG = {
