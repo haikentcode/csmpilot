@@ -317,3 +317,21 @@ CELERY_TASK_ROUTES = {
     'customers.tasks.*': {'queue': 'vector_processing'},
 }
 CELERY_TASK_DEFAULT_QUEUE = 'default'
+# Celery Configuration
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# Salesforce Mock API Configuration (EXTERNAL service - like real Salesforce)
+SALESFORCE_MOCK_API_URL = 'http://localhost:3001/mock-apis/salesforce'
+SALESFORCE_SYNC_INTERVAL_HOURS = 1  # Sync every hour
+
+# Gainsight Mock API Configuration (EXTERNAL service - like real Gainsight)
+GAINSIGHT_MOCK_API_URL = 'http://localhost:3001/mock-apis/gainsight'
+GAINSIGHT_SYNC_INTERVAL_HOURS = 2  # Sync every 2 hours
+
+# Gong Mock API Configuration (EXTERNAL service - like real Gong)
+GONG_MOCK_API_URL = 'http://localhost:3001/mock-apis/gong'
+GONG_SYNC_INTERVAL_HOURS = 4  # Sync every 4 hours
+
+# OpenAI Configuration for AI Processing
+# Set OPENAI_API_KEY in environment variable or .env file
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', None)

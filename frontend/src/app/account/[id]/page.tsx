@@ -44,7 +44,6 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
 import { CustomerDetail, GongMeeting } from "@/services/apiService";
 import MeetingDetailModal from "@/components/MeetingDetailModal";
-import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AccountDetailPage() {
   const router = useRouter();
