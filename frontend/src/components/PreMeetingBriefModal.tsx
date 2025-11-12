@@ -14,7 +14,7 @@ import AnimatedModal from "./AnimatedModal";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useProfileSummary } from "@/hooks/useApi";
-import type { Customer, ProfileSummary } from "@/services/apiService";
+import type { ProfileSummary } from "@/services/apiService";
 
 interface PreMeetingBriefModalProps {
   isOpen: boolean;
@@ -40,14 +40,15 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
   >("overview");
 
   // Use the API hook if no external data is provided
-  const { data: hookData, loading: hookLoading, error: hookError } = useProfileSummary(
-    customer?.id || null
-  );
+  const {
+    data: hookData,
+    loading: hookLoading,
+    error: hookError,
+  } = useProfileSummary(customer?.id || null);
 
   // Use external data if provided, otherwise use hook data
   const profileSummary = externalProfileSummary || hookData;
-  const loading =
-    externalLoading !== undefined ? externalLoading : hookLoading;
+  const loading = externalLoading !== undefined ? externalLoading : hookLoading;
   const error = externalError !== undefined ? externalError : hookError;
 
   if (!customer) return null;
@@ -122,10 +123,16 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
             {customer.name}
           </h3>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-            <Badge variant={getSegmentVariant(customer.segment)} className="text-xs sm:text-sm">
+            <Badge
+              variant={getSegmentVariant(customer.segment)}
+              className="text-xs sm:text-sm"
+            >
               {customer.segment}
             </Badge>
-            <Badge variant={getTierVariant(customer.tier)} className="text-xs sm:text-sm">
+            <Badge
+              variant={getTierVariant(customer.tier)}
+              className="text-xs sm:text-sm"
+            >
               {customer.tier}
             </Badge>
           </div>
@@ -220,7 +227,9 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
       ) : error ? (
         <Card className="card-responsive">
           <CardContent className="spacing-responsive-sm">
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           </CardContent>
         </Card>
       ) : profileSummary?.risks?.length ? (
@@ -232,7 +241,9 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
                   <div className="p-1 rounded-full mt-1 bg-red-100 text-red-600 shrink-0">
                     <AlertTriangle className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">{risk}</p>
+                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                    {risk}
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -271,25 +282,29 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
       ) : error ? (
         <Card className="card-responsive">
           <CardContent className="spacing-responsive-sm">
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           </CardContent>
         </Card>
       ) : profileSummary?.opportunities?.length ? (
         <div className="space-y-3">
-          {profileSummary.opportunities.map((opportunity: string, index: number) => (
-            <Card key={index} className="card-responsive">
-              <CardContent className="spacing-responsive-sm">
-                <div className="flex items-start gap-3">
-                  <div className="p-1 rounded-full mt-1 bg-green-100 text-green-600 shrink-0">
-                    <Target className="h-3 w-3 sm:h-4 sm:w-4" />
+          {profileSummary.opportunities.map(
+            (opportunity: string, index: number) => (
+              <Card key={index} className="card-responsive">
+                <CardContent className="spacing-responsive-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="p-1 rounded-full mt-1 bg-green-100 text-green-600 shrink-0">
+                      <Target className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </div>
+                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                      {opportunity}
+                    </p>
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">  
-                    {opportunity}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            )
+          )}
         </div>
       ) : (
         <Card className="card-responsive">
@@ -324,25 +339,29 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
       ) : error ? (
         <Card className="card-responsive">
           <CardContent className="spacing-responsive-sm">
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           </CardContent>
         </Card>
       ) : profileSummary?.talk_tracks?.length ? (
         <div className="space-y-3">
-          {profileSummary.talk_tracks.map((talkTrack: string, index: number) => (
-            <Card key={index} className="card-responsive">
-              <CardContent className="spacing-responsive-sm">
-                <div className="flex items-start gap-3">
-                  <div className="p-1 rounded-full mt-1 bg-blue-100 text-blue-600 shrink-0">
-                    <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+          {profileSummary.talk_tracks.map(
+            (talkTrack: string, index: number) => (
+              <Card key={index} className="card-responsive">
+                <CardContent className="spacing-responsive-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="p-1 rounded-full mt-1 bg-blue-100 text-blue-600 shrink-0">
+                      <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </div>
+                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                      {talkTrack}
+                    </p>
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
-                    {talkTrack}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            )
+          )}
         </div>
       ) : (
         <Card className="card-responsive">

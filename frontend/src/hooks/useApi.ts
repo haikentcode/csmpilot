@@ -3,7 +3,6 @@ import {
   apiService, 
   handleApiError, 
   isRetryableError,
-  Customer, 
   SimilarCustomer, 
   ProfileSummary, 
   PaginatedResponse 

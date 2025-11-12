@@ -15,11 +15,15 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Set environment variables for SSL
 try:
-    os.environ['SSL_CERT_FILE'] = certifi.where()
-    os.environ['REQUESTS_CA_BUNDLE'] = certifi.where()
-    os.environ['CURL_CA_BUNDLE'] = certifi.where()
-except:
-    pass
+    cert_path = certifi.where()
+    os.environ['SSL_CERT_FILE'] = cert_path
+    os.environ['REQUESTS_CA_BUNDLE'] = cert_path
+    os.environ['CURL_CA_BUNDLE'] = cert_path
+    print(f"🔐 SSL Certificate path: {cert_path}")
+except Exception as e:
+    print(f"⚠️ SSL setup warning: {e}")
+    # Fallback to system certificates
+    os.environ['SSL_CERT_FILE'] = '/etc/ssl/certs/ca-certificates.crt'
 
 # Now import Pinecone and other modules
 from pinecone import Pinecone
@@ -30,6 +34,7 @@ PINECONE_CONFIG = {
     'api_key': os.getenv('PINECONE_API_KEY'),
     'environment': os.getenv('PINECONE_ENVIRONMENT', 'us-east-1-aws'),
     'index_name': os.getenv('PINECONE_INDEX_NAME', 'csm-pilot'),
+    'index_host': os.getenv('PINECONE_INDEX_HOST', 'https://csm-pilot-w9uksjc.svc.aped-4627-b74a.pinecone.io'),
     'dimension': 1024,  # Updated to match your Pinecone index
     'metric': 'cosine',
     'cloud': 'aws',
@@ -69,13 +74,23 @@ class PineconeManager:
             # Create index if it doesn't exist (skip SSL errors)
             self._create_index_if_not_exists()
             
-            # Try to connect to index
+            # Try to connect to index using specific host
             try:
-                self.index = self.pc.Index(PINECONE_CONFIG['index_name'])
-                print(f"✅ Connected to Pinecone index: {PINECONE_CONFIG['index_name']}")
+                if PINECONE_CONFIG.get('index_host'):
+                    # Use specific index host URL
+                    self.index = self.pc.Index(
+                        name=PINECONE_CONFIG['index_name'],
+                        host=PINECONE_CONFIG['index_host']
+                    )
+                    print(f"✅ Connected to Pinecone index: {PINECONE_CONFIG['index_name']}")
+                    print(f"📡 Using host: {PINECONE_CONFIG['index_host']}")
+                else:
+                    # Fallback to default connection
+                    self.index = self.pc.Index(PINECONE_CONFIG['index_name'])
+                    print(f"✅ Connected to Pinecone index: {PINECONE_CONFIG['index_name']}")
             except Exception as e:
                 print(f"⚠️ Could not connect to index: {e}")
-                print("🔧 Please create the index manually in Pinecone Console")
+                print("🔧 Please verify the index host URL and API key")
                 self.index = None
             
             # Initialize embedding model (already downloaded)

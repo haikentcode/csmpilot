@@ -25,12 +25,12 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@k8%j4$7a0)%inng$$^c9wkagntx$16=y7xdjdghb58xq_2t73'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-@k8%j4$7a0)%inng$$^c9wkagntx$16=y7xdjdghb58xq_2t73')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 'on')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
 
 
 # Application definition
@@ -83,12 +83,23 @@ WSGI_APPLICATION = 'csmpilot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Support both SQLite and PostgreSQL based on DATABASE_URL
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///db.sqlite3')
+
+if DATABASE_URL.startswith('postgresql'):
+    # PostgreSQL configuration for Docker/Production
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
     }
-}
+else:
+    # SQLite configuration for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -125,7 +136,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files (user uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Additional directories to search for static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+] if (BASE_DIR / 'static').exists() else []
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -209,3 +230,18 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+# Fix for macOS segmentation faults with ML libraries
+# Use threads instead of processes to avoid multiprocessing issues
+CELERY_WORKER_POOL = 'threads'
+CELERY_WORKER_CONCURRENCY = 2  # Limit concurrent threads
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 10  # Restart workers periodically
+
+# Alternative: Use solo pool for development (single-threaded)
+# CELERY_WORKER_POOL = 'solo'
+
+# Task routing and execution settings
+CELERY_TASK_ROUTES = {
+    'customers.tasks.*': {'queue': 'vector_processing'},
+}
+CELERY_TASK_DEFAULT_QUEUE = 'default'
