@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,65 +8,18 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Users, Sparkles } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
-
-interface SimilarCustomer {
-  id: number;
-  name: string;
-  industry: string;
-  arr: number;
-  similarity_score: number;
-  shared_traits: string[];
-}
-
-interface SimilarCustomersData {
-  industry: string;
-  insight: string;
-  similar_customers: SimilarCustomer[];
-}
-
-interface AccountDetails {
-  id: number;
-  name: string;
-  industry: string;
-}
+import { useSimilarCustomers, useCustomerDetail } from "@/hooks/useApi";
 
 export default function SimilarCustomersPage() {
   const router = useRouter();
   const params = useParams();
-  const accountId = params?.id;
-  const [account, setAccount] = useState<AccountDetails | null>(null);
-  const [similarData, setSimilarData] = useState<SimilarCustomersData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const accountId = params?.id ? Number(params.id) : null;
 
-  useEffect(() => {
-    // Fetch current account details
-    fetch("/mockdata/accountDetails.json")
-      .then((res) => res.json())
-      .then((accounts: AccountDetails[]) => {
-        const foundAccount = accounts.find((acc) => acc.id === Number(accountId));
-        if (foundAccount) {
-          setAccount(foundAccount);
-          // Fetch similar customers based on industry
-          return fetch("/mockdata/similarCustomers.json");
-        }
-        throw new Error("Account not found");
-      })
-      .then((res) => res?.json())
-      .then((data) => {
-        if (account?.industry && data[account.industry]) {
-          setSimilarData(data[account.industry]);
-        } else {
-          // Fallback to first dataset if industry not found
-          const firstIndustry = Object.keys(data)[0];
-          setSimilarData(data[firstIndustry]);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error loading similar customers:", error);
-        setLoading(false);
-      });
-  }, [accountId, account?.industry]);
+  // Fetch customer details and similar customers using API
+  const { loading: accountLoading } = useCustomerDetail(accountId);
+  const { data: similarData, loading: similarLoading } = useSimilarCustomers(accountId);
+
+  const loading = accountLoading || similarLoading;
 
   const formatArr = (arr: number): string => {
     const thousands = Math.round(arr / 1000);
@@ -91,7 +43,8 @@ export default function SimilarCustomersPage() {
     );
   }
 
-  if (!account || !similarData) {
+  // Show error only if we have no similar customers data at all
+  if (!similarData || !similarData.similar_customers || similarData.similar_customers.length === 0) {
     return (
       <DashboardLayout>
         <div className="max-w-7xl mx-auto">
@@ -106,10 +59,10 @@ export default function SimilarCustomersPage() {
           <Card className="bg-white">
             <CardContent className="p-12 text-center">
               <h2 className="text-2xl font-bold text-dark-forest mb-4">
-                Data Not Available
+                No Similar Customers Found
               </h2>
               <p className="text-neutral-gray">
-                Unable to load similar customer data.
+                We couldn&apos;t find any similar customers at this time.
               </p>
             </CardContent>
           </Card>
@@ -134,10 +87,10 @@ export default function SimilarCustomersPage() {
         {/* Page Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-dark-forest mb-2">
-            Similar Customers in {similarData.industry}
+            Similar Customers to {similarData.customer_name}
           </h1>
           <p className="text-neutral-gray text-lg">
-            Accounts with similar engagement and product usage patterns.
+            Found {similarData.total_found} accounts with similar engagement and product usage patterns.
           </p>
         </div>
 
@@ -153,10 +106,10 @@ export default function SimilarCustomersPage() {
               <Sparkles className="w-6 h-6 text-white flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-white font-semibold text-lg mb-1">
-                  Top Insight
+                  Similar Customers Found
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  {similarData.insight}
+                  Found {similarData.total_found} customers with similar profiles based on industry, ARR, and health metrics.
                 </p>
               </div>
             </div>
@@ -167,7 +120,7 @@ export default function SimilarCustomersPage() {
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {similarData.similar_customers.map((customer, index) => (
             <motion.div
-              key={customer.id}
+              key={customer.customer_id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -192,6 +145,21 @@ export default function SimilarCustomersPage() {
                     </p>
                   </div>
 
+                  {/* Health Score */}
+                  {customer.health_score && (
+                    <div className="mb-4">
+                      <p className="text-sm text-neutral-gray mb-1">
+                        Health Score
+                      </p>
+                      <Badge
+                        variant={customer.health_score === "healthy" ? "default" : customer.health_score === "at_risk" ? "secondary" : "destructive"}
+                        className="text-sm"
+                      >
+                        {customer.health_score}
+                      </Badge>
+                    </div>
+                  )}
+
                   {/* Similarity Score */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
@@ -209,25 +177,27 @@ export default function SimilarCustomersPage() {
                   </div>
 
                   {/* Shared Traits */}
-                  <div className="mb-4 flex-1">
-                    <p className="text-sm text-neutral-gray mb-2">
-                      Shared Traits
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {customer.shared_traits.map((trait, idx) => (
-                        <Badge
-                          key={idx}
-                          className="bg-light-mint text-dark-forest border-0 rounded-md px-2 py-1 text-xs font-medium"
-                        >
-                          {trait}
-                        </Badge>
-                      ))}
+                  {customer.shared_traits && customer.shared_traits.length > 0 && (
+                    <div className="mb-4 flex-1">
+                      <p className="text-sm text-neutral-gray mb-2">
+                        Shared Traits
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {customer.shared_traits.map((trait, idx) => (
+                          <Badge
+                            key={idx}
+                            className="bg-light-mint text-dark-forest border-0 rounded-md px-2 py-1 text-xs font-medium"
+                          >
+                            {trait}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* CTA Button */}
                   <Button
-                    onClick={() => router.push(`/account/${customer.id}`)}
+                    onClick={() => router.push(`/account/${customer.customer_id}`)}
                     className="w-full bg-[#25834b] hover:bg-[#004F38] text-white mt-auto cursor-pointer"
                   >
                     View Profile
