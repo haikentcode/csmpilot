@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/EmptyState";
 import { Pagination } from "@/components/ui/Pagination";
 import { useCustomers } from "@/hooks/useApi";
+import { Customer } from "@/services/apiService";
 
 interface CustomerListProps {
   onCustomerSelect: (customer: Customer) => void;
@@ -29,15 +30,12 @@ export default function CustomerList({
 }: CustomerListProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, loading, error, retry } = useCustomers(currentPage);
+
+  const customers = data?.results || [];
+  const totalCustomers = data?.count || 0;
   const itemsPerPage = 10;
-
-  const { data, loading, error, retry } = useCustomers(
-    currentPage,
-    itemsPerPage
-  );
-
-  const customers = data?.customers || [];
-  const totalCustomers = data?.total || 0;
 
   // Handle page changes
   const handlePageChange = (page: number) => {
@@ -50,7 +48,7 @@ export default function CustomerList({
 
   // Filter customers based on search term (only for current page)
   const filteredCustomers = customers.filter(
-    (customer) =>
+    (customer: Customer) =>
       customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.health_score.toLowerCase().includes(searchTerm.toLowerCase())
@@ -132,7 +130,7 @@ export default function CustomerList({
           <CardContent className="p-0">
             <div className="max-h-96 overflow-y-auto">
               <div className="space-y-2 p-4">
-                {filteredCustomers.map((customer, index) => (
+                {filteredCustomers.map((customer: Customer, index: number) => (
                   <Card
                     key={customer.id}
                     className={`
@@ -200,9 +198,9 @@ export default function CustomerList({
                             <div className="flex items-center">
                               <span className="font-medium">Since:</span>
                               <span className="ml-2">
-                                {new Date(
-                                  customer.signup_date
-                                ).toLocaleDateString()}
+                                {customer.signup_date 
+                                  ? new Date(customer.signup_date).toLocaleDateString()
+                                  : 'N/A'}
                               </span>
                             </div>
                           </div>

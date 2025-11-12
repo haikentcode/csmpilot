@@ -3,6 +3,7 @@ import {
   apiService, 
   handleApiError, 
   isRetryableError,
+  Customer,
   SimilarCustomer, 
   ProfileSummary, 
   PaginatedResponse,
@@ -134,22 +135,6 @@ export function useGongMeetings(customerId: number | null) {
   );
 }
 
-// Hook for health check
-export function useHealthCheck() {
-  return useApi(
-    () => apiService.getHealth(),
-    [],
-    { 
-      immediate: true,
-      fallbackData: {
-        status: 'unknown',
-        message: 'Unable to check service status',
-        version: '1.0.0'
-      }
-    }
-  );
-}
-
 // Hook with pagination support
 export function usePaginatedData<T>(
   apiCall: (page: number, perPage: number) => Promise<PaginatedResponse<T>>,
@@ -157,29 +142,8 @@ export function usePaginatedData<T>(
   perPage: number = 10
 ) {
   const [page, setPage] = useState(initialPage);
-  
-  // Use reducer for managing accumulated data state
-  const [state, dispatch] = useReducer(
-    (state: { allData: T[]; hasMore: boolean }, action: 
-      | { type: 'SET_DATA'; data: T[]; page: number; totalPages: number }
-      | { type: 'RESET' }
-    ) => {
-      switch (action.type) {
-        case 'SET_DATA':
-          return {
-            allData: action.page === 1 
-              ? action.data 
-              : [...state.allData, ...action.data],
-            hasMore: action.page < action.totalPages
-          };
-        case 'RESET':
-          return { allData: [], hasMore: true };
-        default:
-          return state;
-      }
-    },
-    { allData: [], hasMore: true }
-  );
+  const [allData, setAllData] = useState<T[]>([]);
+  const [hasMore, setHasMore] = useState(true);
 
   const { data, loading, error, retry } = useApi(
     () => apiCall(page, perPage),
@@ -189,37 +153,38 @@ export function usePaginatedData<T>(
   // Update state when new data arrives
   useEffect(() => {
     if (data) {
-      dispatch({
-        type: 'SET_DATA',
-        data: data.customers || [],
-        page,
-        totalPages: data.total_pages || 0
-      });
+      const results = data.results || [];
+      const totalCount = data.count || 0;
+      const currentCount = (page - 1) * perPage + results.length;
+      
+      setAllData(prev => page === 1 ? results : [...prev, ...results]);
+      setHasMore(currentCount < totalCount);
     }
-  }, [data, page]);
+  }, [data, page, perPage]);
 
   const loadMore = useCallback(() => {
-    if (!loading && state.hasMore) {
+    if (!loading && hasMore) {
       setPage(prev => prev + 1);
     }
-  }, [loading, state.hasMore]);
+  }, [loading, hasMore]);
 
   const reset = useCallback(() => {
     setPage(1);
-    dispatch({ type: 'RESET' });
+    setAllData([]);
+    setHasMore(true);
   }, []);
 
   return {
-    data: state.allData,
+    data: allData,
     loading,
     error,
     retry,
     loadMore,
     reset,
-    hasMore: state.hasMore,
+    hasMore,
     currentPage: page,
-    totalPages: data?.total_pages || 0,
-    total: data?.total || 0,
+    totalPages: data ? Math.ceil(data.count / perPage) : 0,
+    total: data?.count || 0,
   };
 }
 

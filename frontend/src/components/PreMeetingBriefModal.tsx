@@ -119,17 +119,11 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
             {customer.name}
           </h3>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-            <Badge
-              variant={getSegmentVariant(customer.segment)}
-              className="text-xs sm:text-sm"
-            >
-              {customer.segment}
+            <Badge variant="outline" className="text-xs sm:text-sm">
+              {customer.industry}
             </Badge>
-            <Badge
-              variant={getTierVariant(customer.tier)}
-              className="text-xs sm:text-sm"
-            >
-              {customer.tier}
+            <Badge variant={getHealthScoreVariant(customer.health_score)} className="text-xs sm:text-sm">
+              {customer.health_score}
             </Badge>
           </div>
         </div>
