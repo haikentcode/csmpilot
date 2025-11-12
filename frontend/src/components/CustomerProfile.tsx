@@ -24,7 +24,6 @@ import {
   TrendingUp,
   MessageSquareCode,
 } from "lucide-react";
-import type { Customer } from "@/services/apiService";
 
 interface CustomerProfileProps {
   customer: Customer;

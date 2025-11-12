@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, ArrowDownRight, Search } from "lucide-react";
 import { useCustomers } from "@/hooks/useApi";
-import { Customer } from "@/services/apiService";
 import DashboardLayout from "@/components/DashboardLayout";
 
 export default function Dashboard() {
