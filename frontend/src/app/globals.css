@@ -56,6 +56,15 @@
   }
 }
 
+@keyframes loading-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
 @keyframes pulse-subtle {
   0%, 100% {
     opacity: 1;
@@ -122,6 +131,10 @@
   animation: pulse-subtle 2s ease-in-out infinite;
 }
 
+.animate-loading-bar {
+  animation: loading-bar 3s linear forwards;
+}
+
 .animate-slide-in-right {
   animation: slide-in-right 0.5s ease-out forwards;
 }
@@ -140,7 +153,7 @@
 
 :root {
   /* Brand Colors */
-  --primary-green: #00B365;
+  --primary-green: #25834b;
   --dark-forest: #004F38;
   --light-mint: #C7EBD1;
   --off-white: #F9FAF8;
@@ -154,7 +167,7 @@
   --card-foreground: #004F38;
   --popover: #FFFFFF;
   --popover-foreground: #004F38;
-  --primary: #00B365;
+  --primary: #25834b;
   --primary-foreground: #FFFFFF;
   --secondary: #C7EBD1;
   --secondary-foreground: #004F38;
@@ -165,20 +178,20 @@
   --destructive: #EF4444;
   --border: #E5E7EB;
   --input: #E5E7EB;
-  --ring: #00B365;
-  --chart-1: #00B365;
-  --chart-2: #004F38;
+  --ring: #25834b;
+  --chart-1: #25834b;
+  --chart-2: #25834b;
   --chart-3: #C7EBD1;
   --chart-4: #6C757D;
   --chart-5: #F9FAF8;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #004F38;
-  --sidebar-primary: #00B365;
+  --sidebar-primary: #25834b;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #C7EBD1;
   --sidebar-accent-foreground: #004F38;
   --sidebar-border: #E5E7EB;
-  --sidebar-ring: #00B365;
+  --sidebar-ring: #25834b;
 }
 
 .dark {
