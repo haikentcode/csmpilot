@@ -302,3 +302,18 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+# Fix for macOS segmentation faults with ML libraries
+# Use threads instead of processes to avoid multiprocessing issues
+CELERY_WORKER_POOL = 'threads'
+CELERY_WORKER_CONCURRENCY = 2  # Limit concurrent threads
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 10  # Restart workers periodically
+
+# Alternative: Use solo pool for development (single-threaded)
+# CELERY_WORKER_POOL = 'solo'
+
+# Task routing and execution settings
+CELERY_TASK_ROUTES = {
+    'customers.tasks.*': {'queue': 'vector_processing'},
+}
+CELERY_TASK_DEFAULT_QUEUE = 'default'
