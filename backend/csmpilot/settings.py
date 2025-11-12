@@ -34,7 +34,13 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-@k8%j4$7a0)%inng$$^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 'on')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.100.28', '*']  # '*' allows all hosts (development only)
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    '0.0.0.0',
+    'testserver',  # For Django tests
+    'csmpilot-backend',  # Docker service name
+]
 
 
 # Application definition
