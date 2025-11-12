@@ -9,15 +9,14 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  // Initialize collapsed state from localStorage
-  const [collapsed, setCollapsed] = useState(() => {
-    if (typeof window !== "undefined") {
-      const storedState = localStorage.getItem("sidebar-collapsed");
-      return storedState !== null ? JSON.parse(storedState) : false;
-    }
-    return false;
-  });
-  
+  // Initialize from localStorage - this is client-only state
+  const getInitialCollapsed = () => {
+    if (typeof window === "undefined") return false;
+    const storedState = localStorage.getItem("sidebar-collapsed");
+    return storedState !== null ? JSON.parse(storedState) : false;
+  };
+
+  const [collapsed, setCollapsed] = useState(getInitialCollapsed);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

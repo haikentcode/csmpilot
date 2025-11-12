@@ -13,14 +13,13 @@ export default function Dashboard() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [page] = useState(1);
-  const perPage = 20;
 
   // Fetch customers from API
-  const { data, loading, error } = useCustomers(page, perPage);
+  const { data, loading, error } = useCustomers(page);
 
   // Extract customers from paginated response
   const accounts: Customer[] = useMemo(() => {
-    return data?.customers || data?.results || [];
+    return data?.results || [];
   }, [data]);
 
   // Format ARR as currency
@@ -88,13 +87,6 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Top Navigation Bar */}
         <div className="mb-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
-            {/* Greeting */}
-            <h1 className="text-3xl font-bold text-dark-forest">
-              Good morning, User 👋
-            </h1>
-          </div>
-
           {/* Search Bar */}
           <div className="relative w-full sm:max-w-sm">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-gray w-5 h-5" />
