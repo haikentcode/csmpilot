@@ -11,7 +11,7 @@ From our chat with @Daire  (SurveyMonkey CSM), we learned:
     
 
 Quote:
-“If we had an AI that plugs into all our tools, and pulls it together and I can ask it questions, that would be amazing.” — @Daire , CSM
+“If we had an AI that plugs into all our tools, and pulls it together and I can ask it questions, that would be amazing!.” — @Daire , CSM
 
 The Solution:
 CSM Copilot is an AI workspace that:
