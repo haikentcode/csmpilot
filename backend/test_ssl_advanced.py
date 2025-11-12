@@ -60,7 +60,7 @@ def test_advanced_ssl():
                 
                 # Now try Pinecone
                 from pinecone import Pinecone
-                pc = Pinecone(api_key=api_key)
+                pc = Pinecone(api_key=api_key,ssl_verify=False )
                 
                 if index_host:
                     index = pc.Index(host=index_host)
@@ -119,7 +119,7 @@ def test_advanced_ssl():
         urllib3.poolmanager.PoolManager.__init__ = patched_init
         
         from pinecone import Pinecone
-        pc = Pinecone(api_key=api_key)
+        pc = Pinecone(api_key=api_key,ssl_verify=False )
         
         if index_host:
             index = pc.Index(host=index_host)
@@ -148,7 +148,7 @@ def test_advanced_ssl():
                 
                 # Test again
                 from pinecone import Pinecone
-                pc = Pinecone(api_key=api_key)
+                pc = Pinecone(api_key=api_key,ssl_verify=False )
                 
                 if index_host:
                     index = pc.Index(host=index_host)
