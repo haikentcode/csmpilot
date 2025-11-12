@@ -45,6 +45,10 @@ import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
 import { CustomerDetail, GongMeeting } from "@/services/apiService";
 import MeetingDetailModal from "@/components/MeetingDetailModal";
 
+import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
+import { CustomerDetail, GongMeeting } from "@/services/apiService";
+import MeetingDetailModal from "@/components/MeetingDetailModal";
+
 export default function AccountDetailPage() {
   const router = useRouter();
   const params = useParams();
