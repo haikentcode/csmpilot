@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useProfileSummary } from "@/hooks/useApi";
-import type { Customer, ProfileSummary } from "@/services/apiService";
+import type { ProfileSummary } from "@/services/apiService";
 
 interface CustomerDetailModalProps {
   isOpen: boolean;
@@ -49,14 +49,15 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
   >("overview");
 
   // Use the API hook if no external data is provided
-  const { data: hookData, loading: hookLoading, error: hookError } = useProfileSummary(
-    customer?.id || null
-  );
+  const {
+    data: hookData,
+    loading: hookLoading,
+    error: hookError,
+  } = useProfileSummary(customer?.id || null);
 
   // Use external data if provided, otherwise use hook data
   const profileSummary = externalProfileSummary || hookData;
-  const loading =
-    externalLoading !== undefined ? externalLoading : hookLoading;
+  const loading = externalLoading !== undefined ? externalLoading : hookLoading;
   const error = externalError !== undefined ? externalError : hookError;
 
   if (!customer) return null;
@@ -108,8 +109,14 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
             <Badge variant="outline" className="text-xs sm:text-sm">
               {customer.industry}
             </Badge>
-            <Badge 
-              variant={customer.health_score === "Healthy" ? "default" : customer.health_score === "At Risk" ? "secondary" : "destructive"} 
+            <Badge
+              variant={
+                customer.health_score === "Healthy"
+                  ? "default"
+                  : customer.health_score === "At Risk"
+                  ? "secondary"
+                  : "destructive"
+              }
               className="text-xs sm:text-sm"
             >
               {customer.health_score}
@@ -216,7 +223,10 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-2 shrink-0" />
               <span className="truncate">Schedule Call</span>
             </Button>
-            <Button variant="outline" className="btn-responsive justify-start sm:col-span-2 lg:col-span-1">
+            <Button
+              variant="outline"
+              className="btn-responsive justify-start sm:col-span-2 lg:col-span-1"
+            >
               <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-2 shrink-0" />
               <span className="truncate">View in CRM</span>
             </Button>
@@ -256,9 +266,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <p className="text-responsive-sm font-medium text-gray-600">
                 Industry
               </p>
-              <p className="text-responsive-base text-gray-900">
-                Technology
-              </p>
+              <p className="text-responsive-base text-gray-900">Technology</p>
             </div>
             <Separator />
             <div className="space-y-2">
@@ -315,8 +323,14 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <p className="text-responsive-sm font-medium text-gray-600">
                 Health Score
               </p>
-              <Badge 
-                variant={customer.health_score === "Healthy" ? "default" : customer.health_score === "At Risk" ? "secondary" : "destructive"} 
+              <Badge
+                variant={
+                  customer.health_score === "Healthy"
+                    ? "default"
+                    : customer.health_score === "At Risk"
+                    ? "secondary"
+                    : "destructive"
+                }
                 className="text-xs sm:text-sm"
               >
                 {customer.health_score}
@@ -352,12 +366,8 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <p className="text-responsive-sm font-medium text-gray-600">
                 Primary Contact
               </p>
-              <p className="text-responsive-base text-gray-900">
-                John Smith
-              </p>
-              <p className="text-responsive-sm text-gray-500">
-                CEO
-              </p>
+              <p className="text-responsive-base text-gray-900">John Smith</p>
+              <p className="text-responsive-sm text-gray-500">CEO</p>
             </div>
             <div className="space-y-2">
               <p className="text-responsive-sm font-medium text-gray-600">
@@ -408,15 +418,22 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
             </div>
           ) : error ? (
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           ) : profileSummary?.risks?.length ? (
             <div className="space-y-3">
               {profileSummary.risks.map((risk: string, index: number) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-3 bg-red-50 rounded-lg"
+                >
                   <div className="p-1 rounded-full bg-red-100 text-red-600 shrink-0">
                     <AlertTriangle className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">{risk}</p>
+                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                    {risk}
+                  </p>
                 </div>
               ))}
             </div>
@@ -442,19 +459,26 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
             </div>
           ) : error ? (
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           ) : profileSummary?.opportunities?.length ? (
             <div className="space-y-3">
-              {profileSummary.opportunities.map((opportunity: string, index: number) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
-                  <div className="p-1 rounded-full bg-green-100 text-green-600 shrink-0">
-                    <Target className="h-3 w-3 sm:h-4 sm:w-4" />
+              {profileSummary.opportunities.map(
+                (opportunity: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-3 bg-green-50 rounded-lg"
+                  >
+                    <div className="p-1 rounded-full bg-green-100 text-green-600 shrink-0">
+                      <Target className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </div>
+                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                      {opportunity}
+                    </p>
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
-                    {opportunity}
-                  </p>
-                </div>
-              ))}
+                )
+              )}
             </div>
           ) : (
             <p className="text-responsive-base text-gray-600">
@@ -478,19 +502,26 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
               <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
             </div>
           ) : error ? (
-            <p className="text-red-600 text-responsive-sm wrap-break-words">{error}</p>
+            <p className="text-red-600 text-responsive-sm wrap-break-words">
+              {error}
+            </p>
           ) : profileSummary?.talk_tracks?.length ? (
             <div className="space-y-3">
-              {profileSummary.talk_tracks.map((talkTrack: string, index: number) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
-                  <div className="p-1 rounded-full bg-blue-100 text-blue-600 shrink-0">
-                    <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+              {profileSummary.talk_tracks.map(
+                (talkTrack: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg"
+                  >
+                    <div className="p-1 rounded-full bg-blue-100 text-blue-600 shrink-0">
+                      <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </div>
+                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                      {talkTrack}
+                    </p>
                   </div>
-                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
-                    {talkTrack}
-                  </p>
-                </div>
-              ))}
+                )
+              )}
             </div>
           ) : (
             <p className="text-responsive-base text-gray-600">
@@ -533,7 +564,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-full bg-green-100 text-green-600 shrink-0">
                   <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -542,12 +573,10 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
                   <p className="text-responsive-base font-medium text-gray-900">
                     Scheduled follow-up call
                   </p>
-                  <p className="text-responsive-sm text-gray-500">
-                    1 day ago
-                  </p>
+                  <p className="text-responsive-sm text-gray-500">1 day ago</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-3">
                 <div className="p-2 rounded-full bg-purple-100 text-purple-600 shrink-0">
                   <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -556,9 +585,7 @@ const CustomerDetailModal: React.FC<CustomerDetailModalProps> = ({
                   <p className="text-responsive-base font-medium text-gray-900">
                     Quarterly business review completed
                   </p>
-                  <p className="text-responsive-sm text-gray-500">
-                    1 week ago
-                  </p>
+                  <p className="text-responsive-sm text-gray-500">1 week ago</p>
                 </div>
               </div>
             </div>

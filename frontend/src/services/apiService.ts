@@ -73,6 +73,13 @@ export interface Customer {
     description: string;
     primary_use: string;
   }>;
+  // Derived properties
+  segment?: string;
+  tier?: string;
+  arr_band?: string;
+  churned?: boolean;
+  signup_date?: string;
+  created_at?: string;
 }
 
 export interface CustomerDetail extends Customer {
@@ -233,17 +240,87 @@ function calculateSentiment(customer: BackendCustomerDetail): "up" | "down" {
 }
 
 function transformCustomer(backendCustomer: BackendCustomerDetail): Customer {
+  // Use the same logic as addDerivedProperties but for detailed customer
+  const arr = parseFloat(backendCustomer.arr);
+  
+  // Calculate ARR band
+  let arr_band = '$0-50K';
+  if (arr >= 500000) arr_band = '$500K+';
+  else if (arr >= 250000) arr_band = '$250K-500K';
+  else if (arr >= 100000) arr_band = '$100K-250K';
+  else if (arr >= 50000) arr_band = '$50K-100K';
+  
+  // Calculate segment based on ARR
+  let segment = 'Small Business';
+  if (arr >= 500000) segment = 'Enterprise';
+  else if (arr >= 250000) segment = 'Mid-Market';
+  else if (arr >= 100000) segment = 'Growth';
+  
+  // Calculate tier based on industry and ARR
+  let tier = 'Standard';
+  if (arr >= 250000 && (backendCustomer.industry === 'technology' || backendCustomer.industry === 'finance')) {
+    tier = 'Premium';
+  } else if (arr >= 500000) {
+    tier = 'Enterprise';
+  }
+
   return {
     id: backendCustomer.id,
     name: backendCustomer.name,
     industry: transformIndustry(backendCustomer.industry),
-    arr: parseFloat(backendCustomer.arr),
+    arr: arr,
     health_score: transformHealthScore(backendCustomer.health_score),
     renewal_date: backendCustomer.renewal_date,
     last_updated: backendCustomer.last_updated,
     sentiment: calculateSentiment(backendCustomer),
     products: backendCustomer.products || [],
+    segment,
+    tier,
+    arr_band,
+    churned: backendCustomer.health_score === 'critical' && new Date(backendCustomer.renewal_date) < new Date(),
+    signup_date: backendCustomer.created_at || backendCustomer.last_updated,
+    created_at: backendCustomer.created_at,
   };
+}
+
+// Add derived properties that the frontend expects
+function addDerivedProperties(customer: BackendCustomer): Customer {
+  const arr = typeof customer.arr === 'string' ? parseFloat(customer.arr) : customer.arr;
+  
+  // Calculate ARR band
+  let arr_band = '$0-50K';
+  if (arr >= 500000) arr_band = '$500K+';
+  else if (arr >= 250000) arr_band = '$250K-500K';
+  else if (arr >= 100000) arr_band = '$100K-250K';
+  else if (arr >= 50000) arr_band = '$50K-100K';
+  
+  // Calculate segment based on ARR
+  let segment = 'Small Business';
+  if (arr >= 500000) segment = 'Enterprise';
+  else if (arr >= 250000) segment = 'Mid-Market';
+  else if (arr >= 100000) segment = 'Growth';
+  
+  // Calculate tier based on industry and ARR
+  let tier = 'Standard';
+  if (arr >= 250000 && (customer.industry === 'technology' || customer.industry === 'finance')) {
+    tier = 'Premium';
+  } else if (arr >= 500000) {
+    tier = 'Enterprise';
+  }
+  
+  return {
+    ...customer,
+    arr: arr,
+    health_score: transformHealthScore(customer.health_score),
+    industry: transformIndustry(customer.industry),
+    segment,
+    tier,
+    arr_band,
+    churned: customer.health_score === 'critical' && new Date(customer.renewal_date) < new Date(),
+    signup_date: customer.created_at || customer.last_updated || new Date().toISOString(),
+    sentiment: customer.health_score === 'healthy' ? 'up' : 'down',
+    products: customer.products || [],
+  } as Customer;
 }
 
 function transformCustomerDetail(backendCustomer: BackendCustomerDetail): CustomerDetail {
@@ -604,18 +681,8 @@ class ApiService {
       // Transform backend data to frontend format
       // For list view, we use simplified sentiment calculation based on health_score
       const transformedCustomers: Customer[] = response.results.map(customer => {
-        // Create a minimal BackendCustomerDetail for transformation
-        const baseCustomer: BackendCustomerDetail = {
-          ...customer,
-          feedback: [],
-          meetings: [],
-          metrics: null,
-        };
-        // Override sentiment calculation for list view (simpler)
-        const transformed = transformCustomer(baseCustomer);
-        // Use health score for sentiment in list view
-        transformed.sentiment = customer.health_score === 'healthy' ? 'up' : 'down';
-        return transformed;
+        // Apply derived properties transformation
+        return addDerivedProperties(customer);
       });
       
       // Calculate total pages

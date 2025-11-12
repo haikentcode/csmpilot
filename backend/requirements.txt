@@ -26,6 +26,10 @@ python-dotenv==1.0.0
 # SSL certificates
 certifi==2023.11.17
 
+# Database support
+dj-database-url==2.1.0
+psycopg2-binary==2.9.9
+
 # Vector database and embeddings
 pinecone-client==4.1.1
 openai==1.51.2

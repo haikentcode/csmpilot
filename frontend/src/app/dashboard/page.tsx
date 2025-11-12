@@ -7,17 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, ArrowDownRight, Search } from "lucide-react";
 import { useCustomers } from "@/hooks/useApi";
-import { Customer } from "@/services/apiService";
 
 export default function Dashboard() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const perPage = 20;
-  
+
   // Fetch customers from API
   const { data, loading, error } = useCustomers(page, perPage);
-  
+
   // Extract customers from paginated response
   const accounts: Customer[] = useMemo(() => {
     return data?.customers || data?.results || [];
@@ -118,8 +117,13 @@ export default function Dashboard() {
         {/* Error State */}
         {error && (
           <div className="text-center py-12">
-            <p className="text-red-600 text-lg mb-4">Error loading accounts: {error}</p>
-            <p className="text-neutral-gray">Please check that the backend server is running on http://localhost:8000</p>
+            <p className="text-red-600 text-lg mb-4">
+              Error loading accounts: {error}
+            </p>
+            <p className="text-neutral-gray">
+              Please check that the backend server is running on
+              http://localhost:8000
+            </p>
           </div>
         )}
 
@@ -135,7 +139,9 @@ export default function Dashboard() {
         {!loading && !error && filteredAccounts.length === 0 && (
           <div className="text-center py-12">
             <p className="text-neutral-gray text-lg">
-              {searchQuery ? "No accounts found matching your search." : "No accounts found."}
+              {searchQuery
+                ? "No accounts found matching your search."
+                : "No accounts found."}
             </p>
           </div>
         )}
