@@ -211,7 +211,9 @@ SPECTACULAR_SETTINGS = {
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:3001",  # Added for Docker frontend
     "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",  # Added for Docker frontend
     "http://localhost:8080",
     "http://127.0.0.1:8080",
 ]
