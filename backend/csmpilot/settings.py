@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -290,3 +289,16 @@ GONG_SYNC_INTERVAL_HOURS = 4  # Sync every 4 hours
 # OpenAI Configuration for AI Processing
 # Set OPENAI_API_KEY in environment variable or .env file
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', None)
+
+# Pinecone Vector Database Configuration
+PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+PINECONE_ENVIRONMENT = os.getenv('PINECONE_ENVIRONMENT', 'us-east-1-aws')
+PINECONE_INDEX_NAME = os.getenv('PINECONE_INDEX_NAME', 'csm-copilot')
+
+# Celery Configuration for async tasks
+CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
