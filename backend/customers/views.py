@@ -10,6 +10,8 @@ from .serializers import (
     MeetingSerializer,
     CustomerMetricsSerializer
 )
+from .vector_services import get_customer_vector_service
+from .tasks import add_customer_to_vectors, update_customer_vectors, bulk_populate_vectors
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -192,6 +194,120 @@ class CustomerViewSet(viewsets.ModelViewSet):
         
         serializer = CustomerListSerializer(upcoming_renewals, many=True)
         return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'])
+    def similar(self, request, pk=None):
+        """
+        Find customers similar to the current customer using vector similarity
+        GET /api/customers/{id}/similar/
+        
+        Query Parameters:
+        - limit (int): Number of similar customers to return (default: 10, max: 50)
+        - industry (str): Filter by specific industry
+        - health_score (str): Filter by health score (healthy, at_risk, critical)
+        - min_arr (float): Minimum ARR filter
+        - max_arr (float): Maximum ARR filter
+        
+        Response: Array of similar customers with similarity scores
+        """
+        customer = self.get_object()
+        
+        # Get query parameters
+        limit = min(int(request.query_params.get('limit', 10)), 50)
+        industry_filter = request.query_params.get('industry')
+        health_filter = request.query_params.get('health_score')
+        min_arr = request.query_params.get('min_arr')
+        max_arr = request.query_params.get('max_arr')
+        
+        # Build filter criteria
+        filter_criteria = {}
+        if industry_filter:
+            filter_criteria['industry'] = industry_filter
+        if health_filter:
+            filter_criteria['health_score'] = health_filter
+        if min_arr:
+            filter_criteria['arr'] = {'$gte': float(min_arr)}
+        if max_arr:
+            if 'arr' in filter_criteria:
+                filter_criteria['arr']['$lte'] = float(max_arr)
+            else:
+                filter_criteria['arr'] = {'$lte': float(max_arr)}
+        
+        try:
+            vector_service = get_customer_vector_service()
+            similar_customers = vector_service.find_similar_customers(
+                customer=customer,
+                top_k=limit,
+                filter_criteria=filter_criteria
+            )
+            
+            return Response({
+                'customer_id': customer.id,
+                'customer_name': customer.name,
+                'similar_customers': similar_customers,
+                'total_found': len(similar_customers)
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Error finding similar customers: {str(e)}',
+                'similar_customers': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=True, methods=['post'])
+    def sync_vectors(self, request, pk=None):
+        """
+        Sync customer data to vector database (async operation)
+        POST /api/customers/{id}/sync-vectors/
+        
+        Response: Task ID for monitoring the sync operation
+        """
+        customer = self.get_object()
+        
+        try:
+            # Queue async task
+            task = add_customer_to_vectors.delay(customer.id)
+            
+            return Response({
+                'message': f'Customer {customer.name} queued for vector sync',
+                'task_id': task.id,
+                'customer_id': customer.id
+            }, status=status.HTTP_202_ACCEPTED)
+            
+        except Exception as e:
+            return Response({
+                'error': f'Error queuing vector sync: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['post'])
+    def bulk_sync_vectors(self, request):
+        """
+        Sync all customers to vector database (async operation)
+        POST /api/customers/bulk-sync-vectors/
+        
+        Request Body (optional):
+        {
+            "batch_size": 100
+        }
+        
+        Response: Task ID for monitoring the bulk sync operation
+        """
+        batch_size = request.data.get('batch_size', 100)
+        
+        try:
+            # Queue async task
+            task = bulk_populate_vectors.delay(batch_size=batch_size)
+            
+            return Response({
+                'message': 'Bulk vector sync initiated',
+                'task_id': task.id,
+                'batch_size': batch_size
+            }, status=status.HTTP_202_ACCEPTED)
+            
+        except Exception as e:
+            return Response({
+                'error': f'Error initiating bulk vector sync: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class FeedbackViewSet(viewsets.ModelViewSet):

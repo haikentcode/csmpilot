@@ -19,3 +19,16 @@ rpds-py==0.28.0
 sqlparse==0.5.3
 typing_extensions==4.15.0
 uritemplate==4.2.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# SSL certificates
+certifi==2023.11.17
+
+# Vector database and embeddings
+pinecone-client==4.1.1
+openai==1.51.2
+sentence-transformers==3.2.1
+celery==5.3.6
+redis==5.0.7
