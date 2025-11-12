@@ -1,0 +1,656 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Custom animations for micro-interactions */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-up-modal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up-modal {
+  animation: slide-up-modal 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+:root {
+  /* Brand Colors */
+  --primary-green: #00B365;
+  --dark-forest: #004F38;
+  --light-mint: #C7EBD1;
+  --off-white: #F9FAF8;
+  --neutral-gray: #6C757D;
+  
+  /* Shadcn Theme Variables */
+  --radius: 0.625rem;
+  --background: #F9FAF8;
+  --foreground: #004F38;
+  --card: #FFFFFF;
+  --card-foreground: #004F38;
+  --popover: #FFFFFF;
+  --popover-foreground: #004F38;
+  --primary: #00B365;
+  --primary-foreground: #FFFFFF;
+  --secondary: #C7EBD1;
+  --secondary-foreground: #004F38;
+  --muted: #F9FAF8;
+  --muted-foreground: #6C757D;
+  --accent: #C7EBD1;
+  --accent-foreground: #004F38;
+  --destructive: #EF4444;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #00B365;
+  --chart-1: #00B365;
+  --chart-2: #004F38;
+  --chart-3: #C7EBD1;
+  --chart-4: #6C757D;
+  --chart-5: #F9FAF8;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #004F38;
+  --sidebar-primary: #00B365;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #C7EBD1;
+  --sidebar-accent-foreground: #004F38;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #00B365;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Responsive Design System - Mobile First Approach */
+@layer utilities {
+  /* Responsive Container Utilities */
+  .container-responsive {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Mobile devices (320px - 767px) */
+  @media (min-width: 320px) {
+    .container-responsive {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+
+  /* Tablets (768px - 1023px) */
+  @media (min-width: 768px) {
+    .container-responsive {
+      max-width: 768px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  /* Desktops (1024px and above) */
+  @media (min-width: 1024px) {
+    .container-responsive {
+      max-width: 1200px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Responsive Typography Scale */
+  .text-responsive-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .text-responsive-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-responsive-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-responsive-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-responsive-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-responsive-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-responsive-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  /* Tablet responsive typography adjustments */
+  @media (min-width: 768px) {
+    .text-responsive-base {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+    
+    .text-responsive-lg {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+    
+    .text-responsive-xl {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    
+    .text-responsive-2xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+    
+    .text-responsive-3xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  /* Desktop responsive typography adjustments */
+  @media (min-width: 1024px) {
+    .text-responsive-lg {
+      font-size: 1.375rem;
+      line-height: 1.875rem;
+    }
+    
+    .text-responsive-xl {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
+    
+    .text-responsive-2xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+    
+    .text-responsive-3xl {
+      font-size: 3rem;
+      line-height: 1;
+    }
+  }
+
+  /* Responsive Spacing Utilities */
+  .spacing-responsive-xs {
+    padding: 0.5rem;
+  }
+
+  .spacing-responsive-sm {
+    padding: 0.75rem;
+  }
+
+  .spacing-responsive-md {
+    padding: 1rem;
+  }
+
+  .spacing-responsive-lg {
+    padding: 1.5rem;
+  }
+
+  .spacing-responsive-xl {
+    padding: 2rem;
+  }
+
+  /* Tablet spacing adjustments */
+  @media (min-width: 768px) {
+    .spacing-responsive-md {
+      padding: 1.25rem;
+    }
+    
+    .spacing-responsive-lg {
+      padding: 2rem;
+    }
+    
+    .spacing-responsive-xl {
+      padding: 2.5rem;
+    }
+  }
+
+  /* Desktop spacing adjustments */
+  @media (min-width: 1024px) {
+    .spacing-responsive-lg {
+      padding: 2.5rem;
+    }
+    
+    .spacing-responsive-xl {
+      padding: 3rem;
+    }
+  }
+
+  /* Flexible Media Utilities */
+  .media-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .media-responsive-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media-responsive-contain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Grid Responsive Utilities */
+  .grid-responsive-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .grid-responsive-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .grid-responsive-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Tablet grid adjustments */
+  @media (min-width: 768px) {
+    .grid-responsive-2 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .grid-responsive-3 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  /* Desktop grid adjustments */
+  @media (min-width: 1024px) {
+    .grid-responsive-2 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .grid-responsive-3 {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* Modal Responsive Utilities */
+  .modal-responsive {
+    width: 95vw;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  @media (min-width: 768px) {
+    .modal-responsive {
+      width: 80vw;
+      max-width: 600px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .modal-responsive {
+      width: 70vw;
+      max-width: 800px;
+    }
+  }
+
+  /* Card Responsive Utilities */
+  .card-responsive {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .card-responsive {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-responsive {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Button Responsive Utilities */
+  .btn-responsive {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-height: 2.5rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .btn-responsive {
+      width: auto;
+      padding: 0.625rem 1.25rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .btn-responsive {
+      padding: 0.75rem 1.5rem;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--off-white);
+    color: var(--dark-forest);
+  }
+
+  /* Poppins font utility */
+  .font-poppins {
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+  }
+
+  /* Brand Color Utilities */
+  .text-primary-green {
+    color: var(--primary-green);
+  }
+  
+  .text-dark-forest {
+    color: var(--dark-forest);
+  }
+  
+  .text-neutral-gray {
+    color: var(--neutral-gray);
+  }
+  
+  .bg-primary-green {
+    background-color: var(--primary-green);
+  }
+  
+  .bg-dark-forest {
+    background-color: var(--dark-forest);
+  }
+  
+  .bg-light-mint {
+    background-color: var(--light-mint);
+  }
+  
+  .bg-off-white {
+    background-color: var(--off-white);
+  }
+  
+  .border-primary-green {
+    border-color: var(--primary-green);
+  }
+  
+  .hover\:bg-dark-forest:hover {
+    background-color: var(--dark-forest);
+  }
+  
+  .hover\:text-primary-green:hover {
+    color: var(--primary-green);
+  }
+  
+  .hover\:border-primary-green:hover {
+    border-color: var(--primary-green);
+  }
+
+  /* Ensure all images are responsive by default */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Responsive table handling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  @media (max-width: 767px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    tr {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    
+    td {
+      border: none;
+      position: relative;
+      padding-left: 50% !important;
+    }
+    
+    td:before {
+      content: attr(data-label) ": ";
+      position: absolute;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+  }
+}
+
+/* Custom scrollbar utilities for modal content */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 0.375rem;
+}
+
+.scrollbar-track-gray-100::-webkit-scrollbar-track {
+  background-color: rgb(243 244 246);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 0.375rem;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: rgb(243 244 246);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(156 163 175);
+}
