@@ -18,12 +18,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from .env file
-try:
-    from dotenv import load_dotenv
-    load_dotenv(BASE_DIR / '.env')
-except ImportError:
-    # python-dotenv not installed, skip loading .env
-    pass
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -243,52 +238,6 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True  # Set to False in production
 
 CORS_ALLOW_CREDENTIALS = True
-
-# Pinecone Vector Database Configuration
-PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
-PINECONE_ENVIRONMENT = os.getenv('PINECONE_ENVIRONMENT', 'us-east-1-aws')
-PINECONE_INDEX_NAME = os.getenv('PINECONE_INDEX_NAME', 'csm-copilot')
-
-# Celery Configuration for async tasks
-CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = TIME_ZONE
-
-# Fix for macOS segmentation faults with ML libraries
-# Use threads instead of processes to avoid multiprocessing issues
-CELERY_WORKER_POOL = 'threads'
-CELERY_WORKER_CONCURRENCY = 2  # Limit concurrent threads
-CELERY_WORKER_MAX_TASKS_PER_CHILD = 10  # Restart workers periodically
-
-# Alternative: Use solo pool for development (single-threaded)
-# CELERY_WORKER_POOL = 'solo'
-
-# Task routing and execution settings
-CELERY_TASK_ROUTES = {
-    'customers.tasks.*': {'queue': 'vector_processing'},
-}
-CELERY_TASK_DEFAULT_QUEUE = 'default'
-# Celery Configuration
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-
-# Salesforce Mock API Configuration (EXTERNAL service - like real Salesforce)
-SALESFORCE_MOCK_API_URL = 'http://localhost:3001/mock-apis/salesforce'
-SALESFORCE_SYNC_INTERVAL_HOURS = 1  # Sync every hour
-
-# Gainsight Mock API Configuration (EXTERNAL service - like real Gainsight)
-GAINSIGHT_MOCK_API_URL = 'http://localhost:3001/mock-apis/gainsight'
-GAINSIGHT_SYNC_INTERVAL_HOURS = 2  # Sync every 2 hours
-
-# Gong Mock API Configuration (EXTERNAL service - like real Gong)
-GONG_MOCK_API_URL = 'http://localhost:3001/mock-apis/gong'
-GONG_SYNC_INTERVAL_HOURS = 4  # Sync every 4 hours
-
-# OpenAI Configuration for AI Processing
-# Set OPENAI_API_KEY in environment variable or .env file
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', None)
 
 # Pinecone Vector Database Configuration
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
