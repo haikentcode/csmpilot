@@ -19,8 +19,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "CSMPilot - Your Customer Intelligence Copilot",
-  description: "Turn every customer interaction into actionable insights with AI-powered customer intelligence.",
+  title: "DataPiper - Your Customer Intelligence Copilot",
+  description:
+    "Turn every customer interaction into actionable insights with AI-powered customer intelligence.",
+  icons: {
+    icon: "/piper-logo.ico",
+  },
 };
 
 export default function RootLayout({

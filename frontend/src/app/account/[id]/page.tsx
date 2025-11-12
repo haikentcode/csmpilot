@@ -43,6 +43,7 @@ import {
 import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
 import { CustomerDetail, GongMeeting } from "@/services/apiService";
 import MeetingDetailModal from "@/components/MeetingDetailModal";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AccountDetailPage() {
   const router = useRouter();
@@ -131,13 +132,17 @@ export default function AccountDetailPage() {
 
   const handleGenerateStory = () => {
     if (!account) return;
-    
+
     setGeneratingStory(true);
     // Simulate AI generation with delay
     setTimeout(() => {
       const activeUsers = account.metrics?.active_users || 0;
       const nps = account.metrics?.nps || 0;
-      const mockStory = `${account.name} has shown strong engagement with the platform. The account demonstrates ${account.health_score.toLowerCase()} health status with ${activeUsers} active users and an NPS score of ${nps}. Recent meetings indicate ${account.sentiment === 'up' ? 'positive' : 'negative'} sentiment and alignment on strategic goals.`;
+      const mockStory = `${
+        account.name
+      } has shown strong engagement with the platform. The account demonstrates ${account.health_score.toLowerCase()} health status with ${activeUsers} active users and an NPS score of ${nps}. Recent meetings indicate ${
+        account.sentiment === "up" ? "positive" : "negative"
+      } sentiment and alignment on strategic goals.`;
       setAiStory(mockStory);
       setGeneratingStory(false);
       setShowAIStory(true);
@@ -150,19 +155,21 @@ export default function AccountDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-off-white font-poppins flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-primary-green"></div>
-          <p className="mt-4 text-neutral-gray">Loading account details...</p>
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-primary-green"></div>
+            <p className="mt-4 text-neutral-gray">Loading account details...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-off-white font-poppins">
-        <div className="container mx-auto px-4 py-8">
+      <DashboardLayout>
+        <div className="max-w-7xl mx-auto">
           <Button
             onClick={() => router.push("/dashboard")}
             variant="outline"
@@ -178,19 +185,20 @@ export default function AccountDetailPage() {
               </h2>
               <p className="text-red-600 mb-2">{error}</p>
               <p className="text-neutral-gray">
-                Please check that the backend server is running on http://localhost:8000
+                Please check that the backend server is running on
+                http://localhost:8000
               </p>
             </CardContent>
           </Card>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   if (!account) {
     return (
-      <div className="min-h-screen bg-off-white font-poppins">
-        <div className="container mx-auto px-4 py-8">
+      <DashboardLayout>
+        <div className="max-w-7xl mx-auto">
           <Button
             onClick={() => router.push("/dashboard")}
             variant="outline"
@@ -210,15 +218,15 @@ export default function AccountDetailPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   const healthStyles = getHealthStyles(account.health_score);
 
   return (
-    <div className="min-h-screen bg-off-white font-poppins">
-      <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
+      <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <Button
           onClick={() => router.push("/dashboard")}
@@ -267,7 +275,7 @@ export default function AccountDetailPage() {
           <Button
             onClick={handleGenerateStory}
             disabled={generatingStory}
-            className="bg-[#00B365] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer"
+            className="bg-[#25834b] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer"
           >
             <FileText className="w-5 h-5" />
             {generatingStory ? "Generating..." : "Generate Customer Story"}
@@ -275,7 +283,7 @@ export default function AccountDetailPage() {
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="bg-[#00B365] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer">
+              <Button className="bg-[#25834b] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer">
                 <CalendarCheck className="w-5 h-5" />
                 Prepare for Meeting
               </Button>
@@ -339,7 +347,7 @@ export default function AccountDetailPage() {
 
           <Button
             onClick={handleFindSimilar}
-            className="bg-[#00B365] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer"
+            className="bg-[#25834b] hover:bg-[#004F38] text-white rounded-lg px-6 py-3 flex items-center gap-2 cursor-pointer"
           >
             <Users className="w-5 h-5" />
             Find Similar Customers
@@ -438,9 +446,7 @@ export default function AccountDetailPage() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-gray mb-1">
-                    Renewal Date
-                  </p>
+                  <p className="text-sm text-neutral-gray mb-1">Renewal Date</p>
                   <p className="text-2xl font-bold text-dark-forest">
                     {formatDate(account.renewal_date)}
                   </p>
@@ -476,19 +482,17 @@ export default function AccountDetailPage() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-gray mb-1">
-                    Active Users
-                  </p>
+                  <p className="text-sm text-neutral-gray mb-1">Active Users</p>
                   <p className="text-2xl font-bold text-dark-forest">
                     {account.metrics?.active_users ?? "N/A"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-gray mb-1">
-                    Renewal Rate
-                  </p>
+                  <p className="text-sm text-neutral-gray mb-1">Renewal Rate</p>
                   <p className="text-2xl font-bold text-dark-forest">
-                    {account.metrics ? `${account.metrics.renewal_rate}%` : "N/A"}
+                    {account.metrics
+                      ? `${account.metrics.renewal_rate}%`
+                      : "N/A"}
                   </p>
                 </div>
               </div>
@@ -640,7 +644,10 @@ export default function AccountDetailPage() {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={2} className="text-center text-neutral-gray">
+                    <TableCell
+                      colSpan={2}
+                      className="text-center text-neutral-gray"
+                    >
                       No feedback recorded
                     </TableCell>
                   </TableRow>
@@ -660,6 +667,6 @@ export default function AccountDetailPage() {
           meeting={selectedMeeting}
         />
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

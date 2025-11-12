@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Users, Sparkles } from "lucide-react";
+import DashboardLayout from "@/components/DashboardLayout";
 
 interface SimilarCustomer {
   id: number;
@@ -79,19 +80,21 @@ export default function SimilarCustomersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-off-white font-poppins flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-primary-green"></div>
-          <p className="mt-4 text-neutral-gray">Loading similar customers...</p>
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-primary-green"></div>
+            <p className="mt-4 text-neutral-gray">Loading similar customers...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   if (!account || !similarData) {
     return (
-      <div className="min-h-screen bg-off-white font-poppins">
-        <div className="container mx-auto px-4 py-8">
+      <DashboardLayout>
+        <div className="max-w-7xl mx-auto">
           <Button
             onClick={() => router.push("/dashboard")}
             variant="outline"
@@ -111,13 +114,13 @@ export default function SimilarCustomersPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-off-white font-poppins text-dark-forest">
-      <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
+      <div className="max-w-7xl mx-auto">
         {/* Back Link */}
         <Button
           onClick={() => router.push(`/account/${accountId}`)}
@@ -142,7 +145,7 @@ export default function SimilarCustomersPage() {
         <Card
           className="mb-8 rounded-2xl border-0 shadow-md"
           style={{
-            background: "linear-gradient(90deg, #00B365 0%, #C7EBD1 100%)",
+            background: "linear-gradient(90deg, #25834b 0%, #C7EBD1 100%)",
           }}
         >
           <CardContent className="p-5">
@@ -225,7 +228,7 @@ export default function SimilarCustomersPage() {
                   {/* CTA Button */}
                   <Button
                     onClick={() => router.push(`/account/${customer.id}`)}
-                    className="w-full bg-[#00B365] hover:bg-[#004F38] text-white mt-auto cursor-pointer"
+                    className="w-full bg-[#25834b] hover:bg-[#004F38] text-white mt-auto cursor-pointer"
                   >
                     View Profile
                   </Button>
@@ -251,6 +254,6 @@ export default function SimilarCustomersPage() {
           </Card>
         )}
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
