@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Emeritus Institute of Management",
+    "industry": "Education",
+    "health_score": "Healthy",
+    "renewal_date": "2025-12-15",
+    "arr": 150000,
+    "sentiment": "up"
+  },
+  {
+    "id": 2,
+    "name": "AirlineX",
+    "industry": "Travel",
+    "health_score": "At Risk",
+    "renewal_date": "2025-09-20",
+    "arr": 90000,
+    "sentiment": "down"
+  },
+  {
+    "id": 3,
+    "name": "TechCorp Solutions",
+    "industry": "Technology",
+    "health_score": "Healthy",
+    "renewal_date": "2026-03-10",
+    "arr": 250000,
+    "sentiment": "up"
+  },
+  {
+    "id": 4,
+    "name": "HealthPlus Medical",
+    "industry": "Healthcare",
+    "health_score": "Critical",
+    "renewal_date": "2025-07-05",
+    "arr": 75000,
+    "sentiment": "down"
+  },
+  {
+    "id": 5,
+    "name": "Global Finance Corp",
+    "industry": "Finance",
+    "health_score": "Healthy",
+    "renewal_date": "2026-01-20",
+    "arr": 320000,
+    "sentiment": "up"
+  },
+  {
+    "id": 6,
+    "name": "RetailMax Inc",
+    "industry": "Retail",
+    "health_score": "At Risk",
+    "renewal_date": "2025-10-15",
+    "arr": 125000,
+    "sentiment": "down"
+  },
+  {
+    "id": 7,
+    "name": "Manufacturing Pro",
+    "industry": "Manufacturing",
+    "health_score": "Healthy",
+    "renewal_date": "2026-02-28",
+    "arr": 180000,
+    "sentiment": "up"
+  },
+  {
+    "id": 8,
+    "name": "Legal Services Group",
+    "industry": "Legal",
+    "health_score": "At Risk",
+    "renewal_date": "2025-08-12",
+    "arr": 95000,
+    "sentiment": "down"
+  },
+  {
+    "id": 9,
+    "name": "Energy Solutions Ltd",
+    "industry": "Energy",
+    "health_score": "Healthy",
+    "renewal_date": "2026-04-05",
+    "arr": 210000,
+    "sentiment": "up"
+  },
+  {
+    "id": 10,
+    "name": "Media & Entertainment Co",
+    "industry": "Media",
+    "health_score": "Critical",
+    "renewal_date": "2025-06-30",
+    "arr": 85000,
+    "sentiment": "down"
+  },
+  {
+    "id": 11,
+    "name": "Logistics Express",
+    "industry": "Logistics",
+    "health_score": "Healthy",
+    "renewal_date": "2026-05-18",
+    "arr": 165000,
+    "sentiment": "up"
+  },
+  {
+    "id": 12,
+    "name": "Consulting Partners",
+    "industry": "Consulting",
+    "health_score": "Healthy",
+    "renewal_date": "2026-03-25",
+    "arr": 195000,
+    "sentiment": "up"
+  }
+]
+
+

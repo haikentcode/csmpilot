@@ -1,0 +1,362 @@
+{
+  "Education": {
+    "industry": "Education",
+    "insight": "Education clients show 18% higher renewal when advanced survey automation is enabled. Similar patterns found in other mid-to-large enterprise accounts.",
+    "similar_customers": [
+      {
+        "id": 3,
+        "name": "TechCorp Solutions",
+        "industry": "Technology",
+        "arr": 250000,
+        "similarity_score": 0.89,
+        "shared_traits": ["High engagement", "Positive sentiment", "Similar ARR range"]
+      },
+      {
+        "id": 7,
+        "name": "Manufacturing Pro",
+        "industry": "Manufacturing",
+        "arr": 180000,
+        "similarity_score": 0.85,
+        "shared_traits": ["Healthy status", "Strong adoption", "Mid-market segment"]
+      },
+      {
+        "id": 12,
+        "name": "Consulting Partners",
+        "industry": "Consulting",
+        "arr": 195000,
+        "similarity_score": 0.82,
+        "shared_traits": ["Similar size", "High renewal rate", "Advanced features"]
+      }
+    ]
+  },
+  "Travel": {
+    "industry": "Travel",
+    "insight": "Travel industry accounts with mobile-first strategies show 22% better engagement rates. Similar challenges seen in other customer-facing industries.",
+    "similar_customers": [
+      {
+        "id": 6,
+        "name": "RetailMax Inc",
+        "industry": "Retail",
+        "arr": 125000,
+        "similarity_score": 0.88,
+        "shared_traits": ["At Risk status", "Similar ARR", "Customer experience focus"]
+      },
+      {
+        "id": 8,
+        "name": "Legal Services Group",
+        "industry": "Legal",
+        "arr": 95000,
+        "similarity_score": 0.84,
+        "shared_traits": ["User adoption challenges", "Similar timeline", "At Risk"]
+      },
+      {
+        "id": 4,
+        "name": "HealthPlus Medical",
+        "industry": "Healthcare",
+        "arr": 75000,
+        "similarity_score": 0.79,
+        "shared_traits": ["Support needs", "Similar challenges", "Compliance focus"]
+      }
+    ]
+  },
+  "Technology": {
+    "industry": "Technology",
+    "insight": "Technology companies with API integrations achieve 95% renewal rates on average. Strong performance metrics mirror other enterprise accounts.",
+    "similar_customers": [
+      {
+        "id": 5,
+        "name": "Global Finance Corp",
+        "industry": "Finance",
+        "arr": 320000,
+        "similarity_score": 0.92,
+        "shared_traits": ["Enterprise tier", "High ARR", "Advanced features"]
+      },
+      {
+        "id": 9,
+        "name": "Energy Solutions Ltd",
+        "industry": "Energy",
+        "arr": 210000,
+        "similarity_score": 0.88,
+        "shared_traits": ["Analytics focus", "Strong metrics", "Healthy status"]
+      },
+      {
+        "id": 1,
+        "name": "Emeritus Institute of Management",
+        "industry": "Education",
+        "arr": 150000,
+        "similarity_score": 0.85,
+        "shared_traits": ["High engagement", "Positive sentiment", "Feature adoption"]
+      }
+    ]
+  },
+  "Healthcare": {
+    "industry": "Healthcare",
+    "insight": "Healthcare accounts prioritizing compliance documentation show 30% faster issue resolution. Similar compliance needs in regulated industries.",
+    "similar_customers": [
+      {
+        "id": 10,
+        "name": "Media & Entertainment Co",
+        "industry": "Media",
+        "arr": 85000,
+        "similarity_score": 0.87,
+        "shared_traits": ["Critical status", "Similar challenges", "Support intensive"]
+      },
+      {
+        "id": 2,
+        "name": "AirlineX",
+        "industry": "Travel",
+        "arr": 90000,
+        "similarity_score": 0.82,
+        "shared_traits": ["At Risk", "Similar ARR", "Performance concerns"]
+      },
+      {
+        "id": 8,
+        "name": "Legal Services Group",
+        "industry": "Legal",
+        "arr": 95000,
+        "similarity_score": 0.78,
+        "shared_traits": ["Compliance focus", "Document management", "Regulated industry"]
+      }
+    ]
+  },
+  "Finance": {
+    "industry": "Finance",
+    "insight": "Financial services clients with custom dashboards report 40% higher user satisfaction scores. Enterprise patterns align with other large accounts.",
+    "similar_customers": [
+      {
+        "id": 3,
+        "name": "TechCorp Solutions",
+        "industry": "Technology",
+        "arr": 250000,
+        "similarity_score": 0.93,
+        "shared_traits": ["Enterprise tier", "High ARR", "Advanced analytics"]
+      },
+      {
+        "id": 9,
+        "name": "Energy Solutions Ltd",
+        "industry": "Energy",
+        "arr": 210000,
+        "similarity_score": 0.90,
+        "shared_traits": ["Strong metrics", "Analytics focus", "Healthy status"]
+      },
+      {
+        "id": 12,
+        "name": "Consulting Partners",
+        "industry": "Consulting",
+        "arr": 195000,
+        "similarity_score": 0.87,
+        "shared_traits": ["Similar ARR range", "High renewal rate", "Partnership model"]
+      }
+    ]
+  },
+  "Retail": {
+    "industry": "Retail",
+    "insight": "Retail accounts leveraging real-time reporting see 25% improvement in decision-making speed. Customer-centric approach similar to other B2C industries.",
+    "similar_customers": [
+      {
+        "id": 2,
+        "name": "AirlineX",
+        "industry": "Travel",
+        "arr": 90000,
+        "similarity_score": 0.86,
+        "shared_traits": ["At Risk status", "Similar ARR", "Customer experience focus"]
+      },
+      {
+        "id": 8,
+        "name": "Legal Services Group",
+        "industry": "Legal",
+        "arr": 95000,
+        "similarity_score": 0.81,
+        "shared_traits": ["User adoption focus", "Similar size", "At Risk"]
+      },
+      {
+        "id": 11,
+        "name": "Logistics Express",
+        "industry": "Logistics",
+        "arr": 165000,
+        "similarity_score": 0.78,
+        "shared_traits": ["Operational focus", "Mobile strategy", "Good engagement"]
+      }
+    ]
+  },
+  "Manufacturing": {
+    "industry": "Manufacturing",
+    "insight": "Manufacturing clients with ERP integrations achieve 35% faster onboarding times. Integration patterns similar to other operational-focused accounts.",
+    "similar_customers": [
+      {
+        "id": 11,
+        "name": "Logistics Express",
+        "industry": "Logistics",
+        "arr": 165000,
+        "similarity_score": 0.89,
+        "shared_traits": ["Similar ARR", "Operational focus", "Integration needs"]
+      },
+      {
+        "id": 12,
+        "name": "Consulting Partners",
+        "industry": "Consulting",
+        "arr": 195000,
+        "similarity_score": 0.85,
+        "shared_traits": ["Similar size", "Healthy status", "Strong metrics"]
+      },
+      {
+        "id": 9,
+        "name": "Energy Solutions Ltd",
+        "industry": "Energy",
+        "arr": 210000,
+        "similarity_score": 0.82,
+        "shared_traits": ["Analytics focus", "Good health", "Similar ARR range"]
+      }
+    ]
+  },
+  "Legal": {
+    "industry": "Legal",
+    "insight": "Legal firms with document automation enabled reduce support tickets by 45%. Document-heavy workflows similar to other professional services.",
+    "similar_customers": [
+      {
+        "id": 6,
+        "name": "RetailMax Inc",
+        "industry": "Retail",
+        "arr": 125000,
+        "similarity_score": 0.84,
+        "shared_traits": ["At Risk status", "Similar ARR", "Renewal focus"]
+      },
+      {
+        "id": 2,
+        "name": "AirlineX",
+        "industry": "Travel",
+        "arr": 90000,
+        "similarity_score": 0.80,
+        "shared_traits": ["At Risk", "User adoption challenges", "Similar timeline"]
+      },
+      {
+        "id": 4,
+        "name": "HealthPlus Medical",
+        "industry": "Healthcare",
+        "arr": 75000,
+        "similarity_score": 0.76,
+        "shared_traits": ["Compliance needs", "Document focus", "Support requirements"]
+      }
+    ]
+  },
+  "Energy": {
+    "industry": "Energy",
+    "insight": "Energy sector clients using advanced analytics report 50% better forecasting accuracy. Data-driven approach mirrors other analytics-focused accounts.",
+    "similar_customers": [
+      {
+        "id": 5,
+        "name": "Global Finance Corp",
+        "industry": "Finance",
+        "arr": 320000,
+        "similarity_score": 0.91,
+        "shared_traits": ["High ARR", "Analytics focus", "Enterprise tier"]
+      },
+      {
+        "id": 3,
+        "name": "TechCorp Solutions",
+        "industry": "Technology",
+        "arr": 250000,
+        "similarity_score": 0.88,
+        "shared_traits": ["Advanced features", "Strong metrics", "Healthy status"]
+      },
+      {
+        "id": 12,
+        "name": "Consulting Partners",
+        "industry": "Consulting",
+        "arr": 195000,
+        "similarity_score": 0.85,
+        "shared_traits": ["Similar ARR range", "Good health", "High renewal rate"]
+      }
+    ]
+  },
+  "Media": {
+    "industry": "Media",
+    "insight": "Media companies with dedicated support channels see 60% faster issue resolution times. High-touch support needs similar to other critical accounts.",
+    "similar_customers": [
+      {
+        "id": 4,
+        "name": "HealthPlus Medical",
+        "industry": "Healthcare",
+        "arr": 75000,
+        "similarity_score": 0.86,
+        "shared_traits": ["Critical status", "Support needs", "Similar challenges"]
+      },
+      {
+        "id": 2,
+        "name": "AirlineX",
+        "industry": "Travel",
+        "arr": 90000,
+        "similarity_score": 0.81,
+        "shared_traits": ["At Risk", "Performance concerns", "Similar ARR"]
+      },
+      {
+        "id": 8,
+        "name": "Legal Services Group",
+        "industry": "Legal",
+        "arr": 95000,
+        "similarity_score": 0.77,
+        "shared_traits": ["User adoption focus", "Similar timeline", "Support requirements"]
+      }
+    ]
+  },
+  "Logistics": {
+    "industry": "Logistics",
+    "insight": "Logistics companies with mobile app integrations achieve 28% higher user engagement. Operational efficiency patterns similar to other process-driven industries.",
+    "similar_customers": [
+      {
+        "id": 7,
+        "name": "Manufacturing Pro",
+        "industry": "Manufacturing",
+        "arr": 180000,
+        "similarity_score": 0.90,
+        "shared_traits": ["Similar ARR", "Integration focus", "Operational needs"]
+      },
+      {
+        "id": 12,
+        "name": "Consulting Partners",
+        "industry": "Consulting",
+        "arr": 195000,
+        "similarity_score": 0.87,
+        "shared_traits": ["Similar size", "Healthy status", "Good metrics"]
+      },
+      {
+        "id": 9,
+        "name": "Energy Solutions Ltd",
+        "industry": "Energy",
+        "arr": 210000,
+        "similarity_score": 0.84,
+        "shared_traits": ["Analytics focus", "Strong health", "Similar ARR range"]
+      }
+    ]
+  },
+  "Consulting": {
+    "industry": "Consulting",
+    "insight": "Consulting firms with white-label options report 42% higher client satisfaction scores. Partnership models align with other professional services.",
+    "similar_customers": [
+      {
+        "id": 5,
+        "name": "Global Finance Corp",
+        "industry": "Finance",
+        "arr": 320000,
+        "similarity_score": 0.92,
+        "shared_traits": ["High ARR", "Enterprise tier", "Partnership model"]
+      },
+      {
+        "id": 9,
+        "name": "Energy Solutions Ltd",
+        "industry": "Energy",
+        "arr": 210000,
+        "similarity_score": 0.89,
+        "shared_traits": ["Similar ARR range", "Analytics focus", "Healthy status"]
+      },
+      {
+        "id": 7,
+        "name": "Manufacturing Pro",
+        "industry": "Manufacturing",
+        "arr": 180000,
+        "similarity_score": 0.86,
+        "shared_traits": ["Similar size", "Integration needs", "Good health"]
+      }
+    ]
+  }
+}
