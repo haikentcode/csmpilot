@@ -148,28 +148,36 @@ export default function CustomerList({
                         : "border-l-primary-green hover:border-l-dark-forest"
                     }
                   `}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    onClick={() => onCustomerSelect(customer)}
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-dark-forest truncate mb-2">
-                            {customer.name}
-                          </h3>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Badge className="text-responsive-xs hover:scale-105 transition-transform duration-200 text-white">
-                                    {customer.segment}
-                                  </Badge>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>Customer Segment: {customer.segment}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => onCustomerSelect(customer)}
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-dark-forest truncate mb-2">
+                          {customer.name}
+                        </h3>
+                        <div className="flex flex-wrap gap-2 mb-2">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Badge 
+                                  className={`text-responsive-xs hover:scale-105 transition-transform duration-200 ${
+                                    customer.health_score === "Critical"
+                                      ? "bg-red-500 text-white"
+                                      : customer.health_score === "At Risk"
+                                      ? "bg-yellow-500 text-white"
+                                      : "bg-primary-green text-white"
+                                  }`}
+                                >
+                                  {customer.industry}
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Industry: {customer.industry}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
 
                             <TooltipProvider>
                               <Tooltip>
@@ -203,6 +211,45 @@ export default function CustomerList({
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
+                                <Badge 
+                                  className={`text-responsive-xs hover:scale-105 transition-transform duration-200 ${
+                                    customer.health_score === "Critical"
+                                      ? "bg-red-500 text-white"
+                                      : customer.health_score === "At Risk"
+                                      ? "bg-yellow-500 text-white"
+                                      : "bg-primary-green text-white"
+                                  }`}
+                                >
+                                  {customer.health_score}
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Health Score: {customer.health_score}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                        <div className="text-responsive-sm text-neutral-gray space-y-1">
+                          <div className="flex items-center">
+                            <span className="font-medium">ARR:</span>
+                            <span className="ml-2">
+                              ${customer.arr >= 1000 
+                                ? `${(customer.arr / 1000).toFixed(1)}k` 
+                                : customer.arr.toFixed(0)}
+                            </span>
+                          </div>
+                          <div className="flex items-center">
+                            <span className="font-medium">Renewal:</span>
+                            <span className="ml-2">
+                              {new Date(customer.renewal_date).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-4 flex flex-col items-end">
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
                                 <div
                                   className={`
                                 w-3 h-3 rounded-full transition-all duration-200 hover:scale-125
@@ -214,23 +261,20 @@ export default function CustomerList({
                                     : "bg-primary-green"
                                 }
                               `}
-                                />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>
-                                  {customer.churned
-                                    ? "Churned Customer"
-                                    : "Active Customer"}
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                          {selectedCustomerId === customer.id && (
-                            <div className="mt-2 text-responsive-xs text-primary-green font-medium animate-pulse-subtle">
-                              Selected
-                            </div>
-                          )}
-                        </div>
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                Health Score: {customer.health_score}
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        {selectedCustomerId === customer.id && (
+                          <div className="mt-2 text-responsive-xs text-primary-green font-medium animate-pulse-subtle">
+                            Selected
+                          </div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
