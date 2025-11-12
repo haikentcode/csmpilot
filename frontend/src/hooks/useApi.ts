@@ -6,7 +6,8 @@ import {
   Customer, 
   SimilarCustomer, 
   ProfileSummary, 
-  PaginatedResponse 
+  PaginatedResponse,
+  GongMeeting
 } from '../services/apiService';
 
 // Generic API hook with loading, error, and retry states
@@ -157,6 +158,20 @@ export function useProfileSummary(customerId: number | null) {
         opportunities: ['Retry when service is restored'],
         talk_tracks: ['Acknowledge service interruption']
       } as ProfileSummary
+    }
+  );
+}
+
+export function useGongMeetings(customerId: number | null) {
+  return useApi(
+    () => {
+      if (!customerId) throw new Error('Customer ID is required');
+      return apiService.getGongMeetings(customerId);
+    },
+    [customerId],
+    { 
+      immediate: !!customerId,
+      fallbackData: [] as GongMeeting[]
     }
   );
 }

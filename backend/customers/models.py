@@ -24,6 +24,52 @@ class Customer(models.Model):
     arr = models.DecimalField(max_digits=15, decimal_places=2, validators=[MinValueValidator(0)])
     health_score = models.CharField(max_length=20, choices=HEALTH_CHOICES)
     renewal_date = models.DateField()
+    
+    # Salesforce Integration Fields (core customer data from Salesforce)
+    salesforce_account_id = models.CharField(
+        max_length=18,
+        blank=True,
+        db_index=True,
+        help_text="Salesforce Account ID for syncing"
+    )
+    
+    salesforce_synced = models.BooleanField(
+        default=False,
+        help_text="Whether customer data is synced from Salesforce"
+    )
+    
+    last_salesforce_sync = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Last successful Salesforce sync timestamp"
+    )
+    
+    # Gainsight Integration Fields (core customer data from Gainsight)
+    gainsight_company_id = models.CharField(
+        max_length=50,
+        blank=True,
+        db_index=True,
+        help_text="Gainsight Company GSID for syncing"
+    )
+    
+    gainsight_synced = models.BooleanField(
+        default=False,
+        help_text="Whether customer data is synced from Gainsight"
+    )
+    
+    last_gainsight_sync = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Last successful Gainsight sync timestamp"
+    )
+    
+    # Products - Array of SurveyMonkey products the customer uses
+    products = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="List of SurveyMonkey products the customer is using (SME, Audience, MRX, GetFeedback, etc.)"
+    )
+    
     last_updated = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     

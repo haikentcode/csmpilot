@@ -1,0 +1,845 @@
+{
+  "opportunities": [
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Metro001"
+      },
+      "Id": "0064V00001Metro001",
+      "Name": "MetroHealth Medical Group - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Metro001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Metro001"
+        },
+        "Id": "0014V00001Metro001",
+        "Name": "MetroHealth Medical Group"
+      },
+      "StageName": "Negotiation/Review",
+      "CloseDate": "2025-12-31",
+      "Amount": 485000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 485000.00,
+      "Probability": 80,
+      "Type": "Renewal",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health001",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health001"
+        },
+        "Name": "Healthcare Enterprise Team"
+      },
+      "Opportunity_CSM__c": "Jennifer Martinez",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-10T10:00:00.000+0000",
+      "Executive_Influencers__c": "CMO, VP Patient Experience, CIO",
+      "GR_Number__c": "GR-2025-METRO-001",
+      "Feature_Request__c": "Enhanced HIPAA compliance features, Real-time dashboard for patient satisfaction, Integration with Epic EMR system",
+      "Furthest_Stage__c": "Negotiation/Review",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": true,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": true,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Finalize legal terms for HIPAA compliance addendum. Executive review scheduled for Dec 10th. Strong renewal intent confirmed.",
+      "Support_Needed__c": "EMR integration support, HIPAA compliance consultation",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features for organization-wide feedback programs.",
+          "primary_use": "Post-discharge patient satisfaction surveys across all 5 hospital campuses, staff engagement surveys, and centralized feedback management."
+        },
+        {
+          "product_name": "GetFeedback Direct",
+          "category": "Customer Experience (CX) Feedback Platform",
+          "description": "Transactional feedback tool that captures customer experiences immediately after key interactions via email, SMS, or app triggers.",
+          "primary_use": "Post-discharge patient satisfaction surveys sent via SMS and email, triggered automatically after discharge."
+        }
+      ],
+      "CreatedDate": "2024-09-15T10:00:00.000+0000",
+      "LastModifiedDate": "2025-11-15T14:30:00.000+0000",
+      "SystemModstamp": "2025-11-15T14:30:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Comm001"
+      },
+      "Id": "0064V00001Comm001",
+      "Name": "CommunityCare Clinics Network - Renewal & Expansion 2025",
+      "AccountId": "0014V00001Comm001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Comm001"
+        },
+        "Id": "0014V00001Comm001",
+        "Name": "CommunityCare Clinics Network"
+      },
+      "StageName": "Proposal",
+      "CloseDate": "2025-11-30",
+      "Amount": 125000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 125000.00,
+      "Probability": 70,
+      "Type": "Renewal",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health002",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health002"
+        },
+        "Name": "Mid-Market Healthcare Team"
+      },
+      "Opportunity_CSM__c": "Michael Chen",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": true,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "VP Operations, Director of Patient Experience",
+      "GR_Number__c": "GR-2025-COMM-001",
+      "Feature_Request__c": "Multi-location dashboard, NPS tracking per clinic, Automated reporting",
+      "Furthest_Stage__c": "Proposal",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Present proposal for expansion to 5 additional clinic locations. Follow-up meeting scheduled for Nov 25th.",
+      "Support_Needed__c": "Training for clinic administrators, Dashboard setup support",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features for organization-wide feedback programs.",
+          "primary_use": "Check-in and visit-experience surveys across 20 clinic locations, NPS monitoring per location, centralized analytics dashboard."
+        },
+        {
+          "product_name": "GetFeedback Digital (GFB Digital)",
+          "category": "Digital Experience Feedback Platform",
+          "description": "Real-time digital experience tool to capture feedback across websites and mobile apps.",
+          "primary_use": "Patient feedback on online appointment booking journey and patient portal experience."
+        }
+      ],
+      "CreatedDate": "2024-10-01T08:00:00.000+0000",
+      "LastModifiedDate": "2025-11-12T11:00:00.000+0000",
+      "SystemModstamp": "2025-11-12T11:00:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Health001"
+      },
+      "Id": "0064V00001Health001",
+      "Name": "HealthyLife Insurers Ltd. - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Health001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Health001"
+        },
+        "Id": "0014V00001Health001",
+        "Name": "HealthyLife Insurers Ltd."
+      },
+      "StageName": "Negotiation/Review",
+      "CloseDate": "2025-12-15",
+      "Amount": 320000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 320000.00,
+      "Probability": 75,
+      "Type": "Renewal",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health003",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health003"
+        },
+        "Name": "Healthcare Enterprise Team"
+      },
+      "Opportunity_CSM__c": "Sarah Williams",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-08T09:00:00.000+0000",
+      "Executive_Influencers__c": "VP Member Experience, CMO, Director of Product Development",
+      "GR_Number__c": "GR-2025-HEALTH-001",
+      "Feature_Request__c": "Advanced analytics for member satisfaction trends, Integration with claims system, Custom reporting for plan comparisons",
+      "Furthest_Stage__c": "Negotiation/Review",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": true,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": true,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Legal review in progress. Executive presentation scheduled for Dec 5th. Strong renewal signals from member satisfaction data.",
+      "Support_Needed__c": "Claims system integration support, Advanced analytics training",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Member satisfaction surveys, plan satisfaction tracking, service claims experience feedback, product/plan development insights."
+        },
+        {
+          "product_name": "SurveyMonkey Audience",
+          "category": "Survey Panel / Respondent Marketplace",
+          "description": "On-demand marketplace of millions of vetted respondents for fast, targeted research.",
+          "primary_use": "Market research for new plan development, consumer insights for product design, demographic targeting for plan comparisons."
+        },
+        {
+          "product_name": "GetFeedback Direct",
+          "category": "Customer Experience (CX) Feedback Platform",
+          "description": "Transactional feedback tool that captures customer experiences immediately after key interactions.",
+          "primary_use": "Post-claims experience surveys, member service interaction feedback, automated follow-up surveys."
+        }
+      ],
+      "CreatedDate": "2024-09-20T14:00:00.000+0000",
+      "LastModifiedDate": "2025-11-14T16:20:00.000+0000",
+      "SystemModstamp": "2025-11-14T16:20:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Chron001"
+      },
+      "Id": "0064V00001Chron001",
+      "Name": "ChronicCare PharmaTech - MRX Solutions Expansion 2025",
+      "AccountId": "0014V00001Chron001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Chron001"
+        },
+        "Id": "0014V00001Chron001",
+        "Name": "ChronicCare PharmaTech"
+      },
+      "StageName": "Development",
+      "CloseDate": "2026-03-31",
+      "Amount": 285000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 285000.00,
+      "Probability": 60,
+      "Type": "Upsell",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health004",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health004"
+        },
+        "Name": "Life Sciences Team"
+      },
+      "Opportunity_CSM__c": "David Rodriguez",
+      "Renewal_Categories__c": "Neutral (50%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "VP Market Research, Director of Clinical Affairs, CMO",
+      "GR_Number__c": "GR-2025-CHRON-001",
+      "Feature_Request__c": "Advanced patient panel management, Brand tracking capabilities, Expert consulting for study design",
+      "Furthest_Stage__c": "Development",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": false,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Discovery call scheduled for Nov 20th to discuss MRX Solutions capabilities and pricing. Current customer evaluating expansion.",
+      "Support_Needed__c": "MRX Solutions consultation, Study design support",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Internal market research surveys, product usage tracking, caregiver feedback programs."
+        },
+        {
+          "product_name": "SurveyMonkey MRX Audience",
+          "category": "Premium Market Research Audience",
+          "description": "Specialized respondent panels designed for advanced research — including B2B decision-makers, medical professionals, and niche populations.",
+          "primary_use": "Patient panels for clinical research, medical professional surveys, caregiver feedback from specialized populations."
+        }
+      ],
+      "CreatedDate": "2025-10-15T10:30:00.000+0000",
+      "LastModifiedDate": "2025-11-13T15:45:00.000+0000",
+      "SystemModstamp": "2025-11-13T15:45:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Senior001"
+      },
+      "Id": "0064V00001Senior001",
+      "Name": "SeniorLiving Assisted Communities - Renewal 2025",
+      "AccountId": "0014V00001Senior001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Senior001"
+        },
+        "Id": "0014V00001Senior001",
+        "Name": "SeniorLiving Assisted Communities"
+      },
+      "StageName": "Qualified",
+      "CloseDate": "2025-12-20",
+      "Amount": 95000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 95000.00,
+      "Probability": 65,
+      "Type": "Renewal",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health005",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health005"
+        },
+        "Name": "Mid-Market Healthcare Team"
+      },
+      "Opportunity_CSM__c": "Lisa Anderson",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": true,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "VP Operations, Director of Quality",
+      "GR_Number__c": "GR-2025-SENIOR-001",
+      "Feature_Request__c": "Multi-facility benchmarking, Automated reporting, Staff engagement survey templates",
+      "Furthest_Stage__c": "Qualified",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": false,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Proposal review meeting scheduled for Nov 22nd. Customer evaluating expansion to 3 additional facilities.",
+      "Support_Needed__c": "Benchmarking setup, Training for facility administrators",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Resident and family satisfaction surveys, employee engagement for care staff, benchmarking across multiple facilities."
+        },
+        {
+          "product_name": "Wufoo",
+          "category": "Online Form Builder",
+          "description": "A simple drag-and-drop form builder for collecting information, payments, and registrations without coding.",
+          "primary_use": "Resident intake forms, family contact information collection, event registration for facility activities."
+        }
+      ],
+      "CreatedDate": "2024-11-01T09:15:00.000+0000",
+      "LastModifiedDate": "2025-11-12T08:30:00.000+0000",
+      "SystemModstamp": "2025-11-12T08:30:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Tele001"
+      },
+      "Id": "0064V00001Tele001",
+      "Name": "TeleHealth OnDemand Services - Digital Experience Expansion 2025",
+      "AccountId": "0014V00001Tele001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Tele001"
+        },
+        "Id": "0014V00001Tele001",
+        "Name": "TeleHealth OnDemand Services"
+      },
+      "StageName": "Proposal",
+      "CloseDate": "2025-12-31",
+      "Amount": 180000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 180000.00,
+      "Probability": 70,
+      "Type": "Upsell",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health006",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health006"
+        },
+        "Name": "Digital Health Team"
+      },
+      "Opportunity_CSM__c": "Rachel Kim",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-05T11:00:00.000+0000",
+      "Executive_Influencers__c": "VP Product, CTO, Director of Patient Experience",
+      "GR_Number__c": "GR-2025-TELE-001",
+      "Feature_Request__c": "Real-time feedback integration, Mobile app survey capabilities, Analytics dashboard for virtual visit satisfaction",
+      "Furthest_Stage__c": "Proposal",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Present final proposal for GetFeedback Digital expansion. Technical integration discussion scheduled for Nov 28th.",
+      "Support_Needed__c": "Mobile app integration support, Real-time dashboard setup",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Virtual visit experience surveys, patient telehealth satisfaction tracking, service flow improvement analytics."
+        },
+        {
+          "product_name": "GetFeedback Digital (GFB Digital)",
+          "category": "Digital Experience Feedback Platform",
+          "description": "Real-time digital experience tool to capture feedback across websites and mobile apps.",
+          "primary_use": "In-app feedback during virtual visits, website experience feedback, real-time patient satisfaction capture."
+        },
+        {
+          "product_name": "GetFeedback Direct",
+          "category": "Customer Experience (CX) Feedback Platform",
+          "description": "Transactional feedback tool that captures customer experiences immediately after key interactions.",
+          "primary_use": "Post-visit satisfaction surveys triggered automatically after virtual consultations, SMS and email follow-ups."
+        }
+      ],
+      "CreatedDate": "2025-09-10T08:00:00.000+0000",
+      "LastModifiedDate": "2025-11-14T13:20:00.000+0000",
+      "SystemModstamp": "2025-11-14T13:20:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Mental001"
+      },
+      "Id": "0064V00001Mental001",
+      "Name": "Regional Mental Health Centre - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Mental001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Mental001"
+        },
+        "Id": "0014V00001Mental001",
+        "Name": "Regional Mental Health Centre"
+      },
+      "StageName": "Negotiation/Review",
+      "CloseDate": "2025-12-15",
+      "Amount": 145000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 145000.00,
+      "Probability": 75,
+      "Type": "Renewal",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health007",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health007"
+        },
+        "Name": "Healthcare Enterprise Team"
+      },
+      "Opportunity_CSM__c": "James Thompson",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-09T10:30:00.000+0000",
+      "Executive_Influencers__c": "VP Clinical Services, Director of Quality, CMO",
+      "GR_Number__c": "GR-2025-MENTAL-001",
+      "Feature_Request__c": "Enhanced privacy controls for sensitive mental health data, Outcome tracking capabilities, Clinician feedback tools",
+      "Furthest_Stage__c": "Negotiation/Review",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": true,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": true,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Legal review for enhanced privacy compliance. Executive presentation scheduled for Dec 8th. Strong renewal intent confirmed.",
+      "Support_Needed__c": "Privacy compliance consultation, Outcome tracking setup",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Patient experience monitoring, outcome tracking, staff and clinician feedback programs, experience improvement initiatives."
+        },
+        {
+          "product_name": "Research.net",
+          "category": "Professional Research Platform (White-label)",
+          "description": "A white-label version of SurveyMonkey, used by professional researchers or organizations needing a neutral domain and branding.",
+          "primary_use": "Confidential patient satisfaction surveys under neutral domain, research studies with privacy requirements."
+        }
+      ],
+      "CreatedDate": "2024-09-25T11:00:00.000+0000",
+      "LastModifiedDate": "2025-11-13T14:15:00.000+0000",
+      "SystemModstamp": "2025-11-13T14:15:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Univ001"
+      },
+      "Id": "0064V00001Univ001",
+      "Name": "University Teaching Hospital – Eastside - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Univ001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Univ001"
+        },
+        "Id": "0014V00001Univ001",
+        "Name": "University Teaching Hospital – Eastside"
+      },
+      "StageName": "Negotiation/Review",
+      "CloseDate": "2025-12-31",
+      "Amount": 520000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 520000.00,
+      "Probability": 85,
+      "Type": "Renewal",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health008",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health008"
+        },
+        "Name": "Healthcare Enterprise Team"
+      },
+      "Opportunity_CSM__c": "Patricia Garcia",
+      "Renewal_Categories__c": "Verbal Commit (95%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-08T09:00:00.000+0000",
+      "Executive_Influencers__c": "CMO, VP Patient Experience, CIO, Dean of Medicine",
+      "GR_Number__c": "GR-2025-UNIV-001",
+      "Feature_Request__c": "Department-level dashboards, Integration with Epic and Cerner EMR systems, Advanced analytics for research studies",
+      "Furthest_Stage__c": "Negotiation/Review",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": true,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": true,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Finalize legal terms. Executive review scheduled for Dec 12th. Very strong renewal commitment confirmed.",
+      "Support_Needed__c": "EMR integration support, Department dashboard setup, Research study support",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Standardized survey tools across departments, patient and employee satisfaction, dashboard and integration capabilities."
+        },
+        {
+          "product_name": "SM Apply",
+          "category": "Application Management Platform",
+          "description": "Platform for managing end-to-end application and review workflows for programs like scholarships, awards, or grants.",
+          "primary_use": "Medical residency program applications, research grant submissions, scholarship program management."
+        },
+        {
+          "product_name": "Research.net",
+          "category": "Professional Research Platform (White-label)",
+          "description": "A white-label version of SurveyMonkey, used by professional researchers or organizations needing a neutral domain and branding.",
+          "primary_use": "Peer-reviewed research study surveys, academic research projects, confidential patient studies."
+        }
+      ],
+      "CreatedDate": "2024-08-15T10:00:00.000+0000",
+      "LastModifiedDate": "2025-11-15T15:00:00.000+0000",
+      "SystemModstamp": "2025-11-15T15:00:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Home001"
+      },
+      "Id": "0064V00001Home001",
+      "Name": "HomeCare Services Inc. - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Home001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Home001"
+        },
+        "Id": "0014V00001Home001",
+        "Name": "HomeCare Services Inc."
+      },
+      "StageName": "Proposal",
+      "CloseDate": "2025-12-20",
+      "Amount": 195000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 195000.00,
+      "Probability": 70,
+      "Type": "Renewal",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health009",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health009"
+        },
+        "Name": "Mid-Market Healthcare Team"
+      },
+      "Opportunity_CSM__c": "Robert Lee",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": true,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "VP Operations, Director of Quality, CMO",
+      "GR_Number__c": "GR-2025-HOME-001",
+      "Feature_Request__c": "Mobile-friendly surveys for caregivers, Automated visit feedback, Process improvement analytics",
+      "Furthest_Stage__c": "Proposal",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Proposal review meeting scheduled for Nov 26th. Customer evaluating expansion to additional service regions.",
+      "Support_Needed__c": "Mobile survey optimization, Automated workflow setup",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Post-visit surveys after each home care visit, caregiver feedback, client satisfaction tracking, process improvement analytics."
+        },
+        {
+          "product_name": "GetFeedback Direct",
+          "category": "Customer Experience (CX) Feedback Platform",
+          "description": "Transactional feedback tool that captures customer experiences immediately after key interactions.",
+          "primary_use": "Automated post-visit surveys sent via SMS and email, triggered immediately after caregiver visits."
+        }
+      ],
+      "CreatedDate": "2024-10-05T08:30:00.000+0000",
+      "LastModifiedDate": "2025-11-12T10:45:00.000+0000",
+      "SystemModstamp": "2025-11-12T10:45:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Ped001"
+      },
+      "Id": "0064V00001Ped001",
+      "Name": "Pediatric Specialty Hospital - Renewal 2025",
+      "AccountId": "0014V00001Ped001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Ped001"
+        },
+        "Id": "0014V00001Ped001",
+        "Name": "Pediatric Specialty Hospital"
+      },
+      "StageName": "Qualified",
+      "CloseDate": "2025-11-30",
+      "Amount": 115000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 115000.00,
+      "Probability": 65,
+      "Type": "Renewal",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health010",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health010"
+        },
+        "Name": "Mid-Market Healthcare Team"
+      },
+      "Opportunity_CSM__c": "Amanda White",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": true,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "VP Patient Experience, Director of Family Services, CMO",
+      "GR_Number__c": "GR-2025-PED-001",
+      "Feature_Request__c": "Family-centered care survey templates, Child-friendly survey designs, Parent/caregiver feedback tools",
+      "Furthest_Stage__c": "Qualified",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": false,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Discovery call scheduled for Nov 21st. Customer interested in family-centered care improvements.",
+      "Support_Needed__c": "Survey template customization, Family engagement best practices",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Parent and caregiver feedback, patient-family experience surveys, family-centered care improvement initiatives."
+        },
+        {
+          "product_name": "GetFeedback Direct",
+          "category": "Customer Experience (CX) Feedback Platform",
+          "description": "Transactional feedback tool that captures customer experiences immediately after key interactions.",
+          "primary_use": "Post-treatment family satisfaction surveys, automated follow-up surveys for parents and caregivers."
+        }
+      ],
+      "CreatedDate": "2024-11-05T09:00:00.000+0000",
+      "LastModifiedDate": "2025-11-12T09:30:00.000+0000",
+      "SystemModstamp": "2025-11-12T09:30:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Gen001"
+      },
+      "Id": "0064V00001Gen001",
+      "Name": "Genomics & Personalized Medicine Clinic - New Business 2025",
+      "AccountId": "0014V00001Gen001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Gen001"
+        },
+        "Id": "0014V00001Gen001",
+        "Name": "Genomics & Personalized Medicine Clinic"
+      },
+      "StageName": "Proposal",
+      "CloseDate": "2025-12-15",
+      "Amount": 75000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 75000.00,
+      "Probability": 70,
+      "Type": "New Business",
+      "LeadSource": "Website",
+      "OwnerId": "0054V00001Health011",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health011"
+        },
+        "Name": "SMB Healthcare Team"
+      },
+      "Opportunity_CSM__c": "Christopher Brown",
+      "Renewal_Categories__c": "Neutral (50%)",
+      "Custom_Agreement__c": false,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": false,
+      "Billing_Survey_Sent_Time__c": null,
+      "Executive_Influencers__c": "Medical Director, VP Operations",
+      "GR_Number__c": "GR-2025-GEN-001",
+      "Feature_Request__c": "Patient satisfaction tracking for new genomics services, Expectation vs outcome insights, Strategic growth analytics",
+      "Furthest_Stage__c": "Proposal",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": false,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": false,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Present final proposal. Follow-up meeting scheduled for Nov 25th. Customer evaluating for new genomics service launch.",
+      "Support_Needed__c": "Service launch survey setup, Analytics dashboard configuration",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Patient satisfaction tracking for newly launched genomics services, expectation vs outcome insights, strategic growth data collection."
+        },
+        {
+          "product_name": "Research.net",
+          "category": "Professional Research Platform (White-label)",
+          "description": "A white-label version of SurveyMonkey, used by professional researchers or organizations needing a neutral domain and branding.",
+          "primary_use": "Confidential patient research surveys, genomics study data collection, neutral domain for sensitive research."
+        }
+      ],
+      "CreatedDate": "2025-10-20T11:00:00.000+0000",
+      "LastModifiedDate": "2025-11-13T12:00:00.000+0000",
+      "SystemModstamp": "2025-11-13T12:00:00.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v58.0/sobjects/Opportunity/0064V00001Public001"
+      },
+      "Id": "0064V00001Public001",
+      "Name": "Public Health Authority – StateHealth Dept. - Enterprise Renewal 2025",
+      "AccountId": "0014V00001Public001",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v58.0/sobjects/Account/0014V00001Public001"
+        },
+        "Id": "0014V00001Public001",
+        "Name": "Public Health Authority – StateHealth Dept."
+      },
+      "StageName": "Negotiation/Review",
+      "CloseDate": "2025-12-31",
+      "Amount": 385000.00,
+      "CurrencyIsoCode": "USD",
+      "Amount_USD__c": 385000.00,
+      "Probability": 80,
+      "Type": "Renewal",
+      "LeadSource": "Partner Referral",
+      "OwnerId": "0054V00001Health012",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v58.0/sobjects/User/0054V00001Health012"
+        },
+        "Name": "Government & Public Sector Team"
+      },
+      "Opportunity_CSM__c": "Michelle Johnson",
+      "Renewal_Categories__c": "Leaning our Way (65%)",
+      "Custom_Agreement__c": true,
+      "CPQ_Auto_Renew__c": false,
+      "Send_Survey_to_Buying_Contact__c": true,
+      "Billing_Survey_Sent_Time__c": "2025-11-07T10:00:00.000+0000",
+      "Executive_Influencers__c": "State Health Director, VP Public Health Programs, CIO",
+      "GR_Number__c": "GR-2025-PUBLIC-001",
+      "Feature_Request__c": "Community health program surveys, Staff feedback across public health workforce, Programme satisfaction and outcome evaluation tools",
+      "Furthest_Stage__c": "Negotiation/Review",
+      "Was_Lost_Without_Advancement__c": false,
+      "Verbal_Award__c": true,
+      "Security_Review_Completed__c": true,
+      "Mutually_Agreed_Sign_Date__c": true,
+      "Financial_Terms_Agreed__c": true,
+      "Legal_Completed__c": false,
+      "Next_Step__c": "Government procurement review in progress. Executive presentation scheduled for Dec 18th. Strong renewal commitment.",
+      "Support_Needed__c": "Program evaluation setup, Workforce survey administration, Compliance consultation",
+      "Products__c": [
+        {
+          "product_name": "SurveyMonkey Enterprise (SME)",
+          "category": "Survey & Feedback Platform",
+          "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features.",
+          "primary_use": "Community health program surveys (vaccination, screening), staff feedback across public health workforce, program satisfaction and outcome evaluation."
+        },
+        {
+          "product_name": "SM Apply",
+          "category": "Application Management Platform",
+          "description": "Platform for managing end-to-end application and review workflows for programs like scholarships, awards, or grants.",
+          "primary_use": "Public health program applications, grant submissions, program participant management."
+        },
+        {
+          "product_name": "Research.net",
+          "category": "Professional Research Platform (White-label)",
+          "description": "A white-label version of SurveyMonkey, used by professional researchers or organizations needing a neutral domain and branding.",
+          "primary_use": "Public health research studies, community health assessments, neutral domain for government research."
+        }
+      ],
+      "CreatedDate": "2024-08-20T09:00:00.000+0000",
+      "LastModifiedDate": "2025-11-14T16:30:00.000+0000",
+      "SystemModstamp": "2025-11-14T16:30:00.000+0000"
+    }
+  ]
+}
+

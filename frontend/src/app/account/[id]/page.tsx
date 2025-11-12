@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,9 +30,19 @@ import {
   CalendarCheck,
   Users,
   TrendingUp,
+  MessageSquare,
+  Sparkles,
+  AlertCircle,
+  Heart,
+  ThumbsDown,
+  DollarSign,
+  Clock,
+  Package,
+  CheckCircle2,
 } from "lucide-react";
-import { useCustomerDetail } from "@/hooks/useApi";
-import { CustomerDetail } from "@/services/apiService";
+import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
+import { CustomerDetail, GongMeeting } from "@/services/apiService";
+import MeetingDetailModal from "@/components/MeetingDetailModal";
 
 export default function AccountDetailPage() {
   const router = useRouter();
@@ -41,9 +51,12 @@ export default function AccountDetailPage() {
   const [showAIStory, setShowAIStory] = useState(false);
   const [generatingStory, setGeneratingStory] = useState(false);
   const [aiStory, setAiStory] = useState("");
+  const [selectedMeeting, setSelectedMeeting] = useState<GongMeeting | null>(null);
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
 
   // Fetch account details from API
   const { data: account, loading, error } = useCustomerDetail(accountId);
+  const { data: gongMeetings, loading: meetingsLoading } = useGongMeetings(accountId);
 
   const formatArr = (arr: number): string => {
     return `$${arr.toLocaleString()} / yr`;
@@ -55,7 +68,34 @@ export default function AccountDetailPage() {
       month: "short",
       day: "numeric",
       year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
+  };
+
+  const getCategoryConfig = (category: string) => {
+    const CATEGORY_CONFIG: Record<string, { label: string; color: string; bgColor: string; icon: React.ReactNode }> = {
+      FEATURE_REQUEST: { label: "Feature Request", color: "text-blue-700", bgColor: "bg-blue-50 border-blue-200", icon: <TrendingUp className="w-3 h-3" /> },
+      CRITICAL_REVIEW: { label: "Critical Review", color: "text-red-700", bgColor: "bg-red-50 border-red-200", icon: <AlertCircle className="w-3 h-3" /> },
+      COMPLIMENTS: { label: "Compliments", color: "text-green-700", bgColor: "bg-green-50 border-green-200", icon: <Heart className="w-3 h-3" /> },
+      DISSATISFACTION: { label: "Dissatisfaction", color: "text-orange-700", bgColor: "bg-orange-50 border-orange-200", icon: <ThumbsDown className="w-3 h-3" /> },
+      COMPETITOR_MENTION: { label: "Competitor", color: "text-purple-700", bgColor: "bg-purple-50 border-purple-200", icon: <AlertCircle className="w-3 h-3" /> },
+      PRICING_DISCUSSION: { label: "Pricing", color: "text-yellow-700", bgColor: "bg-yellow-50 border-yellow-200", icon: <DollarSign className="w-3 h-3" /> },
+      RENEWAL_SIGNAL: { label: "Renewal", color: "text-emerald-700", bgColor: "bg-emerald-50 border-emerald-200", icon: <FileText className="w-3 h-3" /> },
+      ESCALATION_NEEDED: { label: "Escalation", color: "text-pink-700", bgColor: "bg-pink-50 border-pink-200", icon: <AlertCircle className="w-3 h-3" /> },
+      INTEGRATION_REQUEST: { label: "Integration", color: "text-indigo-700", bgColor: "bg-indigo-50 border-indigo-200", icon: <TrendingUp className="w-3 h-3" /> },
+      SUPPORT_NEEDED: { label: "Support", color: "text-cyan-700", bgColor: "bg-cyan-50 border-cyan-200", icon: <MessageSquare className="w-3 h-3" /> },
+    };
+    return CATEGORY_CONFIG[category] || { label: category, color: "text-gray-700", bgColor: "bg-gray-50 border-gray-200", icon: <FileText className="w-3 h-3" /> };
+  };
+
+  const getSentimentColor = (sentiment: string) => {
+    switch (sentiment.toLowerCase()) {
+      case "positive": return "text-green-700 bg-green-50 border-green-200";
+      case "negative": return "text-red-700 bg-red-50 border-red-200";
+      case "mixed": return "text-yellow-700 bg-yellow-50 border-yellow-200";
+      default: return "text-gray-700 bg-gray-50 border-gray-200";
+    }
   };
 
   const getHealthStyles = (
@@ -330,6 +370,54 @@ export default function AccountDetailPage() {
           )}
         </AnimatePresence>
 
+        {/* Products Section */}
+        {account.products && account.products.length > 0 && (
+          <Card className="bg-white shadow-sm rounded-2xl mb-6">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-dark-forest flex items-center gap-2">
+                <Package className="w-6 h-6 text-primary-green" />
+                SurveyMonkey Products
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {account.products.map((product, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="border-2 border-primary-green/20 rounded-lg p-4 bg-gradient-to-br from-light-mint/30 to-off-white hover:shadow-md transition-all duration-200"
+                  >
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className="p-2 rounded-full bg-primary-green/10 shrink-0">
+                        <CheckCircle2 className="w-5 h-5 text-primary-green" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-dark-forest text-sm mb-1">
+                          {product.product_name}
+                        </h4>
+                        <Badge className="bg-primary-green/10 text-primary-green border-primary-green/20 text-xs mb-2">
+                          {product.category}
+                        </Badge>
+                      </div>
+                    </div>
+                    <p className="text-xs text-neutral-gray mb-2 line-clamp-2">
+                      {product.description}
+                    </p>
+                    <div className="mt-2 pt-2 border-t border-gray-200">
+                      <p className="text-xs font-medium text-dark-forest mb-1">Primary Use:</p>
+                      <p className="text-xs text-neutral-gray line-clamp-2">
+                        {product.primary_use}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Account Metrics */}
@@ -415,20 +503,94 @@ export default function AccountDetailPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="max-h-64 overflow-y-auto space-y-4">
-                {account.meetings && account.meetings.length > 0 ? (
-                  account.meetings.map((meeting) => (
-                    <div key={meeting.id} className="border-l-2 border-primary-green pl-4 pb-4">
-                      <p className="text-sm font-semibold text-dark-forest">
-                        {formatDate(meeting.date)}
-                      </p>
-                      <p className="text-sm text-neutral-gray mt-1">
-                        {meeting.summary}
-                      </p>
-                    </div>
-                  ))
+              <div className="max-h-96 overflow-y-auto space-y-4">
+                {meetingsLoading ? (
+                  <div className="text-center py-8">
+                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-primary-green"></div>
+                    <p className="text-neutral-gray mt-2">Loading meetings...</p>
+                  </div>
+                ) : !gongMeetings ? (
+                  <p className="text-neutral-gray text-center py-4">No meetings data available</p>
+                ) : gongMeetings.length === 0 ? (
+                  <p className="text-neutral-gray text-center py-4">No meetings recorded</p>
                 ) : (
-                  <p className="text-neutral-gray">No meetings recorded</p>
+                  gongMeetings.map((meeting) => {
+                    // Get categories from insights_categories field (from backend) or extract from ai_insights
+                    const insightsCategories = (meeting as any).insights_categories || [];
+                    const insights = meeting.ai_insights?.insights || [];
+                    const categoriesFromInsights = new Set(insights.map((i: any) => i.category));
+                    // Combine both sources
+                    const allCategories = new Set([...insightsCategories, ...Array.from(categoriesFromInsights)]);
+                    const hasCategories = allCategories.size > 0;
+
+                    return (
+                      <motion.div
+                        key={meeting.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="border-l-4 border-primary-green pl-4 pb-4 cursor-pointer hover:bg-light-mint/30 rounded-r-lg transition-all duration-200 p-3 -ml-1"
+                        onClick={() => {
+                          setSelectedMeeting(meeting);
+                          setIsMeetingModalOpen(true);
+                        }}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            {/* Date prominently displayed */}
+                            <p className="text-xs font-semibold text-primary-green mb-1">
+                              {formatDate(meeting.meeting_date)}
+                            </p>
+                            <p className="text-sm font-semibold text-dark-forest mb-1">
+                              {meeting.meeting_title}
+                            </p>
+                            <p className="text-xs text-neutral-gray mb-2">
+                              {meeting.duration_minutes} min • {meeting.participant_count} participant{meeting.participant_count !== 1 ? 's' : ''} • {meeting.direction}
+                            </p>
+                            {/* Quick Summary */}
+                            {meeting.meeting_summary && (
+                              <p className="text-sm text-neutral-gray line-clamp-2 mb-2">
+                                {meeting.meeting_summary}
+                              </p>
+                            )}
+                            {/* Categorization Tags */}
+                            {hasCategories && (
+                              <div className="flex flex-wrap gap-1.5 mt-2">
+                                {Array.from(allCategories).slice(0, 5).map((category: string) => {
+                                  const config = getCategoryConfig(category);
+                                  return (
+                                    <Badge
+                                      key={category}
+                                      className={`${config.bgColor} ${config.color} border text-xs px-2 py-0.5 font-medium flex items-center gap-1`}
+                                    >
+                                      {config.icon}
+                                      {config.label}
+                                    </Badge>
+                                  );
+                                })}
+                                {allCategories.size > 5 && (
+                                  <Badge className="bg-gray-100 text-gray-600 border text-xs px-2 py-0.5">
+                                    +{allCategories.size - 5} more
+                                  </Badge>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex flex-col items-end gap-1 shrink-0">
+                            <Badge
+                              className={`${getSentimentColor(meeting.overall_sentiment)} text-xs capitalize border`}
+                            >
+                              {meeting.overall_sentiment}
+                            </Badge>
+                            {insights.length > 0 && (
+                              <Badge className="bg-primary-green text-white text-xs border-2 border-dark-forest">
+                                {insights.length} insight{insights.length !== 1 ? 's' : ''}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })
                 )}
               </div>
             </CardContent>
@@ -487,6 +649,16 @@ export default function AccountDetailPage() {
             </Table>
           </CardContent>
         </Card>
+
+        {/* Meeting Detail Modal */}
+        <MeetingDetailModal
+          isOpen={isMeetingModalOpen}
+          onClose={() => {
+            setIsMeetingModalOpen(false);
+            setSelectedMeeting(null);
+          }}
+          meeting={selectedMeeting}
+        />
       </div>
     </div>
   );

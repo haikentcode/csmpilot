@@ -11,9 +11,18 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / '.env')
+except ImportError:
+    # python-dotenv not installed, skip loading .env
+    pass
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +34,7 @@ SECRET_KEY = 'django-insecure-@k8%j4$7a0)%inng$$^c9wkagntx$16=y7xdjdghb58xq_2t73
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.100.28', '*']  # '*' allows all hosts (development only)
 
 
 # Application definition
@@ -40,8 +49,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'corsheaders',
+    'django_celery_beat',  # For periodic tasks
     'customers',
     'analytics',
+    'integrations',  # Connector/Metadata architecture
+    'salesforce',
+    'gainsight',
+    'gong',  # Gong meetings integration
+    # 'mock_apis',  # Removed - using external Node.js service in mock-api-service/
 ]
 
 MIDDLEWARE = [
@@ -132,6 +147,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
+    'PAGE_SIZE_QUERY_PARAM': 'page_size',  # Allow frontend to override page size
+    'MAX_PAGE_SIZE': 100,  # Maximum page size allowed
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -188,6 +205,36 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://192.168.100.28:3000",  # Local network access
 ]
 
+# Allow all origins for local network (development only)
+# For production, use CORS_ALLOWED_ORIGINS above
+CORS_ALLOW_ALL_ORIGINS = True  # Set to False in production
+
 CORS_ALLOW_CREDENTIALS = True
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# Salesforce Mock API Configuration (EXTERNAL service - like real Salesforce)
+SALESFORCE_MOCK_API_URL = 'http://localhost:3001/mock-apis/salesforce'
+SALESFORCE_SYNC_INTERVAL_HOURS = 1  # Sync every hour
+
+# Gainsight Mock API Configuration (EXTERNAL service - like real Gainsight)
+GAINSIGHT_MOCK_API_URL = 'http://localhost:3001/mock-apis/gainsight'
+GAINSIGHT_SYNC_INTERVAL_HOURS = 2  # Sync every 2 hours
+
+# Gong Mock API Configuration (EXTERNAL service - like real Gong)
+GONG_MOCK_API_URL = 'http://localhost:3001/mock-apis/gong'
+GONG_SYNC_INTERVAL_HOURS = 4  # Sync every 4 hours
+
+# OpenAI Configuration for AI Processing
+# Set OPENAI_API_KEY in environment variable or .env file
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', None)

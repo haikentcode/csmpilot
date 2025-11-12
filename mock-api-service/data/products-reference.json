@@ -1,0 +1,159 @@
+{
+  "products": [
+    {
+      "product_name": "SurveyMonkey Enterprise (SME)",
+      "category": "Survey & Feedback Platform",
+      "description": "Enterprise-grade version of SurveyMonkey with admin controls, compliance, and collaboration features for organization-wide feedback programs.",
+      "primary_use": "Collect, analyze, and act on feedback securely across teams and departments.",
+      "key_features": ["Centralized admin & governance", "Role-based access control", "HIPAA/GDPR compliance", "Integrations with Slack, Salesforce, Tableau"],
+      "sample_use_cases": [
+        "A hospital system runs patient and staff feedback programs securely.",
+        "A global company conducts employee engagement surveys across 20 countries.",
+        "A university manages course and instructor evaluations."
+      ],
+      "ideal_customer_profiles": ["Healthcare organizations", "Universities", "Large enterprises", "Financial institutions", "Government agencies"],
+      "upsell_opportunities": [
+        "SurveyMonkey Audience – for external respondent sourcing.",
+        "GetFeedback Direct – for transactional CX feedback.",
+        "MRX Solutions – for advanced brand or market research support."
+      ]
+    },
+    {
+      "product_name": "SurveyMonkey Audience",
+      "category": "Survey Panel / Respondent Marketplace",
+      "description": "On-demand marketplace of millions of vetted respondents for fast, targeted research across demographics and geographies.",
+      "primary_use": "Gather market and consumer insights from non-customers or general audiences.",
+      "key_features": ["Pre-screened panels", "Demographic targeting", "Fast turnaround", "Real-time analytics"],
+      "sample_use_cases": [
+        "A healthcare company surveys nurses nationwide about product preferences.",
+        "A CPG brand tests new packaging concepts with 1,000 U.S. consumers.",
+        "A SaaS company validates new feature ideas with tech professionals."
+      ],
+      "ideal_customer_profiles": ["Consumer brands", "Healthcare and pharma researchers", "Marketing agencies", "Startups and SMBs", "Market research firms"],
+      "upsell_opportunities": [
+        "MRX Solutions – for expert-led survey design and data analysis.",
+        "SurveyMonkey Enterprise – for centralized data and reporting across teams."
+      ]
+    },
+    {
+      "product_name": "SurveyMonkey MRX Solutions",
+      "category": "Managed Market Research Services",
+      "description": "Full-service research programs combining SurveyMonkey's technology with professional research expertise for end-to-end studies.",
+      "primary_use": "Execute large or complex research studies with expert design, sampling, and analysis.",
+      "key_features": ["Custom survey design", "Brand and ad tracking", "Expert consulting", "Cross-market benchmarking"],
+      "sample_use_cases": [
+        "A pharma company tracks brand awareness and prescribing intent among doctors.",
+        "A bank commissions an annual customer satisfaction benchmark study.",
+        "A retail brand conducts multi-country brand lift analysis."
+      ],
+      "ideal_customer_profiles": ["Healthcare brands", "CPG enterprises", "Financial services", "SaaS and B2B companies", "Market research teams"],
+      "upsell_opportunities": [
+        "MRX Audience – for specialized B2B and healthcare panels.",
+        "SurveyMonkey Enterprise – for in-house follow-up studies or pulse checks."
+      ]
+    },
+    {
+      "product_name": "SurveyMonkey MRX Audience",
+      "category": "Premium Market Research Audience",
+      "description": "Specialized respondent panels designed for advanced research — including B2B decision-makers, medical professionals, and niche populations.",
+      "primary_use": "Reach high-value, hard-to-access respondents for business or medical research.",
+      "key_features": ["Healthcare & B2B audiences", "Advanced screening", "Global reach", "High-quality data validation"],
+      "sample_use_cases": [
+        "A medical device firm collects feedback from cardiologists.",
+        "A B2B SaaS platform surveys CTOs about procurement behavior.",
+        "A consulting firm gathers competitive intelligence from SMB owners."
+      ],
+      "ideal_customer_profiles": ["Pharmaceutical companies", "Healthcare agencies", "Consulting firms", "Enterprise B2B companies"],
+      "upsell_opportunities": [
+        "MRX Solutions – for full research study execution.",
+        "SurveyMonkey Audience – for consumer comparison or mixed panels."
+      ]
+    },
+    {
+      "product_name": "GetFeedback Digital (GFB Digital)",
+      "category": "Digital Experience Feedback Platform",
+      "description": "Real-time digital experience tool to capture feedback across websites and mobile apps, part of the GetFeedback CX suite.",
+      "primary_use": "Improve website and app experiences through contextual, in-the-moment feedback.",
+      "key_features": ["Web intercept surveys", "In-app feedback", "Visual editor", "Real-time dashboards"],
+      "sample_use_cases": [
+        "A hospital collects patient feedback on its online appointment booking journey.",
+        "An e-commerce brand identifies user pain points on the checkout page.",
+        "A SaaS company measures satisfaction after onboarding completion."
+      ],
+      "ideal_customer_profiles": ["E-commerce brands", "SaaS companies", "Banks and insurance providers", "Healthcare portals", "Telecom operators"],
+      "upsell_opportunities": [
+        "GetFeedback Direct – to capture post-transaction or post-support feedback.",
+        "SurveyMonkey Enterprise – for broader organizational feedback management."
+      ]
+    },
+    {
+      "product_name": "Wufoo",
+      "category": "Online Form Builder",
+      "description": "A simple drag-and-drop form builder for collecting information, payments, and registrations without coding.",
+      "primary_use": "Quickly collect structured data and integrate with websites or CRM tools.",
+      "key_features": ["Form templates", "Payment integration", "Email notifications", "Embed and API options"],
+      "sample_use_cases": [
+        "A clinic uses Wufoo to collect patient intake forms online.",
+        "A nonprofit sets up event registration with donation payments.",
+        "A small business builds a contact form for customer inquiries."
+      ],
+      "ideal_customer_profiles": ["Small businesses", "Nonprofits", "Event organizers", "Healthcare clinics", "Educational institutions"],
+      "upsell_opportunities": [
+        "SurveyMonkey Enterprise – for analytics and advanced reporting.",
+        "SM Apply – for structured application or submission processes."
+      ]
+    },
+    {
+      "product_name": "SM Apply",
+      "category": "Application Management Platform",
+      "description": "Platform for managing end-to-end application and review workflows for programs like scholarships, awards, or grants.",
+      "primary_use": "Simplify collection, review, and decision-making for multi-stage application processes.",
+      "key_features": ["Multi-step forms", "Reviewer dashboards", "Automated scoring", "Workflow tracking"],
+      "sample_use_cases": [
+        "A university manages thousands of scholarship applications each year.",
+        "A healthcare foundation handles research grant submissions.",
+        "A corporate CSR team evaluates innovation challenge entries."
+      ],
+      "ideal_customer_profiles": ["Universities", "Nonprofits", "Government programs", "Corporate CSR teams"],
+      "upsell_opportunities": [
+        "SurveyMonkey Enterprise – for follow-up surveys to applicants or reviewers.",
+        "Wufoo – for simpler, public-facing lead capture forms."
+      ]
+    },
+    {
+      "product_name": "Research.net",
+      "category": "Professional Research Platform (White-label)",
+      "description": "A white-label version of SurveyMonkey, used by professional researchers or organizations needing a neutral domain and branding.",
+      "primary_use": "Run research surveys under an independent, neutral domain for credibility or privacy.",
+      "key_features": ["Custom branding", "research.net domain", "Data privacy controls", "Survey logic and branching"],
+      "sample_use_cases": [
+        "A medical university publishes a peer-reviewed research study survey.",
+        "A healthcare organization runs confidential patient satisfaction surveys.",
+        "A consulting firm conducts client research under a non-branded URL."
+      ],
+      "ideal_customer_profiles": ["Academic researchers", "Healthcare institutions", "Consulting agencies", "Government research bodies"],
+      "upsell_opportunities": [
+        "SurveyMonkey Enterprise – for secure internal survey management.",
+        "MRX Solutions – for professional design and analysis of complex studies."
+      ]
+    },
+    {
+      "product_name": "GetFeedback Direct",
+      "category": "Customer Experience (CX) Feedback Platform",
+      "description": "Transactional feedback tool that captures customer experiences immediately after key interactions via email, SMS, or app triggers.",
+      "primary_use": "Collect and act on real-time feedback from key touchpoints in the customer journey.",
+      "key_features": ["Event-based triggers", "Multi-channel distribution", "Real-time dashboards", "Salesforce integration"],
+      "sample_use_cases": [
+        "A hospital sends post-discharge surveys to patients via SMS.",
+        "A bank measures satisfaction after digital account opening.",
+        "A software company triggers support ticket follow-up surveys automatically."
+      ],
+      "ideal_customer_profiles": ["Healthcare providers", "Banks and financial services", "Retail and eCommerce", "SaaS companies", "Customer support organizations"],
+      "upsell_opportunities": [
+        "GetFeedback Digital – to collect website or in-app feedback.",
+        "SurveyMonkey Enterprise – for broader organizational survey programs."
+      ]
+    }
+  ]
+}
+

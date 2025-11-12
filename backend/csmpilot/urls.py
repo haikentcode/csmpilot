@@ -115,6 +115,10 @@ urlpatterns = [
     path('api/', api_root, name='api-root'),
     path('api/customers/', include('customers.urls')),
     path('api/analytics/', include('analytics.urls')),
+    path('api/gong/', include('gong.urls')),
+    
+    # Note: Mock API is now external Node.js service in mock-api-service/
+    # Runs on port 3001, not Django routes
     
     # API Documentation URLs (will work after installing drf-spectacular)
     # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
