@@ -287,18 +287,18 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
         <div className="space-y-3">
           {profileSummary.opportunities.map(
             (opportunity: string, index: number) => (
-              <Card key={index} className="card-responsive">
-                <CardContent className="spacing-responsive-sm">
-                  <div className="flex items-start gap-3">
-                    <div className="p-1 rounded-full mt-1 bg-green-100 text-green-600 shrink-0">
-                      <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-                    </div>
-                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
-                      {opportunity}
-                    </p>
+            <Card key={index} className="card-responsive">
+              <CardContent className="spacing-responsive-sm">
+                <div className="flex items-start gap-3">
+                  <div className="p-1 rounded-full mt-1 bg-green-100 text-green-600 shrink-0">
+                    <Target className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
-                </CardContent>
-              </Card>
+                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">  
+                    {opportunity}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
             )
           )}
         </div>
@@ -344,18 +344,18 @@ const PreMeetingBriefModal: React.FC<PreMeetingBriefModalProps> = ({
         <div className="space-y-3">
           {profileSummary.talk_tracks.map(
             (talkTrack: string, index: number) => (
-              <Card key={index} className="card-responsive">
-                <CardContent className="spacing-responsive-sm">
-                  <div className="flex items-start gap-3">
-                    <div className="p-1 rounded-full mt-1 bg-blue-100 text-blue-600 shrink-0">
-                      <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
-                    </div>
-                    <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
-                      {talkTrack}
-                    </p>
+            <Card key={index} className="card-responsive">
+              <CardContent className="spacing-responsive-sm">
+                <div className="flex items-start gap-3">
+                  <div className="p-1 rounded-full mt-1 bg-blue-100 text-blue-600 shrink-0">
+                    <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
-                </CardContent>
-              </Card>
+                  <p className="text-responsive-base text-gray-900 wrap-break-words flex-1">
+                    {talkTrack}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
             )
           )}
         </div>

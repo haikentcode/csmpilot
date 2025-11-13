@@ -2,9 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Send, X, Loader2 } from "lucide-react";
+import {
+  MessageCircle,
+  Send,
+  X,
+  Loader2,
+  Sparkles,
+  Activity,
+  Calendar,
+  TrendingUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ragService } from "@/services/ragService";
 
 interface Message {
   id: string;
@@ -18,29 +28,34 @@ interface OpenAIMessage {
   content: string;
 }
 
-const CSM_SYSTEM_PROMPT = `You are Piper AI, an intelligent assistant specifically designed for Customer Success Managers (CSMs).
+const RAG_SYSTEM_PROMPT = `You are Piper, an AI-powered Customer Success Assistant with access to real customer data.
 
-Your expertise includes:
-- Customer health scoring and monitoring
-- Account management strategies
-- Renewal and expansion planning
-- Churn prevention techniques
-- Customer engagement best practices
-- NPS and satisfaction metrics
-- Upsell and cross-sell opportunities
-- Onboarding and adoption strategies
-- Customer success metrics and KPIs
-- Meeting preparation and talk tracks
-- Relationship building with customers
+Your capabilities:
+- Answer questions about specific customers using the provided context
+- Analyze customer health, meetings, and engagement
+- Suggest upsell opportunities based on actual data
+- Compare customers and identify similar accounts
+- Provide meeting summaries and insights
+- Recommend actions based on customer patterns
 
 Guidelines:
-- Only answer questions related to customer success management, customer relationships, account management, and CSM best practices
-- Provide concise, actionable insights (keep responses under 200 words)
-- If asked about topics unrelated to customer success, politely decline and redirect to CSM-related topics
-- Be professional, helpful, and focused on practical advice
-- Use examples when helpful
+- ALWAYS use the provided customer context data to answer questions
+- If data is not in the context, say "I don't have that information in the current context"
+- Be specific and cite actual data points (health scores, ARR, meeting dates, sentiment)
+- Keep responses concise (under 200 words)
+- Format numbers and dates clearly
+- Suggest follow-up actions when relevant
+- If asked about topics unrelated to the provided customer data, politely redirect
 
-If a question is not related to customer success management, respond with: "I'm specifically designed to help with Customer Success Management topics. Could you ask me something about customer health, account management, renewals, or other CSM-related topics?"`;
+Context Format:
+You will receive customer data in structured format including:
+- Customer details (name, industry, ARR, health score, active users, NPS)
+- Recent meetings with AI insights and sentiment
+- Upsell opportunities with reasons
+- Similar customers with similarity scores
+- Use cases for products
+
+Use this data to provide accurate, data-driven responses.`;
 
 export default function ChatDock() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +65,9 @@ export default function ChatDock() {
   const [conversationHistory, setConversationHistory] = useState<
     OpenAIMessage[]
   >([]);
+  const [contextCustomerId, setContextCustomerId] = useState<number | null>(
+    null
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -58,6 +76,42 @@ export default function ChatDock() {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  // Auto-detect customer context from URL
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const match = path.match(/\/account\/(\d+)/);
+      if (match) {
+        setContextCustomerId(parseInt(match[1]));
+      }
+    }
+  }, []);
+
+  // Listen for custom event to open ChatDock with pre-filled message
+  useEffect(() => {
+    const handleOpenChatDock = (event: Event) => {
+      const customEvent = event as CustomEvent<{ message: string }>;
+      const { message } = customEvent.detail;
+      if (message) {
+        setIsOpen(true);
+        setInputValue(message);
+        // Auto-focus on input after a short delay
+        setTimeout(() => {
+          const inputElement =
+            document.querySelector<HTMLInputElement>("#chat-input");
+          if (inputElement) {
+            inputElement.focus();
+          }
+        }, 100);
+      }
+    };
+
+    window.addEventListener("openChatDock", handleOpenChatDock);
+    return () => {
+      window.removeEventListener("openChatDock", handleOpenChatDock);
+    };
+  }, []);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
@@ -86,14 +140,30 @@ export default function ChatDock() {
         );
       }
 
-      // Build messages array for OpenAI
+      // Step 1: Fetch RAG context from backend
+      const ragResponse = await ragService.getChatContext({
+        query: messageText,
+        customer_id: contextCustomerId,
+        conversation_history: conversationHistory.map((msg) => ({
+          role: msg.role,
+          content: msg.content,
+        })),
+      });
+
+      // Step 2: Build context prompt
+      const contextPrompt = ragService.buildContextPrompt(
+        ragResponse.context,
+        messageText
+      );
+
+      // Step 3: Build messages array for OpenAI with RAG context
       const messages: OpenAIMessage[] = [
-        { role: "system", content: CSM_SYSTEM_PROMPT },
+        { role: "system", content: RAG_SYSTEM_PROMPT },
         ...conversationHistory,
-        { role: "user", content: messageText },
+        { role: "user", content: contextPrompt },
       ];
 
-      // Call OpenAI API directly
+      // Step 4: Call OpenAI API with enriched context
       const response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -106,7 +176,7 @@ export default function ChatDock() {
             model: "gpt-4o-mini",
             messages: messages,
             temperature: 0.7,
-            max_tokens: 300,
+            max_tokens: 500,
           }),
         }
       );
@@ -142,7 +212,7 @@ export default function ChatDock() {
 
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Update conversation history
+      // Update conversation history (store original user query, not the context-enriched version)
       setConversationHistory([
         ...conversationHistory,
         { role: "user", content: messageText },
@@ -175,6 +245,14 @@ export default function ChatDock() {
     }
   };
 
+  const handleQuickAction = (query: string) => {
+    setInputValue(query);
+    // Auto-send after a brief delay
+    setTimeout(() => {
+      handleSendMessage();
+    }, 100);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -191,7 +269,9 @@ export default function ChatDock() {
               <div>
                 <h3 className="text-white font-semibold text-lg">Piper AI</h3>
                 <p className="text-white text-xs opacity-90">
-                  Your CSM Assistant
+                  {contextCustomerId
+                    ? "Customer Context Active"
+                    : "Your CSM Assistant"}
                 </p>
               </div>
               <button
@@ -202,13 +282,69 @@ export default function ChatDock() {
               </button>
             </div>
 
+            {/* Context Indicator */}
+            {contextCustomerId && (
+              <div className="bg-light-mint border-b border-primary-green/20 px-4 py-2">
+                <p className="text-xs text-dark-forest flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  <span>
+                    Viewing customer #{contextCustomerId} - Ask me anything
+                    about this account
+                  </span>
+                </p>
+              </div>
+            )}
+
             {/* Chat Messages Area */}
             <div className="flex-1 p-4 bg-off-white overflow-y-auto">
               <div className="space-y-4">
                 {messages.length === 0 && (
                   <div className="text-center text-neutral-gray text-sm py-8">
                     <MessageCircle className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                    <p>Ask me anything about Customer Success Management</p>
+                    <p className="mb-4">
+                      {contextCustomerId
+                        ? "Ask me about this customer"
+                        : "Ask me anything about Customer Success"}
+                    </p>
+
+                    {/* Quick Action Buttons */}
+                    {contextCustomerId && (
+                      <div className="flex flex-col gap-2 mt-4">
+                        <button
+                          onClick={() =>
+                            handleQuickAction(
+                              "What is this customer's health score?"
+                            )
+                          }
+                          className="flex items-center gap-2 px-3 py-2 bg-white hover:bg-light-mint border border-gray-200 rounded-lg text-xs text-dark-forest transition-colors"
+                        >
+                          <Activity className="w-4 h-4 text-primary-green" />
+                          <span>Check health score</span>
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleQuickAction(
+                              "Show me recent meetings and key insights"
+                            )
+                          }
+                          className="flex items-center gap-2 px-3 py-2 bg-white hover:bg-light-mint border border-gray-200 rounded-lg text-xs text-dark-forest transition-colors"
+                        >
+                          <Calendar className="w-4 h-4 text-primary-green" />
+                          <span>Recent meetings</span>
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleQuickAction(
+                              "What upsell opportunities exist?"
+                            )
+                          }
+                          className="flex items-center gap-2 px-3 py-2 bg-white hover:bg-light-mint border border-gray-200 rounded-lg text-xs text-dark-forest transition-colors"
+                        >
+                          <TrendingUp className="w-4 h-4 text-primary-green" />
+                          <span>Upsell opportunities</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -231,10 +367,49 @@ export default function ChatDock() {
                           : "bg-light-mint text-dark-forest"
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">
-                        {message.text}
-                      </p>
-                      <span className="text-xs opacity-60 mt-1 block">
+                      <div className="text-sm space-y-2">
+                        {message.sender === "ai" ? (
+                          // Format AI messages with markdown-like styling
+                          message.text.split('\n').map((line, idx) => {
+                            // Handle bullet points
+                            if (line.trim().startsWith('- ') || line.trim().startsWith('• ')) {
+                              return (
+                                <div key={idx} className="flex gap-2 ml-2">
+                                  <span className="text-primary-green font-bold">•</span>
+                                  <span className="flex-1">{line.replace(/^[-•]\s*/, '')}</span>
+                                </div>
+                              );
+                            }
+                            // Handle numbered lists
+                            const numberedMatch = line.match(/^(\d+)\.\s+(.+)$/);
+                            if (numberedMatch) {
+                              return (
+                                <div key={idx} className="flex gap-2 ml-2">
+                                  <span className="text-primary-green font-bold">{numberedMatch[1]}.</span>
+                                  <span className="flex-1">{numberedMatch[2]}</span>
+                                </div>
+                              );
+                            }
+                            // Handle bold text with **text**
+                            const boldFormatted = line.split(/(\*\*[^*]+\*\*)/).map((part, i) => {
+                              if (part.startsWith('**') && part.endsWith('**')) {
+                                return <strong key={i} className="font-semibold text-dark-forest">{part.slice(2, -2)}</strong>;
+                              }
+                              return part;
+                            });
+                            // Regular line
+                            if (line.trim()) {
+                              return <p key={idx} className="leading-relaxed">{boldFormatted}</p>;
+                            }
+                            // Empty line for spacing
+                            return <div key={idx} className="h-1" />;
+                          })
+                        ) : (
+                          // User messages - simple display
+                          <p className="whitespace-pre-wrap leading-relaxed">{message.text}</p>
+                        )}
+                      </div>
+                      <span className="text-xs opacity-60 mt-2 block">
                         {message.timestamp.toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -265,6 +440,7 @@ export default function ChatDock() {
             <div className="p-3 bg-white border-t border-gray-200">
               <div className="flex gap-2">
                 <Input
+                  id="chat-input"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
@@ -295,9 +471,9 @@ export default function ChatDock() {
           onClick={() => setIsOpen(true)}
           className="fixed right-4 bottom-4 z-50 bg-primary-green hover:bg-dark-forest text-white rounded-full shadow-2xl flex items-center gap-3 px-5 py-3 transition-colors"
         >
-          <MessageCircle className="w-5 h-5 shrink-0" />
+          <Sparkles className="w-5 h-5 shrink-0" />
           <span className="font-semibold text-sm whitespace-nowrap">
-            Chat with Piper AI
+            Ask Piper AI
           </span>
         </motion.button>
       )}

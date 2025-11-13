@@ -23,6 +23,8 @@ interface Customer {
   health_score: string;
   renewal_date: string;
   last_updated: string;
+  active_users: number;
+  nps: number;
   created_at?: string;
   sentiment: 'up' | 'down' | 'neutral';
   

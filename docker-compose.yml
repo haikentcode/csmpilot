@@ -74,6 +74,7 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       # Mock API URLs (use Docker service name)
       - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
       - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight
@@ -121,6 +122,7 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       # Mock API URLs (use Docker service name)
       - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
       - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight
@@ -159,6 +161,7 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       # Mock API URLs (use Docker service name)
       - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
       - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight

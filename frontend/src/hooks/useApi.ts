@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { 
   apiService, 
-  handleApiError,
+  handleApiError, 
   ProfileSummary, 
   PaginatedResponse,
-  GongMeeting
+  GongMeeting,
+  UseCasesResponse,
+  UpsellOpportunitiesResponse
 } from '../services/apiService';
 
 // Simple generic API hook
@@ -23,20 +25,20 @@ export function useApi<T>(
   const [error, setError] = useState<string | null>(null);
 
   const execute = useCallback(async () => {
-    setLoading(true);
+      setLoading(true);
     setError(null);
 
     try {
       const result = await apiCall();
-      setData(result);
+        setData(result);
     } catch (err) {
-      const errorMessage = handleApiError(err);
-      setError(errorMessage);
+        const errorMessage = handleApiError(err);
+        setError(errorMessage);
       if (fallbackData) {
-        setData(fallbackData);
+          setData(fallbackData);
       }
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   }, [apiCall, fallbackData]);
 
@@ -129,5 +131,27 @@ export function useGongMeetings(customerId: number | null) {
       immediate: !!customerId,
       fallbackData: [] as GongMeeting[]
     }
+  );
+}
+
+export function useUseCases(customerId: number | null) {
+  return useApi(
+    () => {
+      if (!customerId) throw new Error('Customer ID is required');
+      return apiService.getUseCases(customerId);
+    },
+    [customerId],
+    { immediate: !!customerId }
+  );
+}
+
+export function useUpsellOpportunities(customerId: number | null, limit?: number) {
+  return useApi(
+    () => {
+      if (!customerId) throw new Error('Customer ID is required');
+      return apiService.getUpsellOpportunities(customerId, limit);
+    },
+    [customerId, limit],
+    { immediate: !!customerId }
   );
 }

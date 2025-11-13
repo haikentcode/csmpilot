@@ -71,7 +71,7 @@ export default function Homepage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link href="/login">
-              <Button className="bg-primary-green hover:bg-dark-forest text-white shadow-md hover:shadow-lg transition-all duration-300 font-medium px-6 py-6 text-base">
+              <Button className="bg-primary-green hover:bg-dark-forest text-white shadow-md hover:shadow-lg transition-all duration-300 font-medium text-md px-6 py-6">
                 {HOME_CONSTANTS.hero.ctaPrimary}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -85,7 +85,7 @@ export default function Homepage() {
           </div>
 
           {/* Simple Features Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-30 max-w-4xl mx-auto">
             {HOME_CONSTANTS.simpleFeatures.map((feature) => {
               const Icon =
                 feature.icon === "Zap"

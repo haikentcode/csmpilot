@@ -477,6 +477,250 @@ class CustomerViewSet(viewsets.ModelViewSet):
                 'error': f'Error fetching upsell opportunities: {str(e)}',
                 'opportunities': []
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['post'], url_path='chat-context')
+    def get_chat_context(self, request):
+        """
+        Retrieve relevant customer data for RAG-based chat.
+        
+        POST /api/customers/chat-context/
+        
+        Request Body:
+        {
+            "query": "What is UBER's health score?",
+            "customer_id": 14,  // optional, if in customer context
+            "conversation_history": []  // optional
+        }
+        
+        Response:
+        {
+            "context": {
+                "customers": [...],
+                "meetings": [...],
+                "opportunities": [...],
+                "use_cases": [...],
+                "similar_customers": [...]
+            },
+            "relevant_customer_ids": [14, 15, 16],
+            "query_intent": "health_check"
+        }
+        """
+        query = request.data.get('query', '')
+        customer_id = request.data.get('customer_id', None)
+        
+        if not query:
+            return Response({
+                'error': 'Query is required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Detect query intent
+            query_intent = self._detect_query_intent(query)
+            print(f"[RAG] Query intent detected: {query_intent}")
+            
+            # Extract customer references from query
+            mentioned_customers = self._extract_customer_references(query, customer_id)
+            print(f"[RAG] Mentioned customers: {[c.name for c in mentioned_customers]}")
+            
+            # Build context based on intent
+            context = {
+                'customers': [],
+                'meetings': [],
+                'opportunities': [],
+                'use_cases': [],
+                'similar_customers': []
+            }
+            
+            relevant_customer_ids = []
+            
+            # If specific customers mentioned or context provided
+            if mentioned_customers:
+                for customer in mentioned_customers:
+                    relevant_customer_ids.append(customer.id)
+                    
+                    # Add customer data
+                    customer_data = CustomerListSerializer(customer).data
+                    context['customers'].append(customer_data)
+                    
+                    # Fetch additional data based on intent
+                    if query_intent in ['meeting_summary', 'general']:
+                        # Fetch recent Gong meetings
+                        from gong.models import GongMeeting
+                        meetings = GongMeeting.objects.filter(
+                            company=customer
+                        ).order_by('-meeting_date')[:5]
+                        
+                        meeting_data = []
+                        for meeting in meetings:
+                            # Calculate insights count from ai_insights
+                            insights_count = 0
+                            if meeting.ai_insights and isinstance(meeting.ai_insights, dict):
+                                insights = meeting.ai_insights.get('insights', [])
+                                if isinstance(insights, list):
+                                    insights_count = len(insights)
+                            
+                            meeting_data.append({
+                                'id': meeting.id,
+                                'meeting_title': meeting.meeting_title,
+                                'meeting_date': meeting.meeting_date.isoformat(),
+                                'overall_sentiment': meeting.overall_sentiment,
+                                'key_topics': meeting.key_topics if meeting.key_topics else [],
+                                'insights_count': insights_count,
+                                'meeting_summary': meeting.meeting_summary if meeting.meeting_summary else ''
+                            })
+                        context['meetings'].extend(meeting_data)
+                    
+                    if query_intent in ['upsell_opportunities', 'general']:
+                        # Fetch upsell opportunities
+                        try:
+                            customer_products = customer.products if customer.products else []
+                            similar_customers_products = []
+                            
+                            # Get similar customers for product recommendations
+                            vector_service = get_customer_vector_service()
+                            if vector_service:
+                                similar_results = vector_service.find_similar_customers(
+                                    customer.id, 
+                                    top_k=5
+                                )
+                                if similar_results:
+                                    similar_ids = [r['customer_id'] for r in similar_results]
+                                    similar_customers = Customer.objects.filter(id__in=similar_ids)
+                                    for sim_customer in similar_customers:
+                                        if sim_customer.products:
+                                            similar_customers_products.extend(sim_customer.products)
+                            
+                            arr_value = float(customer.arr)
+                            arr_range = (arr_value * 0.5, arr_value * 1.5)
+                            
+                            opportunities = get_upsell_opportunities(
+                                customer_products=customer_products,
+                                similar_customers_products=similar_customers_products,
+                                industry=customer.industry,
+                                arr_range=arr_range
+                            )
+                            context['opportunities'].extend(opportunities[:5])
+                        except Exception as e:
+                            print(f"Error fetching opportunities for chat context: {e}")
+                    
+                    if query_intent in ['use_cases', 'general']:
+                        # Fetch use cases
+                        try:
+                            customer_products = customer.products if customer.products else []
+                            use_cases_data = get_use_cases_for_customer(
+                                customer_products=customer_products,
+                                industry=customer.industry
+                            )
+                            context['use_cases'].extend(use_cases_data[:5])
+                        except Exception as e:
+                            print(f"Error fetching use cases for chat context: {e}")
+                    
+                    if query_intent in ['similar_customers', 'general']:
+                        # Fetch similar customers
+                        try:
+                            vector_service = get_customer_vector_service()
+                            if vector_service:
+                                similar_results = vector_service.find_similar_customers(
+                                    customer.id,
+                                    top_k=5
+                                )
+                                if similar_results:
+                                    similar_ids = [r['customer_id'] for r in similar_results]
+                                    similar_customers = Customer.objects.filter(id__in=similar_ids)
+                                    
+                                    for idx, sim_customer in enumerate(similar_customers):
+                                        similarity_score = similar_results[idx].get('score', 0)
+                                        context['similar_customers'].append({
+                                            'customer_id': sim_customer.id,
+                                            'name': sim_customer.name,
+                                            'industry': sim_customer.industry,
+                                            'arr': float(sim_customer.arr),
+                                            'health_score': sim_customer.health_score,
+                                            'similarity_score': similarity_score
+                                        })
+                        except Exception as e:
+                            print(f"Error fetching similar customers for chat context: {e}")
+            
+            # If no specific customers mentioned, provide general data based on intent
+            elif query_intent == 'health_check':
+                # Get at-risk customers
+                at_risk_customers = Customer.objects.filter(
+                    health_score__in=['at_risk', 'critical']
+                ).order_by('-arr')[:5]
+                
+                for customer in at_risk_customers:
+                    relevant_customer_ids.append(customer.id)
+                    customer_data = CustomerListSerializer(customer).data
+                    context['customers'].append(customer_data)
+            
+            return Response({
+                'context': context,
+                'relevant_customer_ids': relevant_customer_ids,
+                'query_intent': query_intent
+            })
+            
+        except Exception as e:
+            import traceback
+            print(f"[RAG ERROR] Exception occurred: {str(e)}")
+            print(f"[RAG ERROR] Traceback: {traceback.format_exc()}")
+            return Response({
+                'error': f'Error building chat context: {str(e)}',
+                'context': {
+                    'customers': [],
+                    'meetings': [],
+                    'opportunities': [],
+                    'use_cases': [],
+                    'similar_customers': []
+                },
+                'relevant_customer_ids': [],
+                'query_intent': 'general'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def _detect_query_intent(self, query: str) -> str:
+        """Detect what the user is asking about."""
+        query_lower = query.lower()
+        
+        if any(word in query_lower for word in ['health', 'score', 'risk', 'churn']):
+            return 'health_check'
+        elif any(word in query_lower for word in ['meeting', 'call', 'discussion', 'talked', 'spoke']):
+            return 'meeting_summary'
+        elif any(word in query_lower for word in ['upsell', 'opportunity', 'expand', 'upgrade', 'product']):
+            return 'upsell_opportunities'
+        elif any(word in query_lower for word in ['similar', 'like', 'compare']):
+            return 'similar_customers'
+        elif any(word in query_lower for word in ['use case', 'usage', 'how they use', 'using']):
+            return 'use_cases'
+        else:
+            return 'general'
+    
+    def _extract_customer_references(self, query: str, context_customer_id: int = None):
+        """Extract customer names or IDs from query."""
+        import re
+        mentioned_customers = []
+        
+        # If context customer ID provided, use it
+        if context_customer_id:
+            try:
+                customer = Customer.objects.get(id=context_customer_id)
+                mentioned_customers.append(customer)
+            except Customer.DoesNotExist:
+                pass
+        
+        # Check for explicit IDs in query
+        id_matches = re.findall(r'\b(?:customer|id|#)\s*(\d+)\b', query, re.IGNORECASE)
+        if id_matches:
+            customer_ids = [int(id) for id in id_matches]
+            found_customers = Customer.objects.filter(id__in=customer_ids)
+            mentioned_customers.extend(found_customers)
+        
+        # Check for customer names (case-insensitive)
+        all_customers = Customer.objects.all()
+        for customer in all_customers:
+            if customer.name.lower() in query.lower():
+                if customer not in mentioned_customers:
+                    mentioned_customers.append(customer)
+        
+        return mentioned_customers
 
 
 class FeedbackViewSet(viewsets.ModelViewSet):
