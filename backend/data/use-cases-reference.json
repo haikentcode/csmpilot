@@ -1,0 +1,84 @@
+{
+  "use_cases": {
+    "HR": [
+      "Hiring Process & Candidate Experience",
+      "Onboarding",
+      "Exit Interview",
+      "Employee Engagement",
+      "Rewards & Recognition",
+      "Pulse Check",
+      "Training - During and Post Training evaluation",
+      "DEI surveys"
+    ],
+    "IT": [
+      "Software Request form",
+      "Feedback on closing support ticket"
+    ],
+    "Education": [
+      "Training Feedback",
+      "Questions between the training",
+      "Training Evaluation"
+    ],
+    "Customer Experience": [
+      "CSAT",
+      "NPS & rNPS",
+      "Service Feedback",
+      "Event Feedback",
+      "VoC Programs",
+      "Sign-ups and Applications"
+    ],
+    "Marketing": [
+      "Market Research",
+      "NPS & CSAT Programs",
+      "Event Registration and Feedback",
+      "AD & Message testing",
+      "Target Audience Insights"
+    ],
+    "Healthcare": [
+      "Patient Satisfaction Surveys",
+      "Post-discharge Patient Feedback",
+      "Staff Engagement Surveys",
+      "Medical Research Surveys",
+      "Medication Pricing Surveys",
+      "Healthcare Provider Feedback",
+      "HIPAA Compliance Surveys",
+      "Clinical Trial Feedback"
+    ],
+    "Technology": [
+      "Product Feedback",
+      "Feature Request Surveys",
+      "User Experience (UX) Testing",
+      "Beta Testing Feedback",
+      "Customer Support Satisfaction",
+      "IT Service Request Forms",
+      "Employee Onboarding Surveys",
+      "Developer Experience Surveys"
+    ],
+    "Finance": [
+      "Customer Satisfaction Surveys",
+      "Service Quality Feedback",
+      "Financial Product Feedback",
+      "Compliance Surveys",
+      "Employee Engagement",
+      "Customer Onboarding Experience"
+    ],
+    "Retail": [
+      "Customer Satisfaction (CSAT)",
+      "Product Feedback",
+      "Shopping Experience Surveys",
+      "Post-Purchase Feedback",
+      "Brand Perception Surveys",
+      "Employee Training Feedback"
+    ]
+  },
+  "industry_mapping": {
+    "healthcare": ["Healthcare", "Customer Experience", "HR", "Marketing"],
+    "technology": ["Technology", "IT", "HR", "Customer Experience", "Marketing"],
+    "finance": ["Finance", "Customer Experience", "HR", "Marketing"],
+    "retail": ["Retail", "Customer Experience", "Marketing", "HR"],
+    "education": ["Education", "HR", "Customer Experience"],
+    "manufacturing": ["HR", "Customer Experience", "IT"],
+    "other": ["Customer Experience", "HR", "Marketing"]
+  }
+}
+
