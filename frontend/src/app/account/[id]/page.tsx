@@ -30,8 +30,10 @@ import {
   CalendarCheck,
   Users,
 } from "lucide-react";
-import { useCustomerDetail } from "@/hooks/useApi";
+import { useCustomerDetail, useGongMeetings } from "@/hooks/useApi";
 import DashboardLayout from "@/components/DashboardLayout";
+import MeetingDetailModal from "@/components/MeetingDetailModal";
+import type { GongMeeting } from "@/services/apiService";
 
 export default function AccountDetailPage() {
   const router = useRouter();
@@ -40,9 +42,14 @@ export default function AccountDetailPage() {
   const [showAIStory, setShowAIStory] = useState(false);
   const [generatingStory, setGeneratingStory] = useState(false);
   const [aiStory, setAiStory] = useState("");
+  const [selectedMeeting, setSelectedMeeting] = useState<GongMeeting | null>(null);
+  const [showMeetingModal, setShowMeetingModal] = useState(false);
 
   // Fetch account details from API
   const { data: account, loading, error } = useCustomerDetail(accountId);
+  
+  // Fetch Gong meetings for this customer
+  const { data: gongMeetingsData, loading: meetingsLoading } = useGongMeetings(accountId);
 
   const formatArr = (arr: number): string => {
     return `$${arr.toLocaleString()} / yr`;
@@ -409,7 +416,7 @@ export default function AccountDetailPage() {
             </CardContent>
           </Card>
 
-          {/* Activity Timeline */}
+          {/* Activity Timeline - Gong Meetings */}
           <Card className="bg-white shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle className="text-xl font-bold text-dark-forest">
@@ -417,19 +424,63 @@ export default function AccountDetailPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="max-h-64 overflow-y-auto space-y-4">
-                {account.meetings && account.meetings.length > 0 ? (
-                  account.meetings.map((meeting) => (
+              <div className="max-h-96 overflow-y-auto space-y-3">
+                {meetingsLoading ? (
+                  <p className="text-neutral-gray">Loading meetings...</p>
+                ) : gongMeetingsData && gongMeetingsData.length > 0 ? (
+                  gongMeetingsData.map((meeting) => (
                     <div
                       key={meeting.id}
-                      className="border-l-2 border-primary-green pl-4 pb-4"
+                      onClick={() => {
+                        setSelectedMeeting(meeting);
+                        setShowMeetingModal(true);
+                      }}
+                      className="border-l-4 border-primary-green pl-4 pb-3 cursor-pointer hover:bg-light-mint/30 rounded-r-lg transition-colors p-3"
                     >
-                      <p className="text-sm font-semibold text-dark-forest">
-                        {formatDate(meeting.date)}
-                      </p>
-                      <p className="text-sm text-neutral-gray mt-1">
-                        {meeting.summary}
-                      </p>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-dark-forest">
+                            {meeting.meeting_title}
+                          </p>
+                          <p className="text-xs text-neutral-gray mt-1">
+                            {formatDate(meeting.meeting_date)}
+                          </p>
+                          {meeting.ai_processed && (
+                            <div className="flex items-center gap-2 mt-2">
+                              {meeting.overall_sentiment && (
+                                <Badge
+                                  className={`text-xs ${
+                                    meeting.overall_sentiment === "positive"
+                                      ? "bg-green-50 text-green-700 border-green-200"
+                                      : meeting.overall_sentiment === "negative"
+                                      ? "bg-red-50 text-red-700 border-red-200"
+                                      : "bg-gray-50 text-gray-700 border-gray-200"
+                                  }`}
+                                >
+                                  {meeting.overall_sentiment}
+                                </Badge>
+                              )}
+                              {meeting.has_insights && (
+                                <Badge className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                                  {meeting.insights_count || 0} insights
+                                </Badge>
+                              )}
+                            </div>
+                          )}
+                          {meeting.key_topics && meeting.key_topics.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {meeting.key_topics.slice(0, 3).map((topic, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-xs bg-light-mint text-dark-forest px-2 py-0.5 rounded"
+                                >
+                                  {topic}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   ))
                 ) : (
@@ -496,6 +547,18 @@ export default function AccountDetailPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Meeting Detail Modal */}
+      {selectedMeeting && (
+        <MeetingDetailModal
+          meeting={selectedMeeting}
+          isOpen={showMeetingModal}
+          onClose={() => {
+            setShowMeetingModal(false);
+            setSelectedMeeting(null);
+          }}
+        />
+      )}
     </DashboardLayout>
   );
 }

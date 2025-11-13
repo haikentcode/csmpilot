@@ -52,8 +52,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'corsheaders',
+    'django_celery_beat',  # For periodic tasks
     'customers',
     'analytics',
+    'salesforce',
+    'gainsight',
+    'gong',
+    'integrations',
 ]
 
 MIDDLEWARE = [

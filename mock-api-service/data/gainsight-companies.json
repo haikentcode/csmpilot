@@ -1,0 +1,367 @@
+{
+  "companies": [
+    {
+      "Name": "MetroHealth Medical Group",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1767139200000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 36,
+      "ARR": 485000.0,
+      "Employees": 10500,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Jennifer Martinez",
+        "email": "jennifer.martinez@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 144,
+      "OriginalContractDate": 1640995200000,
+      "Parentcompany": null,
+      "CreatedDate": 1640995200000,
+      "ModifiedDate": 1767052800000
+    },
+    {
+      "Name": "CommunityCare Clinics Network",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1764460800000,
+      "Status": "Active",
+      "Stage": "Expansion",
+      "Customer_Lifetime_in_Months": 24,
+      "ARR": 125000.0,
+      "Employees": 850,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Michael Chen",
+        "email": "michael.chen@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 96,
+      "OriginalContractDate": 1643587200000,
+      "Parentcompany": null,
+      "CreatedDate": 1643587200000,
+      "ModifiedDate": 1764374400000
+    },
+    {
+      "Name": "HealthyLife Insurers Ltd.",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1765756800000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 42,
+      "ARR": 320000.0,
+      "Employees": 3500,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Sarah Williams",
+        "email": "sarah.williams@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 168,
+      "OriginalContractDate": 1646179200000,
+      "Parentcompany": null,
+      "CreatedDate": 1646179200000,
+      "ModifiedDate": 1765670400000
+    },
+    {
+      "Name": "ChronicCare PharmaTech",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1774915200000,
+      "Status": "Active",
+      "Stage": "Expansion",
+      "Customer_Lifetime_in_Months": 30,
+      "ARR": 285000.0,
+      "Employees": 2200,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "David Rodriguez",
+        "email": "david.rodriguez@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 120,
+      "OriginalContractDate": 1648771200000,
+      "Parentcompany": null,
+      "CreatedDate": 1648771200000,
+      "ModifiedDate": 1774828800000
+    },
+    {
+      "Name": "SeniorLiving Assisted Communities",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1766188800000,
+      "Status": "Active",
+      "Stage": "Adoption",
+      "Customer_Lifetime_in_Months": 18,
+      "ARR": 95000.0,
+      "Employees": 1200,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Lisa Anderson",
+        "email": "lisa.anderson@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 72,
+      "OriginalContractDate": 1651363200000,
+      "Parentcompany": null,
+      "CreatedDate": 1651363200000,
+      "ModifiedDate": 1766102400000
+    },
+    {
+      "Name": "TeleHealth OnDemand Services",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1767139200000,
+      "Status": "Active",
+      "Stage": "Expansion",
+      "Customer_Lifetime_in_Months": 21,
+      "ARR": 180000.0,
+      "Employees": 520,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Rachel Kim",
+        "email": "rachel.kim@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 84,
+      "OriginalContractDate": 1653955200000,
+      "Parentcompany": null,
+      "CreatedDate": 1653955200000,
+      "ModifiedDate": 1767052800000
+    },
+    {
+      "Name": "Regional Mental Health Centre",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1765756800000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 28,
+      "ARR": 145000.0,
+      "Employees": 650,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "James Thompson",
+        "email": "james.thompson@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 112,
+      "OriginalContractDate": 1656547200000,
+      "Parentcompany": null,
+      "CreatedDate": 1656547200000,
+      "ModifiedDate": 1765670400000
+    },
+    {
+      "Name": "University Teaching Hospital \u2013 Eastside",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1767139200000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 48,
+      "ARR": 520000.0,
+      "Employees": 15200,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Patricia Garcia",
+        "email": "patricia.garcia@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 192,
+      "OriginalContractDate": 1659139200000,
+      "Parentcompany": null,
+      "CreatedDate": 1659139200000,
+      "ModifiedDate": 1767052800000
+    },
+    {
+      "Name": "HomeCare Services Inc.",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1766188800000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 33,
+      "ARR": 195000.0,
+      "Employees": 2800,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Robert Lee",
+        "email": "robert.lee@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 132,
+      "OriginalContractDate": 1661731200000,
+      "Parentcompany": null,
+      "CreatedDate": 1661731200000,
+      "ModifiedDate": 1766102400000
+    },
+    {
+      "Name": "Pediatric Specialty Hospital",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1764460800000,
+      "Status": "Active",
+      "Stage": "Adoption",
+      "Customer_Lifetime_in_Months": 15,
+      "ARR": 115000.0,
+      "Employees": 420,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Amanda White",
+        "email": "amanda.white@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 60,
+      "OriginalContractDate": 1664323200000,
+      "Parentcompany": null,
+      "CreatedDate": 1664323200000,
+      "ModifiedDate": 1764374400000
+    },
+    {
+      "Name": "Genomics & Personalized Medicine Clinic",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1765756800000,
+      "Status": "Active",
+      "Stage": "Adoption",
+      "Customer_Lifetime_in_Months": 6,
+      "ARR": 75000.0,
+      "Employees": 85,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Christopher Brown",
+        "email": "christopher.brown@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 24,
+      "OriginalContractDate": 1666915200000,
+      "Parentcompany": null,
+      "CreatedDate": 1666915200000,
+      "ModifiedDate": 1765670400000
+    },
+    {
+      "Name": "Public Health Authority \u2013 StateHealth Dept.",
+      "Gsid": "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+      "Renewal_Date": 1767139200000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 54,
+      "ARR": 385000.0,
+      "Employees": 4800,
+      "Industry": "Healthcare",
+      "csm__gr": {
+        "name": "Michelle Johnson",
+        "email": "michelle.johnson@surveymonkey.com"
+      },
+      "LifecycleInWeeks": 216,
+      "OriginalContractDate": 1669507200000,
+      "Parentcompany": null,
+      "CreatedDate": 1669507200000,
+      "ModifiedDate": 1767052800000
+    },
+    {
+      "Name": "Europcar International",
+      "Gsid": "1I0054U9FAKXZ0H26HO92M3F1G5SPWVQDNF3",
+      "Renewal_Date": 1711929600000,
+      "Status": "Active",
+      "Stage": "Renewal",
+      "Customer_Lifetime_in_Months": 28,
+      "ARR": 85401.88,
+      "Employees": 950,
+      "Industry": "Technology",
+      "csm__gr": {
+        "email": "robin.vanhuis@example.com",
+        "name": "Robin van Huis"
+      },
+      "LifecycleInWeeks": 112,
+      "OriginalContractDate": 1521691459694,
+      "Parentcompany": null,
+      "CreatedDate": 1521691459694,
+      "ModifiedDate": 1711929600000
+    },
+    {
+      "Name": "Rituals Cosmetics E-Commerce B.V.",
+      "Gsid": "1P01OI3OHC9S79J7VN8GQLUQDH0Y52CYFMXW",
+      "Renewal_Date": 1737072000000,
+      "Status": "Active",
+      "Stage": "Adoption",
+      "Customer_Lifetime_in_Months": 15,
+      "ARR": 40865.81,
+      "Employees": 450,
+      "Industry": "Retail",
+      "csm__gr": {
+        "email": "niek.loots@example.com",
+        "name": "Niek Loots"
+      },
+      "LifecycleInWeeks": 60,
+      "OriginalContractDate": 1696118400000,
+      "Parentcompany": null,
+      "CreatedDate": 1696118400000,
+      "ModifiedDate": 1737072000000
+    },
+    {
+      "Name": "TechCorp Solutions Inc.",
+      "Gsid": "1P02MRXML1GRDV44YO2PVJIALGD1NMPG69CA",
+      "Renewal_Date": 1760486400000,
+      "Status": "Expansion",
+      "Stage": "Expansion",
+      "Customer_Lifetime_in_Months": 36,
+      "ARR": 125000.0,
+      "Employees": 1200,
+      "Industry": "Technology",
+      "csm__gr": {
+        "email": "sarah.johnson@example.com",
+        "name": "Sarah Johnson"
+      },
+      "LifecycleInWeeks": 144,
+      "OriginalContractDate": 1726444800000,
+      "Parentcompany": {
+        "Gsid": "1P01OI3OHC9S79J7VN8GQLUQDH0Y52CYFMXW",
+        "Name": "TechCorp Global"
+      },
+      "CreatedDate": 1726444800000,
+      "ModifiedDate": 1760486400000
+    },
+    {
+      "Name": "FinanceHub International",
+      "Gsid": "1P01OI3OHC9S79J7VN8GQLUQDH0Y52CYFMXW2",
+      "Renewal_Date": 1748736000000,
+      "Status": "Active",
+      "Stage": "Launched",
+      "Customer_Lifetime_in_Months": 6,
+      "ARR": 72000.0,
+      "Employees": 680,
+      "Industry": "Finance",
+      "csm__gr": {
+        "email": "david.chen@example.com",
+        "name": "David Chen"
+      },
+      "LifecycleInWeeks": 24,
+      "OriginalContractDate": 1735689600000,
+      "Parentcompany": null,
+      "CreatedDate": 1735689600000,
+      "ModifiedDate": 1748736000000
+    },
+    {
+      "Name": "GlobalTech Enterprises",
+      "Gsid": "1I0054U9FAKXZ0H26H4H0U5VRD65H9JW66FJ2",
+      "Renewal_Date": 1767139200000,
+      "Status": "Active",
+      "Stage": "Kicked Off",
+      "Customer_Lifetime_in_Months": 3,
+      "ARR": 95000.0,
+      "Employees": 550,
+      "Industry": "Technology",
+      "csm__gr": {
+        "email": "michael.thompson@example.com",
+        "name": "Michael Thompson"
+      },
+      "LifecycleInWeeks": 12,
+      "OriginalContractDate": 1727740800000,
+      "Parentcompany": null,
+      "CreatedDate": 1727740800000,
+      "ModifiedDate": 1731427200000
+    },
+    {
+      "Name": "UBER",
+      "Gsid": "1I0UBER9FAKXZ0H26HO92M3F1G5SPWVQDNF3",
+      "Renewal_Date": 1735689600000,
+      "Status": "Active",
+      "Stage": "Expansion",
+      "Customer_Lifetime_in_Months": 48,
+      "ARR": 2500000.0,
+      "Employees": 32000,
+      "Industry": "Technology",
+      "csm__gr": {
+        "email": "sarah.johnson@example.com",
+        "name": "Sarah Johnson"
+      },
+      "LifecycleInWeeks": 192,
+      "OriginalContractDate": 1577836800000,
+      "Parentcompany": null,
+      "CreatedDate": 1577836800000,
+      "ModifiedDate": 1735689600000
+    }
+  ]
+}
