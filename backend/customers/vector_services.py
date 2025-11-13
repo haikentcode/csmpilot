@@ -167,20 +167,20 @@ class CustomerVectorService:
                 filter_dict=filter_dict
             )
             
-            if not response or not response.matches:
+            if not response or not response.get('matches'):
                 return []
             
             # Format results
             similar_customers = []
-            for match in response.matches:
+            for match in response['matches']:
                 similar_customers.append({
-                    'customer_id': match.metadata.get('customer_id'),
-                    'name': match.metadata.get('name'),
-                    'industry': match.metadata.get('industry'),
-                    'arr': match.metadata.get('arr'),
-                    'health_score': match.metadata.get('health_score'),
-                    'similarity_score': match.score,
-                    'metadata': match.metadata
+                    'customer_id': match['metadata'].get('customer_id'),
+                    'name': match['metadata'].get('name'),
+                    'industry': match['metadata'].get('industry'),
+                    'arr': match['metadata'].get('arr'),
+                    'health_score': match['metadata'].get('health_score'),
+                    'similarity_score': match['score'],
+                    'metadata': match['metadata']
                 })
             
             return similar_customers

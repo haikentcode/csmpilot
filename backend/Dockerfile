@@ -10,8 +10,10 @@ ENV DJANGO_SETTINGS_MODULE=csmpilot.settings
 WORKDIR /app
 
 # Install system dependencies
+# Added 'libpq-dev' - this provides the necessary headers for psycopg2/psycopg to compile against Postgres C-libraries.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+    libpq-dev \
     gcc \
     g++ \
     libc6-dev \

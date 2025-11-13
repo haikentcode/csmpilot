@@ -60,7 +60,7 @@ def test_advanced_ssl():
                 
                 # Now try Pinecone
                 from pinecone import Pinecone
-                pc = Pinecone(api_key=api_key,ssl_verify=False )
+                pc = Pinecone(api_key=api_key,ssl_verify=False)
                 
                 if index_host:
                     index = pc.Index(host=index_host)
