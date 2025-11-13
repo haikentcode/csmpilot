@@ -22,36 +22,30 @@ export default function SimilarCustomers({
 }: SimilarCustomersProps) {
   const { data: similarData, loading, error, retry } = useSimilarCustomers(customerId);
 
-  const getSegmentVariant = (
-    segment: string | undefined
+  const getHealthScoreVariant = (
+    healthScore: string | undefined
   ): "default" | "secondary" | "destructive" | "outline" => {
-    if (!segment) return "outline";
-    switch (segment.toLowerCase()) {
-      case "enterprise":
+    if (!healthScore) return "outline";
+    switch (healthScore.toLowerCase()) {
+      case "healthy":
         return "default";
-      case "mid-market":
+      case "at_risk":
+      case "at risk":
         return "secondary";
-      case "smb":
-        return "outline";
+      case "critical":
+        return "destructive";
       default:
         return "outline";
     }
   };
 
-  const getTierVariant = (
-    tier: string | undefined
-  ): "default" | "secondary" | "destructive" | "outline" => {
-    if (!tier) return "outline";
-    switch (tier.toLowerCase()) {
-      case "platinum":
-        return "default";
-      case "gold":
-        return "secondary";
-      case "silver":
-        return "outline";
-      default:
-        return "outline";
+  const formatARR = (arr: number): string => {
+    if (arr >= 1000000) {
+      return `$${(arr / 1000000).toFixed(1)}M`;
+    } else if (arr >= 1000) {
+      return `$${(arr / 1000).toFixed(1)}k`;
     }
+    return `$${arr.toFixed(0)}`;
   };
 
   const getScoreColor = (score: number) => {
@@ -93,7 +87,7 @@ export default function SimilarCustomers({
   if (!similarData || !similarData.similar_customers || similarData.similar_customers.length === 0) {
     return (
       <NoSimilarCustomers
-        customerName={similarData?.base_customer || 'this customer'}
+        customerName={similarData?.customer_name || 'this customer'}
         onRefresh={retry}
       />
     );
@@ -117,7 +111,7 @@ export default function SimilarCustomers({
                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            Similar Customers to {similarData.base_customer}
+            Similar Customers to {similarData.customer_name}
           </CardTitle>
         </CardHeader>
 
@@ -146,7 +140,10 @@ export default function SimilarCustomers({
                   Base Customer:
                 </span>
                 <span className="font-semibold text-primary-green">
-                  {similarData.base_customer}
+                  {similarData.customer_name}
+                </span>
+                <span className="text-xs text-neutral-gray ml-2">
+                  ({similarData.total_found} similar found)
                 </span>
               </div>
             </CardContent>
@@ -156,31 +153,36 @@ export default function SimilarCustomers({
           <div className="space-y-3">
             {similarData.similar_customers.map((customer: SimilarCustomer, index: number) => (
               <Card
-                key={customer.id}
+                key={customer.customer_id}
                 className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer animate-bounce-in border-l-4 border-l-gray-300 hover:border-l-primary-green"
                 style={{ animationDelay: `${(index + 2) * 0.1}s` }}
               >
                 <CardContent className="p-4">
                   <div className="flex justify-between items-start mb-3">
-                    <h4 className="font-semibold text-dark-forest hover:text-primary-green transition-colors duration-200">
-                      {customer.name}
-                    </h4>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-dark-forest hover:text-primary-green transition-colors duration-200">
+                        {customer.name}
+                      </h4>
+                      <p className="text-xs text-neutral-gray mt-1">
+                        {customer.industry} • {formatARR(customer.arr)}
+                      </p>
+                    </div>
                     <div className="flex items-center gap-2">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <span
                               className={`font-bold text-responsive-lg transition-all duration-200 hover:scale-110 ${getScoreColor(
-                                customer.score
+                                customer.similarity_score
                               )}`}
                             >
-                              {(customer.score * 100).toFixed(1)}%
+                              {(customer.similarity_score * 100).toFixed(1)}%
                             </span>
                           </TooltipTrigger>
                           <TooltipContent>
                             <p>
                               Similarity Score:{" "}
-                              {(customer.score * 100).toFixed(1)}%
+                              {(customer.similarity_score * 100).toFixed(1)}%
                             </p>
                           </TooltipContent>
                         </Tooltip>
@@ -189,42 +191,46 @@ export default function SimilarCustomers({
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-3">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Badge
-                            variant={getSegmentVariant(customer.segment)}
-                            className="hover:scale-105 transition-transform duration-200"
-                          >
-                            {customer.segment}
-                          </Badge>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Customer Segment: {customer.segment}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Badge
-                            variant={getTierVariant(customer.tier)}
-                            className="hover:scale-105 transition-transform duration-200"
-                          >
-                            {customer.tier}
-                          </Badge>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Service Tier: {customer.tier}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    {customer.health_score && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge
+                              variant={getHealthScoreVariant(customer.health_score)}
+                              className="hover:scale-105 transition-transform duration-200"
+                            >
+                              {customer.health_score}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Health Score: {customer.health_score}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
 
                     <Badge variant="outline" className="text-responsive-xs">
                       Rank #{index + 1}
                     </Badge>
                   </div>
+
+                  {/* Shared Traits Section */}
+                  {customer.shared_traits && customer.shared_traits.length > 0 && (
+                    <div className="mb-3">
+                      <p className="text-xs font-medium text-neutral-gray mb-2">Shared Traits:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {customer.shared_traits.map((trait, traitIndex) => (
+                          <Badge
+                            key={traitIndex}
+                            variant="secondary"
+                            className="text-xs bg-light-mint text-dark-forest"
+                          >
+                            {trait}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between">
                     <span className="text-responsive-sm text-neutral-gray font-medium">
@@ -232,11 +238,11 @@ export default function SimilarCustomers({
                     </span>
                     <div className="flex items-center gap-2">
                       <Progress
-                        value={customer.score * 100}
+                        value={customer.similarity_score * 100}
                         className="w-24 h-2"
                       />
                       <span className="text-responsive-xs text-neutral-gray min-w-fit">
-                        {(customer.score * 100).toFixed(0)}%
+                        {(customer.similarity_score * 100).toFixed(0)}%
                       </span>
                     </div>
                   </div>

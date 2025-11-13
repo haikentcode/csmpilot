@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Send, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { apiService, type ChatMessage as APIChatMessage } from "@/services/apiService";
 
 interface Message {
   id: string;
@@ -13,20 +14,12 @@ interface Message {
   timestamp: Date;
 }
 
-const mockResponses = [
-  "Emeritus shows an upward usage trend — 12% growth this quarter.",
-  "Customers with similar NPS usually renew at 90%+ rate.",
-  "Try focusing on API adoption — it correlates with higher retention.",
-  "Based on feedback patterns, survey fatigue might be increasing for AirlineX.",
-  "Your top customers have 85% engagement with the new features.",
-  "Consider reaching out to accounts with declining health scores this week.",
-];
-
 export default function ChatDock() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [conversationHistory, setConversationHistory] = useState<APIChatMessage[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -36,13 +29,15 @@ export default function ChatDock() {
     }
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
+    const messageText = inputValue;
+    
     // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue,
+      text: messageText,
       sender: "user",
       timestamp: new Date(),
     };
@@ -51,20 +46,50 @@ export default function ChatDock() {
     setInputValue("");
     setIsLoading(true);
 
-    // Simulate AI response after 1 second
-    setTimeout(() => {
-      const randomResponse =
-        mockResponses[Math.floor(Math.random() * mockResponses.length)];
+    // Update conversation history
+    const newHistory: APIChatMessage[] = [
+      ...conversationHistory,
+      { role: "user", content: messageText }
+    ];
+    setConversationHistory(newHistory);
+
+    try {
+      // Call real API
+      const response = await apiService.sendChatMessage({
+        message: messageText,
+        conversation_history: newHistory
+      });
+
+      // Add AI response
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
+        text: response.response,
         sender: "ai",
-        timestamp: new Date(),
+        timestamp: new Date(response.timestamp),
       };
 
       setMessages((prev) => [...prev, aiMessage]);
+      
+      // Update conversation history with AI response
+      setConversationHistory([
+        ...newHistory,
+        { role: "assistant", content: response.response }
+      ]);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      
+      // Add error message
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm having trouble connecting right now. Please try again in a moment.",
+        sender: "ai",
+        timestamp: new Date(),
+      };
+      
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
