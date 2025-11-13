@@ -12,6 +12,7 @@ from .serializers import (
 )
 from .vector_services import get_customer_vector_service
 from .tasks import add_customer_to_vectors, update_customer_vectors, bulk_populate_vectors
+from .product_service import get_use_cases_for_customer, get_upsell_opportunities
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -307,6 +308,161 @@ class CustomerViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({
                 'error': f'Error initiating bulk vector sync: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=True, methods=['get'])
+    def use_cases(self, request, pk=None):
+        """
+        Get relevant use cases for a customer based on their products.
+        
+        Uses the product catalog to find use cases that match the customer's
+        current products and industry.
+        
+        **URL:** `GET /api/customers/{id}/use-cases/`
+        
+        **Query Parameters:**
+        - industry (str): Override customer's industry for filtering (optional)
+        
+        **Response Example:**
+        ```json
+        {
+            "customer_id": 1,
+            "customer_name": "Acme Corp",
+            "customer_products": ["SurveyMonkey Enterprise", "GetFeedback Digital"],
+            "use_cases": [
+                {
+                    "product_name": "SurveyMonkey Enterprise (SME)",
+                    "product_category": "Survey & Feedback Platform",
+                    "use_case": "A hospital system runs patient and staff feedback programs securely.",
+                    "primary_use": "Collect, analyze, and act on feedback securely...",
+                    "key_features": ["Centralized admin & governance", ...]
+                }
+            ]
+        }
+        ```
+        """
+        customer = self.get_object()
+        
+        # Get customer products
+        customer_products = customer.products or []
+        industry = request.query_params.get('industry') or customer.industry
+        
+        try:
+            use_cases = get_use_cases_for_customer(
+                customer_products=customer_products,
+                industry=industry
+            )
+            
+            return Response({
+                'customer_id': customer.id,
+                'customer_name': customer.name,
+                'customer_products': customer_products,
+                'industry': industry,
+                'use_cases': use_cases,
+                'total_use_cases': len(use_cases)
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Error fetching use cases: {str(e)}',
+                'use_cases': []
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=True, methods=['get'])
+    def upsell_opportunities(self, request, pk=None):
+        """
+        Get upsell opportunities for a customer based on:
+        - Products they already have (upsell opportunities from product catalog)
+        - Similar customers (using vector similarity search)
+        - Industry and ARR matching
+        
+        **URL:** `GET /api/customers/{id}/upsell-opportunities/`
+        
+        **Query Parameters:**
+        - limit (int): Number of similar customers to consider (default: 10)
+        - include_similar (bool): Include recommendations from similar customers (default: true)
+        
+        **Response Example:**
+        ```json
+        {
+            "customer_id": 1,
+            "customer_name": "Acme Corp",
+            "current_products": ["SurveyMonkey Enterprise"],
+            "opportunities": [
+                {
+                    "product_name": "GetFeedback Direct",
+                    "category": "Customer Experience (CX) Feedback Platform",
+                    "description": "Transactional feedback tool...",
+                    "reason": "Used by 5 similar customer(s)",
+                    "reason_type": "similar_customers",
+                    "key_features": [...],
+                    "similarity_score": 5
+                }
+            ]
+        }
+        ```
+        """
+        customer = self.get_object()
+        
+        # Get query parameters
+        limit = int(request.query_params.get('limit', 10))
+        include_similar = request.query_params.get('include_similar', 'true').lower() == 'true'
+        
+        customer_products = customer.products or []
+        similar_customers_products = None
+        
+        # Get similar customers' products if requested
+        if include_similar:
+            try:
+                vector_service = get_customer_vector_service()
+                similar_customers = vector_service.find_similar_customers(
+                    customer=customer,
+                    top_k=limit,
+                    filter_criteria={}
+                )
+                
+                # Extract products from similar customers
+                similar_customers_products = []
+                for similar in similar_customers:
+                    similar_customer_id = similar.get('customer_id')
+                    if similar_customer_id:
+                        try:
+                            similar_customer = Customer.objects.get(id=similar_customer_id)
+                            if similar_customer.products:
+                                similar_customers_products.append(similar_customer.products)
+                        except Customer.DoesNotExist:
+                            continue
+                            
+            except Exception as e:
+                # If vector search fails, continue without similar customers
+                print(f"Warning: Could not fetch similar customers for upsell: {e}")
+        
+        try:
+            # Calculate ARR range for filtering (within 50% of customer ARR)
+            arr_value = float(customer.arr)
+            arr_range = (arr_value * 0.5, arr_value * 1.5)
+            
+            opportunities = get_upsell_opportunities(
+                customer_products=customer_products,
+                similar_customers_products=similar_customers_products,
+                industry=customer.industry,
+                arr_range=arr_range
+            )
+            
+            return Response({
+                'customer_id': customer.id,
+                'customer_name': customer.name,
+                'current_products': customer_products,
+                'industry': customer.industry,
+                'arr': str(customer.arr),
+                'opportunities': opportunities,
+                'total_opportunities': len(opportunities)
+            })
+            
+        except Exception as e:
+            return Response({
+                'error': f'Error fetching upsell opportunities: {str(e)}',
+                'opportunities': []
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

@@ -35,6 +35,13 @@ class Customer(models.Model):
     salesforce_synced = models.BooleanField(default=False, help_text='Whether this customer has been synced from Salesforce')
     gainsight_synced = models.BooleanField(default=False, help_text='Whether this customer has been synced from Gainsight')
     
+    # SurveyMonkey products this customer is using
+    products = models.JSONField(
+        default=list,
+        blank=True,
+        help_text='Array of SurveyMonkey product names the customer is using (e.g., ["SurveyMonkey Enterprise", "GetFeedback Digital"])'
+    )
+    
     class Meta:
         ordering = ['-arr', 'name']
     

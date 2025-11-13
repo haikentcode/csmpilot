@@ -71,7 +71,16 @@ class GongSyncService:
             if customers.count() == 1:
                 return customers.first()
             elif customers.count() > 1:
-                # Multiple customers with same name - prefer healthcare, then most recent
+                # Multiple customers with same name - prefer customers without meetings
+                from .models import GongMeeting
+                customers_without_meetings = [c for c in customers if GongMeeting.objects.filter(company=c).count() == 0]
+                if customers_without_meetings:
+                    # Among customers without meetings, prefer healthcare, then most recent
+                    healthcare_customer = [c for c in customers_without_meetings if c.industry == 'healthcare']
+                    if healthcare_customer:
+                        return healthcare_customer[0]
+                    return max(customers_without_meetings, key=lambda c: c.last_updated)
+                # All have meetings - prefer healthcare, then most recent
                 healthcare_customer = customers.filter(industry='healthcare').first()
                 if healthcare_customer:
                     return healthcare_customer
