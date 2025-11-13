@@ -1409,6 +1409,102 @@
         "id": "account_europcar_001",
         "name": "Europcar International"
       }
+    },
+    {
+      "id": "call_gong_financehub_001",
+      "callId": "call_financehub_123456",
+      "title": "FinanceHub International - Q4 Business Review",
+      "startedAt": "2024-11-20T10:00:00Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "David Chen",
+          "email": "david.chen@financehub.com",
+          "role": "Customer",
+          "title": "VP of Customer Experience"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Quarterly business review with FinanceHub International. Discussion focused on customer satisfaction metrics and feedback collection strategies. Customer is happy with current platform usage and interested in expanding to additional departments. Strong renewal signals and potential for upsell opportunities.",
+      "transcript": "CSM: Thanks for joining today, David. Let's review your Q4 metrics.\n\nDavid: Hi, thanks for having me. We've been very happy with the platform.\n\nCSM: Great to hear! I see you've increased usage by 40% this quarter.\n\nDavid: Yes, we've expanded to our customer support team. They're using it for post-interaction surveys.\n\nCSM: That's excellent. How are the response rates?\n\nDavid: They're good, around 35%. We'd like to improve that though.\n\nCSM: We can help with that. We have some best practices we can share.\n\nDavid: That would be great. Also, we're thinking about expanding to our product team.\n\nCSM: Perfect timing. We have some new features that would be great for product feedback.\n\nDavid: Can you send me more information?\n\nCSM: Absolutely. I'll prepare a proposal for the expansion.\n\nDavid: Sounds good. We're definitely planning to renew, so let's discuss terms.\n\nCSM: Perfect. I'll send over the renewal proposal next week.\n\nDavid: Looking forward to it. Thanks for all your support.",
+      "insights": {
+        "topics": [
+          "renewal",
+          "expansion",
+          "customer satisfaction",
+          "upsell",
+          "best practices"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_financehub_001",
+        "name": "FinanceHub International",
+        "value": 72000.0,
+        "stage": "Renewal",
+        "closeDate": "2025-01-15"
+      },
+      "account": {
+        "id": "account_financehub_001",
+        "name": "FinanceHub International"
+      }
+    },
+    {
+      "id": "call_gong_financehub_002",
+      "callId": "call_financehub_123457",
+      "title": "FinanceHub International - Product Feedback Integration Discussion",
+      "startedAt": "2024-12-05T14:00:00Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "David Chen",
+          "email": "david.chen@financehub.com",
+          "role": "Customer",
+          "title": "VP of Customer Experience"
+        },
+        {
+          "name": "Product Manager",
+          "email": "pm@financehub.com",
+          "role": "Customer",
+          "title": "Product Manager"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Technical discussion about integrating SurveyMonkey with FinanceHub's product feedback system. Customer wants to collect user feedback directly from their application. Discussion of API capabilities, webhook integration, and real-time data sync. Customer is very interested and wants to move forward with implementation.",
+      "transcript": "CSM: Hi David, thanks for bringing your product manager.\n\nDavid: Hi, this is our PM. We want to discuss integrating feedback collection into our app.\n\nPM: Yes, we want users to be able to provide feedback without leaving our platform.\n\nCSM: Perfect. We have API and webhook support for that.\n\nPM: Can you show us how that works?\n\nCSM: Absolutely. We can embed surveys directly in your app, or trigger them via API.\n\nPM: That sounds great. What about real-time data?\n\nCSM: We support webhooks that send data in real-time as responses come in.\n\nPM: Perfect. That's exactly what we need.\n\nDavid: How long would implementation take?\n\nCSM: Usually 2-3 weeks for full integration. We can start with a pilot.\n\nPM: Let's do it. We want to launch this in Q1.\n\nCSM: Great! I'll send you the technical documentation and we can schedule a kickoff.\n\nDavid: Perfect. This will be a great addition to our platform.",
+      "insights": {
+        "topics": [
+          "integration",
+          "API",
+          "webhooks",
+          "product feedback",
+          "implementation"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_financehub_002",
+        "name": "FinanceHub International",
+        "value": 95000.0,
+        "stage": "Expansion",
+        "closeDate": "2025-02-28"
+      },
+      "account": {
+        "id": "account_financehub_002",
+        "name": "FinanceHub International"
+      }
     }
   ]
 }

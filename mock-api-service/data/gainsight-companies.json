@@ -250,6 +250,7 @@
       "ARR": 85401.88,
       "Employees": 950,
       "Industry": "Technology",
+      "Products": ["SurveyMonkey Enterprise (SME)", "GetFeedback Direct"],
       "csm__gr": {
         "email": "robin.vanhuis@example.com",
         "name": "Robin van Huis"
@@ -270,6 +271,7 @@
       "ARR": 40865.81,
       "Employees": 450,
       "Industry": "Retail",
+      "Products": ["GetFeedback Digital (GFB Digital)", "SurveyMonkey Enterprise (SME)"],
       "csm__gr": {
         "email": "niek.loots@example.com",
         "name": "Niek Loots"
@@ -313,6 +315,7 @@
       "ARR": 72000.0,
       "Employees": 680,
       "Industry": "Finance",
+      "Products": ["SurveyMonkey Enterprise (SME)", "GetFeedback Direct"],
       "csm__gr": {
         "email": "david.chen@example.com",
         "name": "David Chen"
@@ -333,6 +336,7 @@
       "ARR": 95000.0,
       "Employees": 550,
       "Industry": "Technology",
+      "Products": ["SurveyMonkey Enterprise (SME)", "SurveyMonkey Audience"],
       "csm__gr": {
         "email": "michael.thompson@example.com",
         "name": "Michael Thompson"

@@ -1,4 +1,25 @@
 services:
+  # Mock API Service (Node.js) - serves JSON data for Salesforce, Gainsight, Gong
+  mock-api:
+    build:
+      context: ./mock-api-service
+      dockerfile: Dockerfile
+    container_name: csmpilot-mock-api
+    ports:
+      - "3002:3001" # External port 3002, internal 3001
+    volumes:
+      - ./mock-api-service:/app
+      - /app/node_modules
+    environment:
+      - PORT=3001
+      - NODE_ENV=development
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Redis service for Celery
   redis:
     image: redis:7-alpine
@@ -53,6 +74,10 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      # Mock API URLs (use Docker service name)
+      - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
+      - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight
+      - GONG_MOCK_API_URL=http://mock-api:3001/mock-apis/gong
       # SSL certificates are properly handled in Linux container
       - PYTHONHTTPSVERIFY=1
     volumes:
@@ -64,12 +89,16 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mock-api:
+        condition: service_healthy
     restart: unless-stopped
     command: >
       sh -c "
         echo 'Setting up Django application...' &&
         python manage.py migrate &&
         python manage.py collectstatic --noinput &&
+        echo 'Setting up Celery periodic tasks...' &&
+        python manage.py shell < setup_celery_tasks.py || echo 'Periodic tasks setup completed' &&
         echo 'Starting Django server...' &&
         python manage.py runserver 0.0.0.0:8000
       "
@@ -92,6 +121,10 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      # Mock API URLs (use Docker service name)
+      - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
+      - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight
+      - GONG_MOCK_API_URL=http://mock-api:3001/mock-apis/gong
       # SSL certificates work properly in Linux container
       - PYTHONHTTPSVERIFY=1
     volumes:
@@ -103,6 +136,8 @@ services:
         condition: service_healthy
       backend:
         condition: service_started
+      mock-api:
+        condition: service_healthy
     restart: unless-stopped
     command: celery -A csmpilot worker --loglevel=info --pool=threads --concurrency=4
 
@@ -124,6 +159,10 @@ services:
       - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT:-us-east-1-aws}
       - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME:-csm-pilot}
       - PINECONE_INDEX_HOST=${PINECONE_INDEX_HOST}
+      # Mock API URLs (use Docker service name)
+      - SALESFORCE_MOCK_API_URL=http://mock-api:3001/mock-apis/salesforce
+      - GAINSIGHT_MOCK_API_URL=http://mock-api:3001/mock-apis/gainsight
+      - GONG_MOCK_API_URL=http://mock-api:3001/mock-apis/gong
     volumes:
       - ./backend:/app
     depends_on:
@@ -133,6 +172,8 @@ services:
         condition: service_healthy
       backend:
         condition: service_started
+      mock-api:
+        condition: service_healthy
     restart: unless-stopped
     command: celery -A csmpilot beat --loglevel=info
 

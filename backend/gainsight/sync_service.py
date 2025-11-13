@@ -227,6 +227,18 @@ class GainsightSyncService:
                 )
                 customer_created = True
         
+        # Update products if provided in Gainsight data
+        products_data = gainsight_data.get('Products') or gainsight_data.get('Products__c')
+        products_list = []
+        if products_data:
+            if isinstance(products_data, list):
+                products_list = [str(p).strip() if isinstance(p, str) else str(p.get('product_name', p)).strip() for p in products_data if p]
+            elif isinstance(products_data, str):
+                if ',' in products_data:
+                    products_list = [p.strip() for p in products_data.split(',') if p.strip()]
+                else:
+                    products_list = [products_data.strip()] if products_data.strip() else []
+        
         # Update customer if it already existed
         if not customer_created:
             customer.name = company_name
@@ -237,7 +249,15 @@ class GainsightSyncService:
             customer.gainsight_company_id = gainsight_id
             customer.gainsight_synced = True
             customer.last_gainsight_sync = timezone.now()
+            # Update products if provided
+            if products_list:
+                customer.products = products_list
             customer.save()
+        else:
+            # Set products for newly created customer
+            if products_list:
+                customer.products = products_list
+                customer.save()
         
         # Extract CSM information
         csm_email = gainsight_data.get('csm__gr.email', '')

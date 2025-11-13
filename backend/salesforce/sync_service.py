@@ -5,6 +5,7 @@ Maps Salesforce Opportunity response to Customer and SalesforceOpportunity model
 """
 
 import requests
+import json
 from datetime import datetime
 from django.utils import timezone
 from django.db import transaction
@@ -172,13 +173,15 @@ class SalesforceSyncService:
             customer.salesforce_synced = True
             customer.last_salesforce_sync = timezone.now()
             # Update products if provided in Salesforce data
-            if 'Products__c' in salesforce_data and salesforce_data.get('Products__c'):
-                customer.products = salesforce_data.get('Products__c')
+            products_data = salesforce_data.get('Products__c') or salesforce_data.get('Products')
+            if products_data:
+                customer.products = self._parse_products(products_data)
             customer.save()
         else:
             # Set products for newly created customer
-            if 'Products__c' in salesforce_data and salesforce_data.get('Products__c'):
-                customer.products = salesforce_data.get('Products__c')
+            products_data = salesforce_data.get('Products__c') or salesforce_data.get('Products')
+            if products_data:
+                customer.products = self._parse_products(products_data)
                 customer.save()
         
         # Extract all Salesforce-specific data for SalesforceOpportunity table
@@ -271,6 +274,57 @@ class SalesforceSyncService:
             return datetime.strptime(datetime_str.split('.')[0], '%Y-%m-%dT%H:%M:%S')
         except (ValueError, AttributeError):
             return None
+    
+    def _parse_products(self, products_data):
+        """
+        Parse products from Salesforce data.
+        Handles various formats: 
+        - Array of objects with 'product_name' field
+        - Array of strings
+        - Comma-separated string
+        - JSON string
+        
+        Args:
+            products_data: Products data from Salesforce (can be string, list, or JSON string)
+        
+        Returns:
+            List of product names (strings)
+        """
+        if not products_data:
+            return []
+        
+        # If it's a list
+        if isinstance(products_data, list):
+            product_names = []
+            for item in products_data:
+                if isinstance(item, dict):
+                    # Extract product_name from object
+                    product_name = item.get('product_name') or item.get('name') or item.get('ProductName')
+                    if product_name:
+                        product_names.append(str(product_name).strip())
+                elif isinstance(item, str):
+                    # Already a string
+                    product_names.append(item.strip())
+            return [p for p in product_names if p]
+        
+        # If it's a string, try to parse it
+        if isinstance(products_data, str):
+            # Try JSON parsing first
+            try:
+                parsed = json.loads(products_data)
+                if isinstance(parsed, list):
+                    return self._parse_products(parsed)  # Recursive call to handle list
+            except (json.JSONDecodeError, ValueError):
+                pass
+            
+            # Try comma-separated
+            if ',' in products_data:
+                return [p.strip() for p in products_data.split(',') if p.strip()]
+            
+            # Single product
+            return [products_data.strip()] if products_data.strip() else []
+        
+        return []
     
     def sync_all_opportunities(self):
         """

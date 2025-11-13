@@ -68,6 +68,25 @@ class CustomerVectorService:
                 meeting_summaries = [m.summary[:100] for m in recent_meetings]
                 text_parts.append(f"Recent Meetings: {'; '.join(meeting_summaries)}")
             
+            # Add Gong meeting insights if available
+            try:
+                recent_gong_meetings = customer.gong_meetings.all()[:2]
+                if recent_gong_meetings:
+                    gong_summaries = [
+                        f"{m.meeting_title}: {m.meeting_summary[:100]}" 
+                        for m in recent_gong_meetings if m.meeting_summary
+                    ]
+                    if gong_summaries:
+                        text_parts.append(f"Gong Meetings: {'; '.join(gong_summaries)}")
+            except Exception:
+                # Gong app might not be installed or related name might differ
+                pass
+            
+            # Add products information
+            if customer.products and len(customer.products) > 0:
+                products_text = ', '.join(customer.products)
+                text_parts.append(f"SurveyMonkey Products: {products_text}")
+            
             return " | ".join(text_parts)
             
         except Exception as e:
@@ -97,6 +116,10 @@ class CustomerVectorService:
                 'renewal_rate': float(metrics.renewal_rate),
                 'seat_utilization': float(metrics.seat_utilization),
             })
+        
+        # Add products
+        if customer.products:
+            metadata['products'] = customer.products
         
         return metadata
     

@@ -36,7 +36,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'industry', 'arr', 'health_score', 
             'renewal_date', 'last_updated', 'created_at',
-            'feedback', 'meetings', 'metrics'
+            'products', 'feedback', 'meetings', 'metrics'
         ]
 
 
@@ -47,5 +47,5 @@ class CustomerListSerializer(serializers.ModelSerializer):
         model = Customer
         fields = [
             'id', 'name', 'industry', 'arr', 'health_score', 
-            'renewal_date', 'last_updated'
+            'renewal_date', 'last_updated', 'products'
         ]
