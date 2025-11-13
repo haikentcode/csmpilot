@@ -3,47 +3,82 @@ export interface FeatureCard {
   title: string;
   subtitle: string;
   body: string;
-  tagline?: string;
   icon: string; // Icon name from lucide-react
+}
+
+export interface SimpleFeature {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
 }
 
 export const HOME_CONSTANTS = {
   hero: {
+    tag: "AI-Powered Customer Intelligence",
     title: "Your Customer Intelligence",
     titleHighlight: "Copilot.",
-    subheading:
-      "DataPiper connects feedback, CRM, and usage data to help teams understand every customer.",
+    subheading: "Turn every customer interaction into actionable insights. Prepare for meetings in seconds, not hours.",
+    ctaPrimary: "Get Started",
+    ctaSecondary: "Get Demo",
   },
   navigation: {
     brandName: "DataPiper",
-    loginText: "Login",
-    getStartedText: "Get Started",
+    loginText: "Log In",
+  },
+  simpleFeatures: [
+    {
+      id: "save-hours",
+      title: "Save Hours Weekly",
+      description: "Automate context gathering and prep work",
+      icon: "Zap",
+    },
+    {
+      id: "better-outcomes",
+      title: "Better Outcomes",
+      description: "Data-driven insights for every interaction",
+      icon: "Target",
+    },
+    {
+      id: "ai-powered",
+      title: "AI-Powered",
+      description: "Advanced intelligence at your fingertips",
+      icon: "Sparkles",
+    },
+  ] as SimpleFeature[],
+  midSection: {
+    headline: "Everything you need to excel as a CSM",
+    subheadline: "Powerful AI features that transform how you manage customer relationships",
   },
   features: [
     {
       id: "customer-stories",
-      title: "Customer Stories, Reimagined",
-      subtitle:
-        "Turn scattered feedback and notes into clear, meaningful narratives.",
-      body: "DataPiper reads survey responses, support tickets, and CSM notes to create a concise story for each account, capturing tone, themes, and engagement trends in one view.",
-      tagline: "From scattered data to clear understanding.",
+      title: "AI-Generated Customer Stories",
+      subtitle: "Automatically generate comprehensive customer narratives from interaction history, surveys, and support tickets. Get the full picture instantly.",
+      body: "Automatically generate comprehensive customer narratives from interaction history, surveys, and support tickets. Get the full picture instantly.",
       icon: "FileText",
     },
     {
-      id: "context-connections",
-      title: "Context That Makes Sense",
-      subtitle: "See how sentiment connects to real business outcomes.",
-      body: "Bring together feedback, usage metrics, and revenue data to understand why customers behave the way they do, not just what they say. Identify patterns before they become problems.",
-      tagline: "Every customer signal, in context.",
-      icon: "TrendingUp",
+      id: "meeting-prep",
+      title: "Smart Meeting Preparation",
+      subtitle: "Walk into every customer meeting prepared with AI-powered briefs, talk tracks, and personalized recommendations tailored to each account.",
+      body: "Walk into every customer meeting prepared with AI-powered briefs, talk tracks, and personalized recommendations tailored to each account.",
+      icon: "Calendar",
     },
     {
-      id: "next-best-actions",
-      title: "Know What to Do Next",
-      subtitle: "Your intelligent co-pilot for every customer interaction.",
-      body: "Before every call or renewal, DataPiper highlights what matters most by comparing similar accounts and surfacing key insights, so your team can act with confidence and stay proactive.",
-      tagline: "Don’t just respond — stay one step ahead.",
-      icon: "Zap",
+      id: "similar-customers",
+      title: "Similar Customer Insights",
+      subtitle: "Discover patterns across your customer base. Learn from successful accounts and apply proven strategies to similar customers.",
+      body: "Discover patterns across your customer base. Learn from successful accounts and apply proven strategies to similar customers.",
+      icon: "Users",
     },
   ] as FeatureCard[],
+  bottomCta: {
+    headline: "Ready to transform your CS workflow?",
+    subheadline: "Join hundreds of CSMs who save hours every week with AI-powered insights",
+    buttonText: "Get Started For Free",
+  },
+  footer: {
+    copyright: "© 2025 DataPiper. Built for Customer Success teams.",
+  },
 };

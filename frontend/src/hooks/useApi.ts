@@ -3,7 +3,8 @@ import {
   apiService, 
   handleApiError,
   ProfileSummary, 
-  PaginatedResponse 
+  PaginatedResponse,
+  GongMeeting
 } from '../services/apiService';
 
 // Simple generic API hook
@@ -113,6 +114,20 @@ export function useProfileSummary(customerId: number | null) {
         opportunities: [],
         talk_tracks: []
       } as ProfileSummary
+    }
+  );
+}
+
+export function useGongMeetings(customerId: number | null) {
+  return useApi(
+    () => {
+      if (!customerId) throw new Error('Customer ID is required');
+      return apiService.getGongMeetings(customerId);
+    },
+    [customerId],
+    { 
+      immediate: !!customerId,
+      fallbackData: [] as GongMeeting[]
     }
   );
 }

@@ -115,6 +115,7 @@ urlpatterns = [
     path('api/', api_root, name='api-root'),
     path('api/customers/', include('customers.urls')),
     path('api/analytics/', include('analytics.urls')),
+    path('api/gong/', include('gong.urls')),
     
     # API Documentation URLs (will work after installing drf-spectacular)
     # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

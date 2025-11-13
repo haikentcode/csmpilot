@@ -10,6 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
+mock-api-service/node_modules/
 dist/
 downloads/
 eggs/

@@ -1,0 +1,1414 @@
+{
+  "meetings": [
+    {
+      "id": "call_gong_healthcare_1000",
+      "callId": "call_healthcare_1000",
+      "title": "MetroHealth Medical Group - Q4 Patient Satisfaction Review",
+      "startedAt": "2025-07-30T15:59:27.994479Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.johnson@metrohealthmedicalgroup.com",
+          "role": "Customer",
+          "title": "Medical Director"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Quarterly review of patient satisfaction scores across all 5 hospital campuses. Discussion focused on improving post-discharge survey response rates and implementing real-time dashboard for patient experience metrics. Customer confirmed strong renewal intent and requested HIPAA compliance documentation.",
+      "transcript": "Jennifer: Thanks for joining today. Let's review the Q4 patient satisfaction metrics.\n\nDr. Martinez: We've seen improvement in response rates, but we need better real-time visibility.\n\nJennifer: We can set up a custom dashboard that updates in real-time. Also, I have the HIPAA compliance documentation ready.\n\nDr. Martinez: That's great. We're planning to expand to 2 more locations next year, so we'll need additional licenses.\n\nJennifer: Perfect. I'll prepare a proposal for the expansion. The renewal looks very positive.",
+      "insights": {
+        "topics": [
+          "patient satisfaction",
+          "dashboard",
+          "HIPAA",
+          "expansion",
+          "renewal"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1000",
+        "name": "MetroHealth Medical Group",
+        "value": 125000,
+        "stage": "Development",
+        "closeDate": "2025-08-29"
+      },
+      "account": {
+        "id": "account_healthcare_1000",
+        "name": "MetroHealth Medical Group"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1001",
+      "callId": "call_healthcare_1001",
+      "title": "MetroHealth Medical Group - EMR Integration Discussion",
+      "startedAt": "2025-08-14T15:59:27.994479Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.smith@metrohealthmedicalgroup.com",
+          "role": "Customer",
+          "title": "VP Operations"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Technical discussion about integrating SurveyMonkey with Epic EMR system. Customer wants automated patient survey triggers based on discharge events. Discussion of API capabilities and security requirements.",
+      "transcript": "Jennifer: Let's discuss the Epic integration requirements.\n\nIT Director: We need automated triggers when patients are discharged. Can your API handle that?\n\nJennifer: Yes, absolutely. We have webhook support that can trigger surveys automatically.\n\nIT Director: What about HIPAA compliance for the API integration?\n\nJennifer: All our APIs are HIPAA-compliant. I'll send you the technical documentation.\n\nIT Director: Great. Let's schedule a technical deep-dive next week.",
+      "insights": {
+        "topics": [
+          "integration",
+          "EMR",
+          "API",
+          "HIPAA",
+          "automation"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1001",
+        "name": "MetroHealth Medical Group",
+        "value": 145000,
+        "stage": "Qualified",
+        "closeDate": "2025-09-13"
+      },
+      "account": {
+        "id": "account_healthcare_1001",
+        "name": "MetroHealth Medical Group"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1002",
+      "callId": "call_healthcare_1002",
+      "title": "MetroHealth Medical Group - Staff Engagement Survey Planning",
+      "startedAt": "2025-08-29T15:59:27.994479Z",
+      "duration": 1800,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.johnson@metrohealthmedicalgroup.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Planning call for annual staff engagement survey. Customer wants to survey all 10,000+ employees across departments. Discussion of survey design, distribution methods, and reporting capabilities.",
+      "transcript": "HR Director: We need to survey all employees this quarter. Can you handle that volume?\n\nJennifer: Yes, we can support surveys for your entire workforce. We'll set up role-based access for department admins.\n\nHR Director: Perfect. We also need anonymous responses for sensitive questions.\n\nJennifer: That's built-in. Responses are completely anonymous when configured that way.\n\nHR Director: Excellent. Let's proceed with the setup.",
+      "insights": {
+        "topics": [
+          "staff engagement",
+          "survey design",
+          "anonymous responses",
+          "volume"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1002",
+        "name": "MetroHealth Medical Group",
+        "value": 125000,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-09-28"
+      },
+      "account": {
+        "id": "account_healthcare_1002",
+        "name": "MetroHealth Medical Group"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1003",
+      "callId": "call_healthcare_1003",
+      "title": "CommunityCare Clinics - Multi-Location Dashboard Setup",
+      "startedAt": "2025-08-24T15:59:27.994479Z",
+      "duration": 2400,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.smith@communitycareclinicsnetwork.com",
+          "role": "Customer",
+          "title": "CIO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Setup discussion for multi-location dashboard to track NPS and patient satisfaction across 20 clinic locations. Customer wants location-specific reporting and automated alerts for low scores.",
+      "transcript": "Michael: Let's set up the multi-location dashboard for your clinics.\n\nOperations VP: We need to see NPS scores for each location separately.\n\nMichael: Perfect. The dashboard will show location-level metrics with drill-down capabilities.\n\nOperations VP: Can we set up alerts if a location drops below a certain threshold?\n\nMichael: Yes, we can configure automated alerts. Also, I see you're expanding to 5 more locations?\n\nOperations VP: Yes, that's correct. We'll need additional licenses.",
+      "insights": {
+        "topics": [
+          "dashboard",
+          "multi-location",
+          "NPS",
+          "alerts",
+          "expansion"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1003",
+        "name": "CommunityCare Clinics Network",
+        "value": 485000,
+        "stage": "Proposal",
+        "closeDate": "2025-09-23"
+      },
+      "account": {
+        "id": "account_healthcare_1003",
+        "name": "CommunityCare Clinics Network"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1004",
+      "callId": "call_healthcare_1004",
+      "title": "CommunityCare Clinics - Patient Portal Feedback Integration",
+      "startedAt": "2025-09-03T15:59:27.994479Z",
+      "duration": 1800,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.smith@communitycareclinicsnetwork.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about integrating GetFeedback Digital into patient portal for real-time feedback collection. Customer wants to capture feedback during appointment booking and after visits.",
+      "transcript": "Michael: How can we integrate feedback into our patient portal?\n\nPortal Manager: We want to capture feedback right after patients book appointments.\n\nMichael: GetFeedback Digital can be embedded directly into your portal. It's very user-friendly.\n\nPortal Manager: What about mobile responsiveness?\n\nMichael: It's fully responsive and works great on mobile devices.\n\nPortal Manager: Perfect. Let's schedule the implementation.",
+      "insights": {
+        "topics": [
+          "patient portal",
+          "GetFeedback Digital",
+          "integration",
+          "mobile"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1004",
+        "name": "CommunityCare Clinics Network",
+        "value": 145000,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-10-03"
+      },
+      "account": {
+        "id": "account_healthcare_1004",
+        "name": "CommunityCare Clinics Network"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1005",
+      "callId": "call_healthcare_1005",
+      "title": "HealthyLife Insurers - Member Satisfaction Trends Analysis",
+      "startedAt": "2025-08-09T15:59:27.994479Z",
+      "duration": 3000,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Williams",
+          "email": "doctor.johnson@healthylifeinsurersltd..com",
+          "role": "Customer",
+          "title": "VP Patient Experience"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Deep dive into member satisfaction trends over the past year. Analysis shows improvement in claims experience scores. Discussion of advanced analytics features and integration with claims system for automated survey triggers.",
+      "transcript": "Sarah: Let's review the member satisfaction trends.\n\nMember Experience VP: We've seen great improvement, especially in claims processing.\n\nSarah: That's excellent. The advanced analytics dashboard shows a 15% improvement year-over-year.\n\nMember Experience VP: Can we integrate this with our claims system?\n\nSarah: Yes, we can set up automated triggers based on claim events.\n\nMember Experience VP: That would be perfect. Let's move forward with the integration.",
+      "insights": {
+        "topics": [
+          "member satisfaction",
+          "analytics",
+          "trends",
+          "integration",
+          "claims"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1005",
+        "name": "HealthyLife Insurers Ltd.",
+        "value": 285000,
+        "stage": "Qualified",
+        "closeDate": "2025-09-08"
+      },
+      "account": {
+        "id": "account_healthcare_1005",
+        "name": "HealthyLife Insurers Ltd."
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1006",
+      "callId": "call_healthcare_1006",
+      "title": "HealthyLife Insurers - New Plan Development Research",
+      "startedAt": "2025-08-26T15:59:27.994479Z",
+      "duration": 2700,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Williams",
+          "email": "doctor.smith@healthylifeinsurersltd..com",
+          "role": "Customer",
+          "title": "VP Operations"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using SurveyMonkey Audience for market research on new insurance plan development. Customer wants to survey potential members about plan preferences and pricing sensitivity.",
+      "transcript": "Product Director: We're developing new plans and need market research.\n\nSarah: SurveyMonkey Audience can help you reach targeted demographics quickly.\n\nProduct Director: Can we target specific age groups and geographic regions?\n\nSarah: Absolutely. We have pre-screened panels with advanced targeting.\n\nProduct Director: How fast can we get results?\n\nSarah: Typically within 3-5 business days for 1,000 responses.\n\nProduct Director: Perfect. Let's proceed.",
+      "insights": {
+        "topics": [
+          "market research",
+          "Audience",
+          "plan development",
+          "targeting"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1006",
+        "name": "HealthyLife Insurers Ltd.",
+        "value": 385000,
+        "stage": "Development",
+        "closeDate": "2025-09-25"
+      },
+      "account": {
+        "id": "account_healthcare_1006",
+        "name": "HealthyLife Insurers Ltd."
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1007",
+      "callId": "call_healthcare_1007",
+      "title": "ChronicCare PharmaTech - Patient Panel Research Discussion",
+      "startedAt": "2025-08-19T15:59:27.994479Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.johnson@chroniccarepharmatech.com",
+          "role": "Customer",
+          "title": "Medical Director"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using MRX Audience for specialized patient panels in chronic care research. Customer needs to reach patients with specific conditions for product feedback and usage studies.",
+      "transcript": "David: Let's discuss MRX Audience for your patient research needs.\n\nResearch Director: We need to reach patients with specific chronic conditions.\n\nDavid: MRX Audience has specialized healthcare panels with advanced screening capabilities.\n\nResearch Director: What about data quality and validation?\n\nDavid: All responses go through rigorous quality checks. We also validate against medical databases.\n\nResearch Director: That's exactly what we need. Let's explore MRX Solutions for full study execution.",
+      "insights": {
+        "topics": [
+          "MRX Audience",
+          "patient panels",
+          "research",
+          "data quality"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1007",
+        "name": "ChronicCare PharmaTech",
+        "value": 95000,
+        "stage": "Development",
+        "closeDate": "2025-09-18"
+      },
+      "account": {
+        "id": "account_healthcare_1007",
+        "name": "ChronicCare PharmaTech"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1008",
+      "callId": "call_healthcare_1008",
+      "title": "SeniorLiving - Resident Satisfaction Benchmarking",
+      "startedAt": "2025-08-22T15:59:27.994479Z",
+      "duration": 2400,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Williams",
+          "email": "doctor.smith@seniorlivingassistedcommunities.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about benchmarking resident and family satisfaction across multiple facilities. Customer wants to compare performance and identify best practices. Planning for expansion to 3 additional facilities.",
+      "transcript": "Lisa: Let's review the benchmarking capabilities across your facilities.\n\nOperations VP: We want to compare satisfaction scores across all locations.\n\nLisa: The benchmarking dashboard will show facility-level comparisons with industry benchmarks.\n\nOperations VP: Can we see which facilities are performing best?\n\nLisa: Yes, and we can identify best practices from top performers.\n\nOperations VP: Perfect. We're expanding to 3 more facilities, so this will be crucial.",
+      "insights": {
+        "topics": [
+          "benchmarking",
+          "facilities",
+          "satisfaction",
+          "expansion"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1008",
+        "name": "SeniorLiving Assisted Communities",
+        "value": 145000,
+        "stage": "Development",
+        "closeDate": "2025-09-21"
+      },
+      "account": {
+        "id": "account_healthcare_1008",
+        "name": "SeniorLiving Assisted Communities"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1009",
+      "callId": "call_healthcare_1009",
+      "title": "TeleHealth OnDemand - Virtual Visit Experience Optimization",
+      "startedAt": "2025-08-16T15:59:27.994479Z",
+      "duration": 3000,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.smith@telehealthondemandservices.com",
+          "role": "Customer",
+          "title": "VP Operations"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about optimizing virtual visit experience through real-time feedback. Customer wants to capture feedback during and immediately after virtual consultations. Planning GetFeedback Digital and Direct integration.",
+      "transcript": "Rachel: Let's discuss optimizing your virtual visit experience.\n\nProduct VP: We want to capture feedback in real-time during visits.\n\nRachel: GetFeedback Digital can be integrated into your telehealth platform.\n\nProduct VP: What about post-visit surveys?\n\nRachel: GetFeedback Direct can trigger surveys automatically after each visit via SMS.\n\nProduct VP: That's perfect. We're seeing 40% response rates with current methods.\n\nRachel: With our solution, you should see 60%+ response rates. Let's set it up.",
+      "insights": {
+        "topics": [
+          "virtual visits",
+          "real-time feedback",
+          "GetFeedback",
+          "optimization"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1009",
+        "name": "TeleHealth OnDemand Services",
+        "value": 180000,
+        "stage": "Qualified",
+        "closeDate": "2025-09-15"
+      },
+      "account": {
+        "id": "account_healthcare_1009",
+        "name": "TeleHealth OnDemand Services"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1010",
+      "callId": "call_healthcare_1010",
+      "title": "TeleHealth OnDemand - Mobile App Feedback Integration",
+      "startedAt": "2025-09-01T15:59:27.994479Z",
+      "duration": 2100,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.smith@telehealthondemandservices.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Technical discussion about integrating feedback collection into mobile app. Customer wants in-app surveys after virtual consultations and push notification capabilities.",
+      "transcript": "CTO: We need to integrate feedback into our mobile app.\n\nRachel: GetFeedback Digital has excellent mobile SDK support.\n\nCTO: Can we trigger surveys based on app events?\n\nRachel: Yes, we can trigger surveys after specific app events like consultation completion.\n\nCTO: What about push notifications?\n\nRachel: We support push notifications for survey invitations. It's very effective.\n\nCTO: Great. Let's schedule the technical implementation.",
+      "insights": {
+        "topics": [
+          "mobile app",
+          "SDK",
+          "push notifications",
+          "integration"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1010",
+        "name": "TeleHealth OnDemand Services",
+        "value": 145000,
+        "stage": "Qualified",
+        "closeDate": "2025-10-01"
+      },
+      "account": {
+        "id": "account_healthcare_1010",
+        "name": "TeleHealth OnDemand Services"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1011",
+      "callId": "call_healthcare_1011",
+      "title": "Regional Mental Health - Privacy-Compliant Patient Surveys",
+      "startedAt": "2025-08-14T15:59:27.994479Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.smith@regionalmentalhealthcentre.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about privacy-compliant survey solutions for mental health patients. Customer needs enhanced privacy controls and neutral domain (Research.net) for sensitive patient surveys. Focus on outcome tracking capabilities.",
+      "transcript": "James: Let's discuss privacy-compliant solutions for your patient surveys.\n\nClinical Director: Privacy is critical for mental health patients.\n\nJames: Research.net provides a neutral domain and enhanced privacy controls.\n\nClinical Director: Can we track outcomes over time?\n\nJames: Yes, we have outcome tracking capabilities with longitudinal analysis.\n\nClinical Director: That's exactly what we need. We're very interested in renewing.",
+      "insights": {
+        "topics": [
+          "privacy",
+          "Research.net",
+          "outcome tracking",
+          "mental health"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1011",
+        "name": "Regional Mental Health Centre",
+        "value": 485000,
+        "stage": "Proposal",
+        "closeDate": "2025-09-13"
+      },
+      "account": {
+        "id": "account_healthcare_1011",
+        "name": "Regional Mental Health Centre"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1012",
+      "callId": "call_healthcare_1012",
+      "title": "University Teaching Hospital - Department Dashboard Implementation",
+      "startedAt": "2025-08-04T15:59:27.994479Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Davis",
+          "email": "doctor.johnson@universityteachinghospitaleastside.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Planning for department-level dashboards across all hospital departments. Customer wants standardized survey tools with department-specific reporting. Discussion of EMR integration with Epic and Cerner systems.",
+      "transcript": "Patricia: Let's plan the department dashboard implementation.\n\nCIO: We need dashboards for each department with standardized metrics.\n\nPatricia: Perfect. Each department will have their own dashboard with role-based access.\n\nCIO: Can we integrate with both Epic and Cerner?\n\nPatricia: Yes, we support both EMR systems. The integration will be seamless.\n\nCIO: Excellent. We're very committed to renewing. This is a critical system for us.",
+      "insights": {
+        "topics": [
+          "department dashboards",
+          "EMR integration",
+          "standardization",
+          "renewal"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1012",
+        "name": "University Teaching Hospital \u2013 Eastside",
+        "value": 180000,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-09-03"
+      },
+      "account": {
+        "id": "account_healthcare_1012",
+        "name": "University Teaching Hospital \u2013 Eastside"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1013",
+      "callId": "call_healthcare_1013",
+      "title": "University Teaching Hospital - Residency Program Application Management",
+      "startedAt": "2025-08-24T15:59:27.994479Z",
+      "duration": 2400,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.johnson@universityteachinghospitaleastside.com",
+          "role": "Customer",
+          "title": "VP Patient Experience"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using SM Apply for medical residency program applications. Customer manages thousands of applications annually and needs streamlined review process with automated scoring.",
+      "transcript": "Dean of Medicine: We need a better system for residency applications.\n\nPatricia: SM Apply is perfect for this. It handles multi-step applications with reviewer dashboards.\n\nDean of Medicine: Can we automate scoring?\n\nPatricia: Yes, we have automated scoring based on criteria you define.\n\nDean of Medicine: How many applications can it handle?\n\nPatricia: We've handled programs with 10,000+ applications. No problem.\n\nDean of Medicine: Perfect. Let's implement this for next year's cycle.",
+      "insights": {
+        "topics": [
+          "SM Apply",
+          "residency applications",
+          "automated scoring",
+          "review process"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1013",
+        "name": "University Teaching Hospital \u2013 Eastside",
+        "value": 145000,
+        "stage": "Qualified",
+        "closeDate": "2025-09-23"
+      },
+      "account": {
+        "id": "account_healthcare_1013",
+        "name": "University Teaching Hospital \u2013 Eastside"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1014",
+      "callId": "call_healthcare_1014",
+      "title": "University Teaching Hospital - Research Study Survey Platform",
+      "startedAt": "2025-09-05T15:59:27.994479Z",
+      "duration": 1800,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Johnson",
+          "email": "doctor.smith@universityteachinghospitaleastside.com",
+          "role": "Customer",
+          "title": "CIO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using Research.net for peer-reviewed research studies. Customer needs neutral domain for academic research with proper data privacy controls.",
+      "transcript": "Research Director: We need a neutral platform for our research studies.\n\nPatricia: Research.net provides a neutral domain perfect for academic research.\n\nResearch Director: What about data privacy for sensitive studies?\n\nPatricia: We have enhanced privacy controls and HIPAA compliance.\n\nResearch Director: Perfect. This will help with our peer-reviewed publications.",
+      "insights": {
+        "topics": [
+          "Research.net",
+          "academic research",
+          "peer review",
+          "privacy"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1014",
+        "name": "University Teaching Hospital \u2013 Eastside",
+        "value": 385000,
+        "stage": "Qualified",
+        "closeDate": "2025-10-05"
+      },
+      "account": {
+        "id": "account_healthcare_1014",
+        "name": "University Teaching Hospital \u2013 Eastside"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1015",
+      "callId": "call_healthcare_1015",
+      "title": "HomeCare Services - Post-Visit Survey Automation",
+      "startedAt": "2025-08-19T15:59:27.994479Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Williams",
+          "email": "doctor.smith@homecareservicesinc..com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about automating post-visit surveys for thousands of home care visits daily. Customer wants SMS and email surveys triggered automatically after each caregiver visit. Focus on mobile-friendly surveys for caregivers.",
+      "transcript": "Robert: Let's discuss automating your post-visit surveys.\n\nOperations VP: We have thousands of visits daily. Manual surveys aren't scalable.\n\nRobert: GetFeedback Direct can trigger surveys automatically via SMS and email.\n\nOperations VP: Our caregivers are often in the field. Can they complete surveys on mobile?\n\nRobert: Absolutely. All surveys are mobile-optimized.\n\nOperations VP: Perfect. We're expanding to new regions, so this is critical.",
+      "insights": {
+        "topics": [
+          "automation",
+          "post-visit",
+          "SMS",
+          "mobile",
+          "scalability"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1015",
+        "name": "HomeCare Services Inc.",
+        "value": 195000,
+        "stage": "Proposal",
+        "closeDate": "2025-09-18"
+      },
+      "account": {
+        "id": "account_healthcare_1015",
+        "name": "HomeCare Services Inc."
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1016",
+      "callId": "call_healthcare_1016",
+      "title": "HomeCare Services - Process Improvement Analytics",
+      "startedAt": "2025-09-03T15:59:27.994479Z",
+      "duration": 2100,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Davis",
+          "email": "doctor.johnson@homecareservicesinc..com",
+          "role": "Customer",
+          "title": "VP Patient Experience"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using survey data for process improvement. Customer wants analytics dashboard to identify trends and pain points in home care delivery.",
+      "transcript": "Quality Director: How can we use survey data for process improvement?\n\nRobert: Our analytics dashboard shows trends and identifies pain points.\n\nQuality Director: Can we see patterns by region or caregiver?\n\nRobert: Yes, you can drill down by any dimension. We also provide recommendations.\n\nQuality Director: That's exactly what we need. Let's set up the dashboard.",
+      "insights": {
+        "topics": [
+          "analytics",
+          "process improvement",
+          "trends",
+          "dashboard"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1016",
+        "name": "HomeCare Services Inc.",
+        "value": 115000,
+        "stage": "Proposal",
+        "closeDate": "2025-10-03"
+      },
+      "account": {
+        "id": "account_healthcare_1016",
+        "name": "HomeCare Services Inc."
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1017",
+      "callId": "call_healthcare_1017",
+      "title": "Pediatric Specialty Hospital - Family-Centered Care Survey Design",
+      "startedAt": "2025-08-26T15:59:27.994479Z",
+      "duration": 2400,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Smith",
+          "email": "doctor.johnson@pediatricspecialtyhospital.com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about designing family-centered care surveys for parents and caregivers. Customer needs child-friendly survey designs and templates specific to pediatric care. Focus on family engagement.",
+      "transcript": "Amanda: Let's design surveys for your family-centered care program.\n\nFamily Services Director: We need surveys that parents and caregivers will actually complete.\n\nAmanda: We have pediatric-specific templates that are family-friendly.\n\nFamily Services Director: Can we customize the design?\n\nAmanda: Absolutely. We can make them child-friendly with colors and simple language.\n\nFamily Services Director: Perfect. Family engagement is our top priority.",
+      "insights": {
+        "topics": [
+          "family-centered care",
+          "pediatric",
+          "survey design",
+          "engagement"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1017",
+        "name": "Pediatric Specialty Hospital",
+        "value": 385000,
+        "stage": "Qualified",
+        "closeDate": "2025-09-25"
+      },
+      "account": {
+        "id": "account_healthcare_1017",
+        "name": "Pediatric Specialty Hospital"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1018",
+      "callId": "call_healthcare_1018",
+      "title": "Genomics Clinic - New Service Launch Survey Planning",
+      "startedAt": "2025-08-29T15:59:27.994479Z",
+      "duration": 2100,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Williams",
+          "email": "doctor.smith@genomics&personalizedmedicineclinic.com",
+          "role": "Customer",
+          "title": "CIO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Planning surveys for newly launched genomics services. Customer wants to track patient satisfaction, expectation vs outcome insights, and gather data for strategic growth planning. Discussion of Research.net for confidential research.",
+      "transcript": "Christopher: Let's plan surveys for your new genomics services.\n\nMedical Director: We need to track patient satisfaction and outcomes.\n\nChristopher: We can set up expectation vs outcome surveys to measure patient experience.\n\nMedical Director: We also need confidential research surveys.\n\nChristopher: Research.net would be perfect for that - neutral domain, enhanced privacy.\n\nMedical Director: Excellent. This will help us plan our growth strategy.",
+      "insights": {
+        "topics": [
+          "genomics",
+          "service launch",
+          "expectation vs outcome",
+          "Research.net"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1018",
+        "name": "Genomics & Personalized Medicine Clinic",
+        "value": 195000,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-09-28"
+      },
+      "account": {
+        "id": "account_healthcare_1018",
+        "name": "Genomics & Personalized Medicine Clinic"
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1019",
+      "callId": "call_healthcare_1019",
+      "title": "StateHealth Dept. - Community Health Program Evaluation",
+      "startedAt": "2025-08-09T15:59:27.994479Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.smith@publichealthauthoritystatehealthdept..com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about evaluating community health programs including vaccination and screening initiatives. Customer needs program satisfaction and outcome evaluation tools. Planning for workforce surveys across public health employees.",
+      "transcript": "Michelle: Let's discuss evaluating your community health programs.\n\nProgram Director: We need to measure program satisfaction and outcomes.\n\nMichelle: Our platform is perfect for program evaluation with advanced analytics.\n\nProgram Director: Can we survey our entire public health workforce?\n\nMichelle: Yes, we can handle surveys for thousands of employees with role-based access.\n\nProgram Director: Perfect. Government procurement is in progress, but we're very committed.",
+      "insights": {
+        "topics": [
+          "community health",
+          "program evaluation",
+          "workforce surveys",
+          "government"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1019",
+        "name": "Public Health Authority \u2013 StateHealth Dept.",
+        "value": 145000,
+        "stage": "Proposal",
+        "closeDate": "2025-09-08"
+      },
+      "account": {
+        "id": "account_healthcare_1019",
+        "name": "Public Health Authority \u2013 StateHealth Dept."
+      }
+    },
+    {
+      "id": "call_gong_healthcare_1020",
+      "callId": "call_healthcare_1020",
+      "title": "StateHealth Dept. - Grant Application Management",
+      "startedAt": "2025-08-24T15:59:27.994479Z",
+      "duration": 2400,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Dr. Brown",
+          "email": "doctor.smith@publichealthauthoritystatehealthdept..com",
+          "role": "Customer",
+          "title": "CMO"
+        },
+        {
+          "name": "CSM",
+          "email": "csm@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Discussion about using SM Apply for public health grant applications and program participant management. Customer manages multiple grant programs and needs streamlined application and review process.",
+      "transcript": "Grant Manager: We need a better system for grant applications.\n\nMichelle: SM Apply handles grant applications with full workflow management.\n\nGrant Manager: Can we track applications through the review process?\n\nMichelle: Yes, you'll have full visibility into each application's status.\n\nGrant Manager: Perfect. This will streamline our entire grant process.",
+      "insights": {
+        "topics": [
+          "grants",
+          "SM Apply",
+          "application management",
+          "workflow"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_healthcare_1020",
+        "name": "Public Health Authority \u2013 StateHealth Dept.",
+        "value": 485000,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-09-23"
+      },
+      "account": {
+        "id": "account_healthcare_1020",
+        "name": "Public Health Authority \u2013 StateHealth Dept."
+      }
+    },
+    {
+      "id": "call_gong_001",
+      "callId": "call_123456789",
+      "title": "Europcar International & SurveyMonkey Apply | Quarterly Meeting",
+      "startedAt": "2024-10-22T14:00:00Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Robin van Huis",
+          "email": "robin.vanhuis@europcar.com",
+          "role": "Customer",
+          "title": "Customer Success Manager"
+        },
+        {
+          "name": "Ankur Kumar",
+          "email": "ankur@surveymonkey.com",
+          "role": "Internal",
+          "title": "Account Manager"
+        },
+        {
+          "name": "Kayla Smith",
+          "email": "kayla@surveymonkey.com",
+          "role": "Internal",
+          "title": "Product Manager"
+        }
+      ],
+      "summary": "Ankur, Kayla and Erica from SurveyMonkey, along with Stephanie and Sai from Europcar International, discussed potential AI integrations into the SurveyMonkey platform to streamline RFP building, application review, and reviewer assignment processes, as well as dashboard improvements. The Europcar team highlighted specific pain points and use cases, while SurveyMonkey explored feasibility and potential solutions, including leveraging existing features and planning for future development. Two existing bug issues were also discussed and are targeted for resolution in the near future.",
+      "transcript": "Ankur: Good morning everyone, thanks for joining. Let's start with reviewing the Q4 performance.\n\nRobin: Thanks Ankur. We've been seeing great results with the platform, but we have some feature requests that would really help us scale.\n\nKayla: That's great to hear. What specific features are you thinking about?\n\nRobin: We'd love to see an advanced analytics dashboard with custom reporting. Also, we're having some performance issues with the current system during peak times.\n\nAnkur: Performance issues? Can you tell us more about that?\n\nRobin: Yes, we're experiencing delays when processing large batches of applications. It's causing some frustration with our team.\n\nKayla: That's definitely something we can look into. We have some optimizations planned for Q1.\n\nRobin: That would be great. Also, we've been looking at competitor solutions, but we prefer to stick with SurveyMonkey if we can get these improvements.\n\nAnkur: We appreciate that. Let's schedule a follow-up to discuss the analytics dashboard requirements in detail.",
+      "insights": {
+        "topics": [
+          "analytics",
+          "performance",
+          "integration",
+          "AI"
+        ],
+        "sentiment": "neutral"
+      },
+      "deal": {
+        "id": "deal_001",
+        "name": "Europcar International",
+        "value": 85401.88,
+        "stage": "Ready to Close",
+        "closeDate": "2024-11-01"
+      },
+      "account": {
+        "id": "account_001",
+        "name": "Europcar International"
+      }
+    },
+    {
+      "id": "call_gong_002",
+      "callId": "call_123456790",
+      "title": "Rituals Cosmetics - Product Demo & Feature Discussion",
+      "startedAt": "2024-11-05T10:30:00Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Niek Loots",
+          "email": "niek.loots@rituals.com",
+          "role": "Customer",
+          "title": "Head of Digital"
+        },
+        {
+          "name": "Sarah Johnson",
+          "email": "sarah@surveymonkey.com",
+          "role": "Internal",
+          "title": "Sales Engineer"
+        }
+      ],
+      "summary": "Niek from Rituals Cosmetics discussed upcoming renewal and potential upsell opportunities. The team showed interest in new analytics features and API integrations. Some concerns were raised about pricing for the additional features. Overall positive sentiment with strong renewal signals.",
+      "transcript": "Sarah: Hi Niek, thanks for taking the time today. I wanted to show you some of our new features.\n\nNiek: Thanks Sarah. We're actually very happy with the current platform. We're definitely planning to renew.\n\nSarah: That's great to hear! I wanted to show you our new analytics dashboard. It has some really powerful features.\n\nNiek: That looks interesting. We've been looking for better reporting capabilities. What about API integrations? We're building some custom workflows.\n\nSarah: We have a comprehensive API. Let me show you the documentation.\n\nNiek: Perfect. Now, what would the pricing look like for these additional features?\n\nSarah: I can send you a detailed quote. But I think we can work something out that fits your budget.\n\nNiek: Great. We're also looking at some competitor solutions, but we'd prefer to stay with you if the pricing is reasonable.\n\nSarah: I'll make sure we put together a competitive offer. When are you looking to make a decision?\n\nNiek: We're planning to renew by end of Q1. Let's schedule a follow-up to discuss the details.",
+      "insights": {
+        "topics": [
+          "renewal",
+          "pricing",
+          "analytics",
+          "API"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_002",
+        "name": "Rituals Cosmetics E-Commerce B.V.",
+        "value": 40865.81,
+        "stage": "Qualified",
+        "closeDate": "2026-04-12"
+      },
+      "account": {
+        "id": "account_002",
+        "name": "Rituals Cosmetics E-Commerce B.V."
+      }
+    },
+    {
+      "id": "call_gong_003",
+      "callId": "call_123456791",
+      "title": "TechCorp Solutions - Q4 Business Review",
+      "startedAt": "2024-11-08T15:00:00Z",
+      "duration": 3300,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Sarah Johnson",
+          "email": "sarah.johnson@techcorp.com",
+          "role": "Customer",
+          "title": "CTO"
+        },
+        {
+          "name": "Michael Thompson",
+          "email": "michael@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        },
+        {
+          "name": "David Chen",
+          "email": "david@surveymonkey.com",
+          "role": "Internal",
+          "title": "Solutions Architect"
+        }
+      ],
+      "summary": "TechCorp Solutions Q4 review meeting. Customer expressed strong satisfaction with the platform and requested advanced SSO integration capabilities. Discussion about enterprise features and custom reporting. Customer mentioned they're expanding and will need more seats. Very positive meeting with clear expansion signals.",
+      "transcript": "Michael: Thanks for joining Sarah. Let's review how Q4 went for you.\n\nSarah: Q4 was excellent. We've seen great adoption across our teams. The platform has been really solid.\n\nMichael: That's wonderful to hear. Any areas where we can improve?\n\nSarah: Actually, we'd love to see better SSO integration. We're using multiple systems and having seamless authentication would be huge.\n\nMichael: That's definitely something we can prioritize. We have enterprise SSO capabilities.\n\nDavid: I can show you our current SSO options. We support SAML, OAuth, and more.\n\nSarah: Perfect. We're also expanding our team, so we'll need to add more seats. Can we discuss pricing for that?\n\nMichael: Absolutely. I'll send you a quote. How many additional seats are you thinking?\n\nSarah: Probably around 50 more. We're growing fast.\n\nMichael: Great! We can definitely accommodate that. Anything else?\n\nSarah: The custom reporting features you showed last time - when will those be available?\n\nDavid: We're targeting Q1 release. I can give you early access if you're interested.\n\nSarah: That would be fantastic. Overall, we're very happy with the partnership.",
+      "insights": {
+        "topics": [
+          "SSO",
+          "expansion",
+          "pricing",
+          "custom reporting"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_003",
+        "name": "TechCorp Solutions Inc.",
+        "value": 125000.0,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-12-15"
+      },
+      "account": {
+        "id": "account_003",
+        "name": "TechCorp Solutions Inc."
+      }
+    },
+    {
+      "id": "call_gong_004",
+      "callId": "call_123456792",
+      "title": "HealthCare Systems - Support Escalation Call",
+      "startedAt": "2024-11-10T09:00:00Z",
+      "duration": 1800,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "Maria Garcia",
+          "email": "maria.garcia@healthcare.com",
+          "role": "Customer",
+          "title": "IT Director"
+        },
+        {
+          "name": "David Chen",
+          "email": "david@surveymonkey.com",
+          "role": "Internal",
+          "title": "Support Manager"
+        }
+      ],
+      "summary": "Support escalation call with HealthCare Systems. Customer reported critical performance issues affecting their daily operations. Multiple bugs were discussed that need immediate attention. Customer expressed frustration but appreciated the quick response. Issues need to be escalated to engineering team.",
+      "transcript": "Maria: Hi David, thanks for taking this call. We're experiencing some critical issues.\n\nDavid: Hi Maria, I'm sorry to hear that. Can you tell me more about what's happening?\n\nMaria: The system has been very slow for the past week. We're seeing timeouts when processing surveys. This is affecting our patient feedback collection.\n\nDavid: That's definitely a priority. Can you give me specific error messages?\n\nMaria: Yes, we're getting 'Request timeout' errors frequently. Also, we noticed some data isn't syncing properly between modules.\n\nDavid: I see. These are known issues we're working on. Let me escalate this to our engineering team immediately.\n\nMaria: How quickly can we expect a fix? This is impacting our operations.\n\nDavid: I'll make sure this gets priority. We should have a patch by end of week.\n\nMaria: That would help, but we need something sooner if possible. We're considering our options.\n\nDavid: I understand. Let me see what we can do. I'll have someone reach out today.\n\nMaria: Thank you. We really need this resolved quickly.",
+      "insights": {
+        "topics": [
+          "performance",
+          "bugs",
+          "support",
+          "escalation"
+        ],
+        "sentiment": "negative"
+      },
+      "deal": {
+        "id": "deal_004",
+        "name": "HealthCare Systems Ltd.",
+        "value": 55000.0,
+        "stage": "Adoption",
+        "closeDate": "2025-01-15"
+      },
+      "account": {
+        "id": "account_004",
+        "name": "HealthCare Systems Ltd."
+      }
+    },
+    {
+      "id": "call_gong_005",
+      "callId": "call_123456793",
+      "title": "GlobalTech Enterprises - New Business Discovery Call",
+      "startedAt": "2024-11-12T11:00:00Z",
+      "duration": 2400,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Michael Thompson",
+          "email": "michael.thompson@globaltech.com",
+          "role": "Customer",
+          "title": "CEO"
+        },
+        {
+          "name": "Ankur Kumar",
+          "email": "ankur@surveymonkey.com",
+          "role": "Internal",
+          "title": "Sales Director"
+        }
+      ],
+      "summary": "Discovery call with GlobalTech Enterprises for new business opportunity. Customer showed strong interest in the platform and requested a proof of concept. Discussion about enterprise features, security, and integration capabilities. Customer mentioned they're evaluating multiple vendors including competitors. Positive initial meeting with follow-up scheduled.",
+      "transcript": "Ankur: Hi Michael, thanks for your time. I understand you're looking for a survey platform.\n\nMichael: Yes, we're evaluating options for our customer feedback program. We've heard good things about SurveyMonkey.\n\nAnkur: Great! What are your main requirements?\n\nMichael: We need something that can handle high volume, has good security, and integrates with our existing systems.\n\nAnkur: Perfect. We can definitely handle that. We have enterprise-grade security and comprehensive APIs.\n\nMichael: That sounds good. We're also looking at a few competitors. What makes you different?\n\nAnkur: Our platform is built for scale, and we have dedicated support. Also, our analytics are industry-leading.\n\nMichael: Can we do a proof of concept? We'd like to test it with a small pilot.\n\nAnkur: Absolutely. I can set that up. When would you like to start?\n\nMichael: How about next week? We're looking to make a decision by end of month.\n\nAnkur: Perfect. I'll send you the details. We're confident you'll be impressed.\n\nMichael: Looking forward to it. Thanks for the call.",
+      "insights": {
+        "topics": [
+          "new business",
+          "POC",
+          "security",
+          "integration",
+          "competitors"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_005",
+        "name": "GlobalTech Enterprises",
+        "value": 95000.0,
+        "stage": "Proposal",
+        "closeDate": "2025-12-31"
+      },
+      "account": {
+        "id": "account_005",
+        "name": "GlobalTech Enterprises"
+      }
+    },
+    {
+      "id": "call_gong_uber_001",
+      "callId": "call_uber_123456",
+      "title": "UBER - Q4 Business Review & Renewal Discussion",
+      "startedAt": "2024-11-10T10:00:00Z",
+      "duration": 3600,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "John Smith",
+          "email": "john.smith@uber.com",
+          "role": "Customer",
+          "title": "VP of Engineering"
+        },
+        {
+          "name": "Sarah Johnson",
+          "email": "sarah@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        },
+        {
+          "name": "Michael Chen",
+          "email": "michael@surveymonkey.com",
+          "role": "Internal",
+          "title": "Solutions Architect"
+        }
+      ],
+      "summary": "Q4 business review with UBER focusing on renewal and expansion opportunities. Customer expressed strong satisfaction with current platform and requested advanced analytics features and API integrations. Discussion about custom reporting capabilities and enterprise features. Strong renewal signals with verbal commitment. Technical integration support needed for new API features.",
+      "transcript": "Sarah: Hi John, thanks for joining. Let's review Q4 performance and discuss the renewal.\n\nJohn: Thanks Sarah. We've been very happy with the platform. The team adoption has been excellent.\n\nSarah: That's great to hear! What are your thoughts on renewal?\n\nJohn: We're definitely planning to renew. We'd like to expand usage and add some advanced features.\n\nMichael: What specific features are you interested in?\n\nJohn: We need advanced analytics with custom reporting. Also, we're building some integrations and need better API capabilities.\n\nSarah: Perfect! We have enterprise API features that would work well for you.\n\nJohn: That sounds good. We also need custom reporting for our executive team.\n\nMichael: I can show you our analytics dashboard. It has powerful customization options.\n\nJohn: Great. We're also looking at some competitor solutions, but we prefer to stay with you if we can get these features.\n\nSarah: We'll make sure we put together a competitive proposal. When are you looking to make a decision?\n\nJohn: We're targeting end of year. We have executive review scheduled for Dec 15th.\n\nSarah: Perfect. I'll send you a detailed proposal with pricing for the additional features.\n\nJohn: Thanks. We're very interested in expanding our partnership.",
+      "insights": {
+        "topics": [
+          "renewal",
+          "expansion",
+          "analytics",
+          "API",
+          "competitors"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_uber_001",
+        "name": "UBER",
+        "value": 2500000.0,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-12-31"
+      },
+      "account": {
+        "id": "account_uber_001",
+        "name": "UBER"
+      }
+    },
+    {
+      "id": "call_gong_uber_002",
+      "callId": "call_uber_123457",
+      "title": "UBER - Technical Integration Discussion",
+      "startedAt": "2024-11-14T14:00:00Z",
+      "duration": 2400,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Emily Davis",
+          "email": "emily.davis@uber.com",
+          "role": "Customer",
+          "title": "Engineering Manager"
+        },
+        {
+          "name": "Michael Chen",
+          "email": "michael@surveymonkey.com",
+          "role": "Internal",
+          "title": "Solutions Architect"
+        },
+        {
+          "name": "David Kim",
+          "email": "david@surveymonkey.com",
+          "role": "Internal",
+          "title": "Technical Support"
+        }
+      ],
+      "summary": "Technical discussion about API integrations and custom reporting features. Customer requested detailed API documentation and technical proof of concept. Discussion about webhook integrations and data export capabilities. Customer mentioned some performance concerns with current API rate limits. Technical support needed for integration setup.",
+      "transcript": "Michael: Hi Emily, thanks for taking the time. I understand you need help with API integrations.\n\nEmily: Yes, we're building some custom workflows and need to integrate with your platform.\n\nMichael: Great! What specific integrations are you looking for?\n\nEmily: We need webhook support for real-time data sync. Also, we need to export large datasets via API.\n\nMichael: We have comprehensive webhook support. Let me show you the documentation.\n\nEmily: That looks good. What about rate limits? We process a lot of data.\n\nMichael: We have enterprise tier with higher rate limits. That should be included in your renewal.\n\nEmily: Perfect. We also need custom reporting via API. Can we pull report data programmatically?\n\nDavid: Yes, we have a reporting API. I can set up a proof of concept for you.\n\nEmily: That would be great. When can we start?\n\nDavid: I can have something ready by next week. I'll send you the details.\n\nEmily: Thanks. We're really looking forward to these improvements.",
+      "insights": {
+        "topics": [
+          "API",
+          "integration",
+          "webhooks",
+          "performance",
+          "custom reporting"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_uber_001",
+        "name": "UBER",
+        "value": 2500000.0,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-12-31"
+      },
+      "account": {
+        "id": "account_uber_001",
+        "name": "UBER"
+      }
+    },
+    {
+      "id": "call_gong_uber_003",
+      "callId": "call_uber_123458",
+      "title": "UBER - Executive Review Preparation",
+      "startedAt": "2024-11-18T09:00:00Z",
+      "duration": 1800,
+      "direction": "inbound",
+      "participants": [
+        {
+          "name": "John Smith",
+          "email": "john.smith@uber.com",
+          "role": "Customer",
+          "title": "VP of Engineering"
+        },
+        {
+          "name": "Sarah Johnson",
+          "email": "sarah@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        }
+      ],
+      "summary": "Preparation call for executive review meeting. Customer confirmed strong renewal intent and requested final proposal details. Discussion about pricing for additional features and expansion. Customer mentioned they're evaluating competitor solutions but prefer to stay with current vendor. Strong positive signals for renewal.",
+      "transcript": "John: Hi Sarah, I wanted to touch base before our executive review.\n\nSarah: Hi John, thanks for calling. How can I help?\n\nJohn: We're preparing for the Dec 15th executive review. Can you send us the final proposal?\n\nSarah: Absolutely! I'll send it today. It includes pricing for the analytics and API features.\n\nJohn: Great. We're very interested in expanding. The team has been very happy.\n\nSarah: That's wonderful to hear. We're excited about the partnership.\n\nJohn: We've been looking at some competitors, but we'd prefer to stay with you if the pricing is competitive.\n\nSarah: I'm confident we can work something out. The proposal will have all the details.\n\nJohn: Perfect. We're targeting end of year for decision. I'll keep you posted.\n\nSarah: Thanks John. Looking forward to continuing our partnership.",
+      "insights": {
+        "topics": [
+          "renewal",
+          "pricing",
+          "competitors",
+          "expansion"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_uber_001",
+        "name": "UBER",
+        "value": 2500000.0,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-12-31"
+      },
+      "account": {
+        "id": "account_uber_001",
+        "name": "UBER"
+      }
+    },
+    {
+      "id": "call_gong_techcorp_001",
+      "callId": "call_techcorp_123456",
+      "title": "TechCorp Solutions - Enterprise SSO Integration Discussion",
+      "startedAt": "2024-11-20T10:00:00Z",
+      "duration": 3000,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Sarah Johnson",
+          "email": "sarah.johnson@techcorp.com",
+          "role": "Customer",
+          "title": "CTO"
+        },
+        {
+          "name": "Michael Thompson",
+          "email": "michael@surveymonkey.com",
+          "role": "Internal",
+          "title": "Customer Success Manager"
+        },
+        {
+          "name": "David Chen",
+          "email": "david@surveymonkey.com",
+          "role": "Internal",
+          "title": "Solutions Architect"
+        }
+      ],
+      "summary": "Discussion about enterprise SSO integration requirements for TechCorp Solutions. Customer needs seamless authentication across multiple systems. Discussion about SAML, OAuth, and enterprise features. Customer is expanding team and needs more seats. Very positive meeting with clear expansion signals. Customer requested custom reporting features and early access to new analytics dashboard.",
+      "transcript": "Michael: Hi Sarah, thanks for joining. Let's discuss your SSO integration needs.\n\nSarah: Thanks Michael. We need seamless authentication across all our systems. Currently we're managing multiple logins which is a pain.\n\nMichael: I understand. We have comprehensive SSO support. Let me show you our options.\n\nDavid: We support SAML, OAuth, and more. What's your current setup?\n\nSarah: We're using Azure AD. We need something that integrates smoothly.\n\nDavid: Perfect! We have native Azure AD integration. I can set up a proof of concept.\n\nSarah: That would be great. Also, we're expanding our team. We'll need about 50 more seats.\n\nMichael: Excellent! I'll send you pricing for that. When are you looking to expand?\n\nSarah: Probably next quarter. We're growing fast.\n\nMichael: Great! We also have some new analytics features coming. Would you like early access?\n\nSarah: Yes, definitely! We've been asking for better reporting capabilities.\n\nDavid: I can give you access to our beta dashboard. It has powerful customization options.\n\nSarah: Perfect. We're very happy with the platform. The team adoption has been excellent.\n\nMichael: That's wonderful to hear. We're excited about the partnership.\n\nSarah: Same here. Let's schedule a follow-up to discuss the SSO setup.\n\nMichael: Absolutely. I'll send you the details.\n\nSarah: Thanks!",
+      "insights": {
+        "topics": [
+          "SSO",
+          "expansion",
+          "analytics",
+          "Azure AD",
+          "custom reporting"
+        ],
+        "sentiment": "positive"
+      },
+      "deal": {
+        "id": "deal_techcorp_001",
+        "name": "TechCorp Solutions Inc.",
+        "value": 125000.0,
+        "stage": "Negotiation/Review",
+        "closeDate": "2025-12-15"
+      },
+      "account": {
+        "id": "account_techcorp_001",
+        "name": "TechCorp Solutions Inc."
+      }
+    },
+    {
+      "id": "call_gong_europcar_002",
+      "callId": "call_europcar_123457",
+      "title": "Europcar International - AI Integration Follow-up",
+      "startedAt": "2024-11-25T14:00:00Z",
+      "duration": 2700,
+      "direction": "outbound",
+      "participants": [
+        {
+          "name": "Robin van Huis",
+          "email": "robin.vanhuis@europcar.com",
+          "role": "Customer",
+          "title": "Customer Success Manager"
+        },
+        {
+          "name": "Ankur Kumar",
+          "email": "ankur@surveymonkey.com",
+          "role": "Internal",
+          "title": "Account Manager"
+        },
+        {
+          "name": "Kayla Smith",
+          "email": "kayla@surveymonkey.com",
+          "role": "Internal",
+          "title": "Product Manager"
+        }
+      ],
+      "summary": "Follow-up meeting on AI integration features discussed in previous quarterly review. Customer is very interested in AI capabilities for RFP building and application review. Discussion about timeline and implementation. Customer mentioned some performance concerns that need to be addressed. Two bug issues were discussed and are being prioritized. Overall positive meeting with strong feature request signals.",
+      "transcript": "Ankur: Hi Robin, thanks for the follow-up. Let's discuss the AI integration features.\n\nRobin: Hi Ankur. We're very excited about the AI capabilities you showed us.\n\nKayla: Great! What specific use cases are you thinking about?\n\nRobin: We want to use AI for RFP building and application review. It would save us a lot of time.\n\nKayla: That's perfect. We're planning to release those features in Q1.\n\nRobin: That sounds good. Can we get early access?\n\nAnkur: I can see if we can include you in the beta program.\n\nRobin: That would be great. Also, we're still experiencing those performance issues we mentioned.\n\nKayla: We're working on that. We have optimizations planned.\n\nRobin: Good. We need those resolved before we can fully adopt the new features.\n\nAnkur: I understand. We'll prioritize those bugs.\n\nRobin: Also, we've been looking at competitor solutions, but we prefer to stay with you.\n\nKayla: We appreciate that. We'll make sure we deliver on these features.\n\nRobin: Perfect. Let's schedule another check-in next month.\n\nAnkur: Absolutely. I'll send you the calendar invite.",
+      "insights": {
+        "topics": [
+          "AI",
+          "feature request",
+          "performance",
+          "bugs",
+          "competitors"
+        ],
+        "sentiment": "neutral"
+      },
+      "deal": {
+        "id": "deal_europcar_001",
+        "name": "Europcar International",
+        "value": 85401.88,
+        "stage": "Ready to Close",
+        "closeDate": "2024-11-01"
+      },
+      "account": {
+        "id": "account_europcar_001",
+        "name": "Europcar International"
+      }
+    }
+  ]
+}

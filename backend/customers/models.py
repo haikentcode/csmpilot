@@ -27,6 +27,14 @@ class Customer(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
+    # External system IDs for integration
+    salesforce_account_id = models.CharField(max_length=255, blank=True, null=True, help_text='Salesforce Account ID')
+    gainsight_company_id = models.CharField(max_length=255, blank=True, null=True, help_text='Gainsight Company GSID')
+    last_salesforce_sync = models.DateTimeField(blank=True, null=True, help_text='Last time synced from Salesforce')
+    last_gainsight_sync = models.DateTimeField(blank=True, null=True, help_text='Last time synced from Gainsight')
+    salesforce_synced = models.BooleanField(default=False, help_text='Whether this customer has been synced from Salesforce')
+    gainsight_synced = models.BooleanField(default=False, help_text='Whether this customer has been synced from Gainsight')
+    
     class Meta:
         ordering = ['-arr', 'name']
     

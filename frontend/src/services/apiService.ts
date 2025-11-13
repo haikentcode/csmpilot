@@ -121,6 +121,52 @@ export interface ProfileSummary {
   talk_tracks: string[];
 }
 
+export interface GongMeeting {
+  id: number;
+  company: number;
+  company_name?: string;
+  company_id?: number;
+  gong_meeting_id: string;
+  gong_call_id?: string;
+  meeting_title: string;
+  meeting_date: string;
+  duration_seconds: number;
+  duration_minutes: number;
+  direction: 'inbound' | 'outbound' | 'internal' | 'other';
+  participants: Array<{
+    name?: string;
+    email?: string;
+    role?: string;
+    title?: string;
+  }>;
+  participant_count: number;
+  meeting_summary?: string;
+  meeting_transcript?: string;
+  deal_name?: string;
+  deal_value?: string;
+  deal_stage?: string;
+  ai_processed: boolean;
+  ai_processed_at?: string;
+  overall_sentiment: 'positive' | 'neutral' | 'negative' | 'mixed' | 'n/a';
+  key_topics: string[];
+  ai_insights: {
+    insights?: Array<{
+      category: string;
+      sentences: string[];
+      confidence: number;
+    }>;
+    overall_sentiment?: string;
+    key_topics?: string[];
+  };
+  raw_meeting_data?: Record<string, unknown>;
+  insights_categories?: string[];
+  has_insights?: boolean;
+  insights_count?: number;
+  last_synced_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface PaginatedResponse<T> {
   count: number;
   next: string | null;
@@ -330,6 +376,30 @@ class ApiService {
         timestamp: new Date().toISOString(),
         error: error instanceof Error ? error.message : "Unknown error",
       };
+    }
+  }
+
+  async getGongMeetings(customerId: number): Promise<GongMeeting[]> {
+    try {
+      const result = await this.request<{
+        count: number;
+        next: string | null;
+        previous: string | null;
+        results: GongMeeting[];
+      }>(`/api/gong/meetings/?customer=${customerId}`);
+      
+      // Handle paginated response (DRF format)
+      if (result && typeof result === 'object' && 'results' in result) {
+        return result.results;
+      }
+      // Fallback: if it's already an array, return it
+      if (Array.isArray(result)) {
+        return result;
+      }
+      return [];
+    } catch (error) {
+      console.warn(`Failed to fetch Gong meetings for customer ${customerId}:`, error);
+      return [];
     }
   }
 }
