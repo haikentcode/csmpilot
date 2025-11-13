@@ -29,7 +29,7 @@ export default function CustomerList({
 }: CustomerListProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  
   const { data, loading, error, retry } = useCustomers(currentPage);
 
   const customers = data?.results || [];
@@ -102,7 +102,7 @@ export default function CustomerList({
           loading={loading}
           className="justify-center"
         />
-
+        
         <Card className="h-fit">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
@@ -126,13 +126,13 @@ export default function CustomerList({
               />
             </div>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="max-h-96 overflow-y-auto">
-              <div className="space-y-2 p-4">
-                {filteredCustomers.map((customer, index) => (
-                  <Card
-                    key={customer.id}
-                    className={`
+        <CardContent className="p-0">
+          <div className="max-h-96 overflow-y-auto">
+            <div className="space-y-2 p-4">
+              {filteredCustomers.map((customer, index) => (
+                <Card
+                  key={customer.id}
+                  className={`
                     cursor-pointer transition-all duration-300 hover:shadow-md hover:scale-[1.02]
                     animate-fade-in-up border-l-4
                     ${
@@ -219,7 +219,7 @@ export default function CustomerList({
                           <Tooltip>
                             <TooltipTrigger asChild>
                                 <div
-                                  className={`
+                                className={`
                                 w-3 h-3 rounded-full transition-all duration-200 hover:scale-125
                                 ${
                                   customer.health_score === "Critical"
@@ -246,13 +246,13 @@ export default function CustomerList({
                       </div>
                     </div>
                   </CardContent>
-                  </Card>
-                ))}
-              </div>
+                </Card>
+              ))}
             </div>
-          </CardContent>
-        </Card>
-      </div>
-    </TooltipProvider>
-  );
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </TooltipProvider>
+);
 }

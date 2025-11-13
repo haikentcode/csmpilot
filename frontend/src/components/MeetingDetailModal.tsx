@@ -150,7 +150,10 @@ export default function MeetingDetailModal({
   const insightsCategories = meeting.insights_categories || [];
   const categoriesFromInsights = new Set(insights.map((i) => i.category));
   // Combine categories from both sources
-  const allCategories = new Set([...insightsCategories, ...Array.from(categoriesFromInsights)]);
+  const allCategories = new Set([
+    ...insightsCategories,
+    ...Array.from(categoriesFromInsights),
+  ]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -238,7 +241,9 @@ export default function MeetingDetailModal({
             {/* Categorization Tags */}
             {allCategories.size > 0 && (
               <div>
-                <p className="text-sm font-semibold text-dark-forest mb-2">Categories:</p>
+                <p className="text-sm font-semibold text-dark-forest mb-2">
+                  Categories:
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {Array.from(allCategories).map((category) => {
                     const config = getCategoryConfig(category);
@@ -294,10 +299,11 @@ export default function MeetingDetailModal({
                         <ul className="space-y-2 ml-6">
                           {categoryInsights.map((insight, idx) => {
                             const sentences = insight.sentences || [];
-                            const insightText = sentences.length > 0 
-                              ? sentences.join(' ')
-                              : JSON.stringify(insight);
-                            
+                            const insightText =
+                              sentences.length > 0
+                                ? sentences.join(" ")
+                                : JSON.stringify(insight);
+
                             return (
                               <li
                                 key={idx}
@@ -431,7 +437,7 @@ export default function MeetingDetailModal({
               <CardContent>
                 <div className="max-h-96 overflow-y-auto bg-gray-50 p-4 rounded-lg border border-gray-200">
                   <pre className="text-xs text-neutral-gray whitespace-pre-wrap font-mono">
-                    {typeof meeting.raw_meeting_data === 'object' 
+                    {typeof meeting.raw_meeting_data === "object"
                       ? JSON.stringify(meeting.raw_meeting_data, null, 2)
                       : String(meeting.raw_meeting_data)}
                   </pre>
@@ -442,7 +448,8 @@ export default function MeetingDetailModal({
             <Card className="border-l-4 border-l-gray-300 bg-gray-50">
               <CardContent className="p-4">
                 <p className="text-sm text-neutral-gray italic">
-                  Raw meeting data not available. This may require fetching the full meeting detail.
+                  Raw meeting data not available. This may require fetching the
+                  full meeting detail.
                 </p>
               </CardContent>
             </Card>
@@ -452,4 +459,3 @@ export default function MeetingDetailModal({
     </Dialog>
   );
 }
-

@@ -54,7 +54,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 export const InlineLoader: React.FC<{ text?: string }> = ({ text = 'Loading...' }) => (
   <div className="flex items-center space-x-2 text-neutral-gray">
     <div className="w-4 h-4 animate-spin rounded-full border-2 border-gray-300 border-t-primary-green" />
-    <span className="text-sm">{text}</span>
+    <span className="text-md text-dark-forest">{text}</span>
   </div>
 );
 
