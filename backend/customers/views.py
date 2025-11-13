@@ -13,6 +13,7 @@ from .serializers import (
 from .vector_services import get_customer_vector_service
 from .tasks import add_customer_to_vectors, update_customer_vectors, bulk_populate_vectors
 from .product_service import get_use_cases_for_customer, get_upsell_opportunities
+from .ai_use_cases_service import get_ai_filtered_use_cases
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -346,12 +347,23 @@ class CustomerViewSet(viewsets.ModelViewSet):
         # Get customer products
         customer_products = customer.products or []
         industry = request.query_params.get('industry') or customer.industry
+        use_ai = request.query_params.get('use_ai', 'true').lower() == 'true'
         
         try:
-            use_cases = get_use_cases_for_customer(
-                customer_products=customer_products,
-                industry=industry
-            )
+            if use_ai:
+                # Use AI-powered filtering for intelligent use case selection
+                use_cases = get_ai_filtered_use_cases(
+                    customer_products=customer_products,
+                    industry=industry,
+                    customer_name=customer.name,
+                    arr=float(customer.arr) if customer.arr else None
+                )
+            else:
+                # Fallback to basic product catalog matching
+                use_cases = get_use_cases_for_customer(
+                    customer_products=customer_products,
+                    industry=industry
+                )
             
             return Response({
                 'customer_id': customer.id,
@@ -359,7 +371,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
                 'customer_products': customer_products,
                 'industry': industry,
                 'use_cases': use_cases,
-                'total_use_cases': len(use_cases)
+                'total_use_cases': len(use_cases),
+                'ai_filtered': use_ai
             })
             
         except Exception as e:

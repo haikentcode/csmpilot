@@ -43,18 +43,21 @@ http://localhost:8000/api
 
 ---
 
-### 2. Get Use Cases for Customer ⭐ NEW
+### 2. Get Use Cases for Customer ⭐ NEW (AI-Powered)
 **Endpoint:** `GET /api/customers/{id}/use_cases/`
 
-**Description:** Get relevant use cases for a customer based on their current products. Helps CSMs understand how customers can effectively use their products.
+**Description:** Get AI-filtered, relevant use cases for a customer based on their industry, products, and context. Uses OpenAI to intelligently select the most relevant use cases from a comprehensive catalog (HR, IT, Customer Experience, Marketing, Healthcare, Technology, etc.). Returns industry-specific use cases (e.g., healthcare customers get patient satisfaction surveys, tech customers get IT surveys).
 
 **Query Parameters:**
 - `industry` (optional): Override customer's industry for filtering
+- `use_ai` (optional, default: true): Use AI-powered filtering (true) or basic product catalog matching (false)
 
 **Example Request:**
 ```bash
 GET /api/customers/50/use_cases/
 GET /api/customers/50/use_cases/?industry=healthcare
+GET /api/customers/50/use_cases/?use_ai=true
+GET /api/customers/50/use_cases/?industry=technology&use_ai=true
 ```
 
 **Response:**
@@ -69,9 +72,11 @@ GET /api/customers/50/use_cases/?industry=healthcare
   "industry": "technology",
   "use_cases": [
     {
+      "category": "IT",
+      "use_case": "Software Request form",
+      "description": "Technology companies can use this to collect and manage software requests from employees, streamlining IT procurement and ensuring proper approval workflows.",
       "product_name": "SurveyMonkey Enterprise (SME)",
       "product_category": "Survey & Feedback Platform",
-      "use_case": "A hospital system runs patient and staff feedback programs securely.",
       "primary_use": "Collect, analyze, and act on feedback securely across teams and departments.",
       "key_features": [
         "Centralized admin & governance",
@@ -81,19 +86,36 @@ GET /api/customers/50/use_cases/?industry=healthcare
       ]
     },
     {
-      "product_name": "SurveyMonkey Audience",
-      "product_category": "Survey Panel / Respondent Marketplace",
-      "use_case": "A SaaS company validates new feature ideas with tech professionals.",
-      "primary_use": "Gather market and consumer insights from non-customers or general audiences.",
+      "category": "Customer Experience",
+      "use_case": "CSAT",
+      "description": "Technology companies can measure customer satisfaction after support interactions, product updates, or service delivery to improve customer experience.",
+      "product_name": "SurveyMonkey Enterprise (SME)",
+      "product_category": "Survey & Feedback Platform",
+      "primary_use": "Collect, analyze, and act on feedback securely across teams and departments.",
       "key_features": [
-        "Pre-screened panels",
-        "Demographic targeting",
-        "Fast turnaround",
-        "Real-time analytics"
+        "Centralized admin & governance",
+        "Role-based access control",
+        "HIPAA/GDPR compliance",
+        "Integrations with Slack, Salesforce, Tableau"
+      ]
+    },
+    {
+      "category": "HR",
+      "use_case": "Employee Engagement",
+      "description": "Technology companies can run regular pulse surveys to measure employee engagement, identify areas for improvement, and track engagement trends over time.",
+      "product_name": "SurveyMonkey Enterprise (SME)",
+      "product_category": "Survey & Feedback Platform",
+      "primary_use": "Collect, analyze, and act on feedback securely across teams and departments.",
+      "key_features": [
+        "Centralized admin & governance",
+        "Role-based access control",
+        "HIPAA/GDPR compliance",
+        "Integrations with Slack, Salesforce, Tableau"
       ]
     }
   ],
-  "total_use_cases": 6
+  "total_use_cases": 5,
+  "ai_filtered": true
 }
 ```
 
@@ -101,6 +123,8 @@ GET /api/customers/50/use_cases/?industry=healthcare
 - CSM can show customer how to use their products effectively
 - Helps with product adoption and training
 - Provides talking points for customer meetings
+- **AI-powered filtering**: Returns industry-specific, relevant use cases (e.g., healthcare gets patient satisfaction surveys, tech gets IT surveys)
+- **Intelligent selection**: Uses OpenAI to analyze customer context and select top 5-8 most relevant use cases
 
 ---
 
